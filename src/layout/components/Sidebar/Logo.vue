@@ -20,20 +20,20 @@
 
 <script>
 export default {
-  name: 'SidebarLogo',
+  name: "SidebarLogo",
   props: {
     collapse: {
       type: Boolean,
-      required: true
-    }
+      required: true,
+    },
   },
-  data () {
+  data() {
     return {
-      title: '冰激凌CMS',
-      logo: 'https://i.imgtg.com/2022/11/16/tpaRa.png'
-    }
-  }
-}
+      title: "垃圾回收后台",
+      logo: "https://i.imgtg.com/2022/11/16/tpaRa.png",
+    };
+  },
+};
 </script>
 
 <style lang="scss" scoped>

@@ -4,6 +4,10 @@
 @import './element-ui.scss';
 @import './sidebar.scss';
 
+:root{
+  --login-fontColor: #38a6ba;
+}
+
 body {
   height: 100%;
   -moz-osx-font-smoothing: grayscale;

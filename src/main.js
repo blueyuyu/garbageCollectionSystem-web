@@ -15,26 +15,16 @@ import '@/icons' // icon
 import '@/permission' // permission control
 import VueQriously from 'vue-qriously'
 
-import { getSetting } from '@/api/websetting'
+// import { getSetting } from '@/api/websetting'
 
-
-/**
- * If you don't want to use mock-server
- * you want to use MockJs for mock api
- * you can execute: mockXHR()
- *
- * Currently MockJs will be used in the production environment,
- * please remove it before going online ! ! !
- */
 // if (process.env.NODE_ENV === 'production') {
 //   const { mockXHR } = require('../mock')
 //   mockXHR()
 // }
 
 // set ElementUI lang to EN
-// 如果想要中文版 element-ui，按如下方式声明
-// Vue.use(ElementUI)
-import SlideVerify from 'vue-monoplasty-slide-verify';
+// Vue.use(ElementUI) 如果想要中文版 element-ui
+import SlideVerify from 'vue-monoplasty-slide-verify'; // 验证码滑块
 
 Vue.use(SlideVerify);
 
@@ -49,12 +39,12 @@ new Vue({
 }).$mount('#app')
 
 // 请求接口保存全局数据
-const  getUpdateList = (async()=>{
-    await getSetting().then(resp => {   
-      store.dispatch("glabledata",resp.data);
-    })
-})
-getUpdateList()
+// const  getUpdateList = (async()=>{
+//     await getSetting().then(resp => {   
+//       store.dispatch("glabledata",resp.data);
+//     })
+// })
+// getUpdateList()
 
 // 按需引入：base.css 基础样式必须引入，其它组件样式按需引入
 import "element-ui/packages/theme-chalk/lib/base.css";
