@@ -2,6 +2,7 @@
 const path = require('path')
 const defaultSettings = require('./src/settings.js')
 const CompressionPlugin = require('compression-webpack-plugin');
+const { configure } = require('nprogress');
 
 function resolve(dir) {
   return path.join(__dirname, dir)
@@ -46,6 +47,13 @@ module.exports = {
     //   }
     // }
   },
+  // configureWebpack: {
+  //   resolve :{
+  //     alias:{
+  //       'echarts': 'echarts/dist/echarts.js'
+  //     }
+  //   }
+  // },
   configureWebpack: config => {
     if (process.env.NODE_ENV === 'production') {
       return {

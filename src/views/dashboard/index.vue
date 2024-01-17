@@ -1,33 +1,63 @@
 <template>
   <div class="dashboard-container">
-    <github-corner class="github-corner" />
     <panel-group style="margin-top: 10px" />
-    <el-row :gutter="8">
-      <el-col :xs="{ span: 24 }" :sm="{ span: 24 }" :md="{ span: 24 }" :lg="{ span: 12 }" :xl="{ span: 12 }"
-        style="padding-right: 8px; margin-bottom: 30px">
-        <transaction-table />
-      </el-col>
-      <el-col :xs="{ span: 24 }" :sm="{ span: 12 }" :md="{ span: 12 }" :lg="{ span: 6 }" :xl="{ span: 6 }" style="    display: flex;
-    padding-left: 4px;
-    padding-right: 4px;
-    margin-top: 30px;
-    margin-left: 0px;
-    align-content: center;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: nowrap;">
-        <div class="box">
-          <span></span>
-          <div class="content">
-            <h2>当前版本 v2.0.1 <el-button style="margin-top: 40px;" type="primary" round>查看官网</el-button>
-            </h2>
-          </div>
+    <el-row style="width: 100%;">
+      <el-col :xs="{ span: 24 }" :sm="{ span: 12 }" :md="{ span: 12 }" :lg="{ span: 12 }" :xl="{ span: 12 }">
+        <div class="rubbish-counts" style="
+        margin-right: 20px;
+        padding: 20px;
+        height: 70vh;
+        background-color: #e5f2fd;
+      ">
+          <div class="title">垃圾分类收录数据</div>
+          <el-row style="display: flex; ">
+            <el-col :md="{ span: 12 }" :lg="{ span: 14 }" class="counts_chart">
+              <div class="pie" ref="pieCharts" style="width: 50%;height: 100%;"></div>
+              <div class="line" ref="lineCharts" style="width: 50%;height: 100%;"></div>
+            </el-col>
+            <el-col :md="{ span: 12 }" :lg="{ span: 10 }" class="counts_data" style="
+              background-color: #f7f9fb;
+              backdrop-filter: blur(10px);
+              border-radius: 20px;
+              height: 100%;
+              ">
+              <div class="counts_data_item">
+                320,11
+                <div class="item_text">可回收垃圾</div>
+              </div>
+              <div class="counts_data_item">
+                222
+                <div class="item_text">厨余垃圾</div>
+              </div>
+              <div class="counts_data_item">
+                333
+                <div class="item_text">其他垃圾</div>
+              </div>
+              <div class="counts_data_item">
+                444
+                <div class="item_text">有害垃圾</div>
+              </div>
+            </el-col>
+          </el-row>
         </div>
       </el-col>
-
-      <el-col :xs="{ span: 24 }" :sm="{ span: 12 }" :md="{ span: 12 }" :lg="{ span: 6 }" :xl="{ span: 6 }"
-        style="margin-bottom: 30px">
-        <box-card />
+      <el-col :xs="{ span: 24 }" :sm="{ span: 12 }" :md="{ span: 12 }" :lg="{ span: 12 }" :xl="{ span: 12 }"
+        style="height: 70vh; ">
+        <el-row style="height: 50%; margin-left: 20px;">
+          <div class="user-behavior" style="height: 100%; background-color: #f4fdfd;padding: 20px;">
+            <div class="title">用户行为数据</div>
+            <div style="display: flex;height: 100%;">
+              <div class="bar" ref="barCharts" style="width: 50%;height: 100%;"></div>
+              <div class="line" ref="lineCharts" style="width: 50%;height: 100%;"></div>
+            </div>
+          </div>
+        </el-row>
+        <el-row style="height: 50%;margin-top: 20px;background-color: #ecffed;box-sizing: border-box;">
+          <div class="article-show" style="height: 100%;padding: 20px;">
+            <div class="title">近期文章</div>
+            <TransactionTable></TransactionTable>
+          </div>
+        </el-row>
       </el-col>
     </el-row>
   </div>
@@ -35,23 +65,425 @@
 
 <script>
 import TransactionTable from './components/TransactionTable'
-import BoxCard from './components/BoxCard'
 import PanelGroup from './components/PanelGroup'
-import GithubCorner from '@/components/GithubCorner'
 
 export default {
   create: {
 
   },
   methods: {
+    initPieChart() {
+      var myChart = this.$echarts.init(this.$refs.pieCharts);
+      // 2. 指定配置项和数据
+      var option = {
+        tooltip: {
+          trigger: "item",
+          formatter: "{a} <br/>{b} : {c} ({d}%)"
+        },
+        // 注意颜色写的位置
+        color: [
+          "#f4516c",
+          "#0096ff",
+          "#9fe6b8",
+          "#32c5e9",
+          "#1d9dff"
+        ],
+        series: [
+          {
+            name: "垃圾类别占比统计",
+            type: "pie",
+            // 如果radius是百分比则必须加引号
+            radius: ["10%", "70%"],
+            center: ["44%", "44%"],
+            roseType: "radius",
+            data: [
+              { value: 20, name: "可回收垃圾" },
+              { value: 26, name: "厨余垃圾" },
+              { value: 24, name: "其他垃圾" },
+              { value: 25, name: "有害垃圾" },
+            ],
+            label: {
+              fontSize: 10
+            },
+            labelLine: {
+              length: 4,
+              length2: 6
+            }
+          }
+        ]
+      };
+      myChart.setOption(option);
+
+    },
+    initBarChart() {
+      var mycharts = this.$echarts.init(this.$refs.barCharts)
+      var data = [70, 34, 60];
+      var titlename = ["参与率", "搜索率", "知识掌握率"];
+      var valdata = [1,1,1]; // 纵轴
+      var myColor = ["#1089E7", "#F57474", "#56D0E3", "#F8B448", "#8B78F6"];
+      var options = {
+        //图标位置
+        grid: {
+          top: "10%",
+          left: "22%",
+          bottom: "10%"
+        },
+        xAxis: {
+          show: false
+        },
+        yAxis: [
+          {
+            show: true,
+            data: titlename,
+            inverse: true,
+            axisLine: {
+              show: false
+            },
+            splitLine: {
+              show: false
+            },
+            axisTick: {
+              show: false
+            },
+            axisLabel: {
+              color: "#333",
+              fontSize: 14,
+              rich: {
+                lg: {
+                  backgroundColor: "#339911",
+                  color: "#00000072",
+                  borderRadius: 15,
+                  align: "center",
+                  width: 15,
+                  height: 15
+                }
+              }
+            },
+          },
+          {
+            show: false,
+            inverse: true,
+            data: valdata,
+            axisLabel: {
+              textStyle: {
+                fontSize: 12,
+                color: "#666"
+              }
+            }
+          }
+        ],
+        series: [
+          {
+            name: "条",
+            type: "bar",
+            yAxisIndex: 0,
+            data: data,
+            barCategoryGap: 20,
+            barWidth: 20,
+            itemStyle: {
+              normal: {
+                barBorderRadius: 20,
+                color: function (params) {
+                  var num = myColor.length;
+                  return myColor[params.dataIndex % num];
+                }
+              }
+            },
+            label: {
+              normal: {
+                show: true,
+                position: "inside",
+                formatter: "{c}%"
+              }
+            }
+
+          },
+          {
+            name: "框",
+            type: "bar",
+            yAxisIndex: 1,
+            barCategoryGap: 20,
+            data: [100, 100, 100, 100, 100],
+            barWidth: 20,
+            itemStyle: {
+              normal: {
+                color: "none",
+                borderColor: "#00c1de",
+                borderWidth: 3,
+                barBorderRadius: 15
+              }
+            }
+          }
+        ]
+      };
+      mycharts.setOption(options);
+    },
+    initLineChart() {
+      var mycharts = this.$echarts.init(this.$refs.lineCharts)
+      const options = {
+        tooltip: {
+          trigger: "axis",
+          axisPointer: {
+            lineStyle: {
+              color: "#dddc6b"
+            }
+          }
+        },
+        legend: {
+          top: "0%",
+          textStyle: {
+            color: "#00000072",
+            fontSize: "12"
+          }
+        },
+        grid: {
+          left: "10",
+          top: "30",
+          right: "10",
+          bottom: "10",
+          containLabel: true
+        },
+
+        xAxis: [
+          {
+            type: "category",
+            boundaryGap: false,
+            axisLabel: {
+              textStyle: {
+                color: "#00000072",
+                fontSize: 12
+              }
+            },
+            axisLine: {
+              lineStyle: {
+                color: "#00000072"
+              }
+            },
+            data: [
+              "01",
+              "02",
+              "03",
+              "04",
+              "05",
+              "06",
+              "07",
+              "08",
+              "09",
+              "11",
+              "12",
+              "13",
+              "14",
+              "15",
+              "16",
+              "17",
+              "18",
+              "19",
+              "20",
+              "21",
+              "22",
+              "23",
+              "24",
+              "25",
+              "26",
+              "27",
+              "28",
+              "29",
+              "30"
+            ]
+          },
+          {
+            axisPointer: { show: false },
+            axisLine: { show: false },
+            position: "bottom",
+            offset: 20
+          }
+        ],
+// y轴线颜色
+        yAxis: [
+          {
+            type: "value",
+            axisTick: { show: false },
+            axisLine: {
+              lineStyle: {
+                color: "#d7dbe3"
+              }
+            },
+            axisLabel: {
+              textStyle: {
+                color: "#d7dbe3",
+                fontSize: 12
+              }
+            },
+            splitLine: {
+              lineStyle: {
+                color: "#d7dbe3"
+              }
+            }
+          }
+        ],
+        series: [
+          {
+            name: "播放量",
+            type: "line",
+            smooth: true,
+            symbol: "circle",
+            symbolSize: 5,
+            showSymbol: false,
+            lineStyle: {
+              normal: {
+                color: "#0184d5",
+                width: 2
+              }
+            },
+            areaStyle: {
+              normal: {
+                color: new this.$echarts.graphic.LinearGradient(
+                  0,
+                  0,
+                  0,
+                  1,
+                  [
+                    {
+                      offset: 0,
+                      color: "rgba(1, 132, 213, 0.4)"
+                    },
+                    {
+                      offset: 0.8,
+                      color: "rgba(1, 132, 213, 0.1)"
+                    }
+                  ],
+                  false
+                ),
+                shadowColor: "rgba(0, 0, 0, 0.1)"
+              }
+            },
+            itemStyle: {
+              normal: {
+                color: "#0184d5",
+                borderColor: "rgba(221, 220, 107, .1)",
+                borderWidth: 12
+              }
+            },
+            data: [
+              30,
+              40,
+              30,
+              40,
+              30,
+              40,
+              30,
+              60,
+              20,
+              40,
+              20,
+              40,
+              30,
+              40,
+              30,
+              40,
+              30,
+              40,
+              30,
+              60,
+              20,
+              40,
+              20,
+              40,
+              30,
+              60,
+              20,
+              40,
+              20,
+              40
+            ]
+          },
+          {
+            name: "转发量",
+            type: "line",
+            smooth: true,
+            symbol: "circle",
+            symbolSize: 5,
+            showSymbol: false,
+            lineStyle: {
+              normal: {
+                color: "#00d887",
+                width: 2
+              }
+            },
+            areaStyle: {
+              normal: {
+                color: new this.$echarts.graphic.LinearGradient(
+                  0,
+                  0,
+                  0,
+                  1,
+                  [
+                    {
+                      offset: 0,
+                      color: "rgba(0, 216, 135, 0.4)"
+                    },
+                    {
+                      offset: 0.8,
+                      color: "rgba(0, 216, 135, 0.1)"
+                    }
+                  ],
+                  false
+                ),
+                shadowColor: "rgba(0, 0, 0, 0.1)"
+              }
+            },
+            itemStyle: {
+              normal: {
+                color: "#00d887",
+                borderColor: "rgba(221, 220, 107, .1)",
+                borderWidth: 12
+              }
+            },
+            data: [
+              50,
+              30,
+              50,
+              60,
+              10,
+              50,
+              30,
+              50,
+              60,
+              40,
+              60,
+              40,
+              80,
+              30,
+              50,
+              60,
+              10,
+              50,
+              30,
+              70,
+              20,
+              50,
+              10,
+              40,
+              50,
+              30,
+              70,
+              20,
+              50,
+              10,
+              40
+            ]
+          }
+        ]
+      };
+      mycharts.setOption(options)
+    }
   },
   name: 'Dashboard',
   components: {
-    GithubCorner,
     PanelGroup,
     TransactionTable,
-    BoxCard,
-  },
+    TransactionTable
+},
   data() {
     return {
       res: ""
@@ -59,6 +491,11 @@ export default {
   },
   computed: {
 
+  },
+  mounted() {
+    this.initPieChart();
+    this.initBarChart();
+    this.initLineChart();
   }
 
 }
@@ -82,6 +519,25 @@ export default {
     font-size: 30px;
     line-height: 46px;
   }
+}
+
+.title {
+  font-size: 22px;
+  font-weight: 500;
+  color: #545767;
+}
+
+.counts_data_item {
+  width: 100%;
+  padding: 20px 0;
+  text-align: center;
+  font-size: 32px;
+  color: #666;
+}
+
+.item_text {
+  font-size: 16px;
+  color: #00000073;
 }
 
 .box {

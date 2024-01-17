@@ -1,6 +1,6 @@
 <template>
   <div>
-  <h3>最新文章</h3>
+  <!-- <h3>最新文章</h3> -->
   <el-table :data="list" style="width: 100%;">
     <el-table-column label="文章标题" min-width="185">
       <template slot-scope="scope">
@@ -28,7 +28,6 @@
 </template>
 
 <script>
-import { getNewArticle } from "@/api/webarticle";
 import { formatDate } from "@/utils/date.js";
 
 export default {
@@ -50,7 +49,6 @@ export default {
     }
   },
   created() {
-    this.fetchData()
   },
   methods: {
     formatDate(time) {
@@ -58,9 +56,6 @@ export default {
       return formatDate(data, "yyyy-MM-dd hh:mm ");
     },
     fetchData() {
-      getNewArticle(6, "discuss").then((resp) => {
-        this.list = resp.data;
-      });
     }
   }
 }

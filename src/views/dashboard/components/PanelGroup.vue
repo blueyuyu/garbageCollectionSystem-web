@@ -1,57 +1,62 @@
 <template>
   <el-row :gutter="40" class="panel-group">
+    <!-- 收录垃圾总数 -->
     <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
-      <div class="card-panel" @click="handleSetLineChartData('newVisitis')">
+      <div class="card-panel" @click="handleSetLineChartData('rubbishes')">
+        <div class="card-panel-icon-wrapper icon-garbage" >
+          <svg-icon icon-class="garbage" class-name="card-panel-icon" />
+        </div>
+        <div class="card-panel-description">
+          <div class="card-panel-text">
+            收录垃圾总数
+          </div>
+          <count-to :start-val="0" :end-val="136000" :duration="3600" class="card-panel-num" />
+        </div>
+      </div>
+    </el-col>
+    <!-- 用户总数 -->
+    <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
+      <div class="card-panel" @click="handleSetLineChartData('users')">
         <div class="card-panel-icon-wrapper icon-people">
           <svg-icon icon-class="peoples" class-name="card-panel-icon" />
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">
-            新用户
+            注册用户总数
           </div>
           <count-to :start-val="0" :end-val="102400" :duration="2600" class="card-panel-num" />
         </div>
       </div>
     </el-col>
+    <!-- 文章总数 -->
     <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
-      <div class="card-panel" @click="handleSetLineChartData('messages')">
-        <div class="card-panel-icon-wrapper icon-message">
-          <svg-icon icon-class="message" class-name="card-panel-icon" />
+      <div class="card-panel" @click="handleSetLineChartData('articles')">
+        <div class="card-panel-icon-wrapper icon-article" >
+          <svg-icon icon-class="article" class-name="card-panel-icon" />
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">
-            评论
-          </div>
-          <count-to :start-val="0" :end-val="81212" :duration="3000" class="card-panel-num" />
-        </div>
-      </div>
-    </el-col>
-    <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
-      <div class="card-panel" @click="handleSetLineChartData('purchases')">
-        <div class="card-panel-icon-wrapper icon-money">
-          <svg-icon icon-class="money" class-name="card-panel-icon" />
-        </div>
-        <div class="card-panel-description">
-          <div class="card-panel-text">
-            总销售
+            垃圾分相关文章收录总数
           </div>
           <count-to :start-val="0" :end-val="9280" :duration="3200" class="card-panel-num" />
         </div>
       </div>
     </el-col>
+    <!-- 评论数 -->
     <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
-      <div class="card-panel" @click="handleSetLineChartData('shoppings')">
-        <div class="card-panel-icon-wrapper icon-shopping">
-          <svg-icon icon-class="shopping" class-name="card-panel-icon" />
+      <div class="card-panel" @click="handleSetLineChartData('comments')">
+        <div class="card-panel-icon-wrapper icon-message">
+          <svg-icon icon-class="message" class-name="card-panel-icon" />
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">
-            总订单
+            评论数目
           </div>
-          <count-to :start-val="0" :end-val="13600" :duration="3600" class="card-panel-num" />
+          <count-to :start-val="0" :end-val="81212" :duration="3000" class="card-panel-num" />
         </div>
       </div>
     </el-col>
+
   </el-row>
 </template>
 
@@ -90,24 +95,23 @@ export default {
     border-color: rgba(0, 0, 0, .05);
 
     &:hover {
-      .card-panel-icon-wrapper {
-        color: #fff;
-      }
-
+      // .card-panel-icon-wrapper {
+      //   color: #fff;
+      // }
       .icon-people {
-        background: #40c9c6;
+        background: #e6fafa;
       }
 
       .icon-message {
-        background: #36a3f7;
+        background: #e5f2fd;
       }
 
-      .icon-money {
-        background: #f4516c;
+      .icon-article {
+        background: #ffe9eb;
       }
 
-      .icon-shopping {
-        background: #34bfa3
+      .icon-garbage {
+        background: #ecffed;
       }
     }
 
@@ -117,14 +121,15 @@ export default {
 
     .icon-message {
       color: #36a3f7;
+      font-size: 20px;
     }
 
-    .icon-money {
+    .icon-article {
       color: #f4516c;
     }
 
-    .icon-shopping {
-      color: #34bfa3
+    .icon-garbage {
+      color: #34bfa3;
     }
 
     .card-panel-icon-wrapper {

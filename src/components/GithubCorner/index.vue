@@ -1,6 +1,6 @@
 <template>
   <a
-    href="https://github.com/Thecosy"
+    href="https://github.com/blueyuyu/garbageCollectionSystem-web"
     target="_blank"
     class="github-corner"
     aria-label="View source on Github"

@@ -477,7 +477,7 @@ export default {
       var that = this;
       this.loading = true;
       const userInfo = await loginAdmin(that.loginUser.username,that.loginUser.password)
-      localStorage.setItem('__user',JSON.stringify(userInfo));
+      localStorage.setItem('__USER',JSON.stringify(userInfo));
       localStorage.setItem('__TOKEN',userInfo.token);
       that.$message({
         message: "登陆成功",
