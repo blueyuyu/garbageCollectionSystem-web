@@ -1,4 +1,6 @@
 import axios from 'axios'
+import { Message } from 'element-ui';
+import router from '@/router';
 
 // process.env.VUE_APP_BASE_API
 const service = axios.create({
@@ -55,6 +57,9 @@ service.interceptors.request.use(
     // }
     printRequestInfo(config)
     config.headers['Content-Type'] = 'application/json;charset=utf-8';
+    if (localStorage.getItem('__TOKEN')) {
+      config.headers['token'] = localStorage.getItem('__TOKEN')
+    }
     console.log('config', config);
     return config
   },
@@ -70,6 +75,10 @@ service.interceptors.request.use(
 service.interceptors.response.use(
   (response) => {
     printResponseInfo(response);
+    if (response.data.code == '401') {
+      Message(response.data.msg);
+      router.push('/login');
+    }
     return response;
   },
   (error) => {

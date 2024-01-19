@@ -271,7 +271,13 @@ export const constantRoutes = [
       {
         path: "AdminInfo",
         component: () => import("@/admin/AdminInfo"),
-        name: "管理员信息",
+        name: "编辑个人信息",
+        meta: { title: "个人信息", icon: "el-icon-s-custom" },
+      },
+      {
+        path: "allAdmin",
+        component: () => import("@/admin/AllAdmin"),
+        name: "allAdmin",
         meta: { title: "管理员信息", icon: "el-icon-s-custom" },
       },
       {
