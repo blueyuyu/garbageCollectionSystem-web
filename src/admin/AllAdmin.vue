@@ -106,6 +106,27 @@
       </el-table-column>
     </el-table>
 
+    <!-- Form -->
+    <el-dialog title="修改" :visible.sync="dialogFormVisible" width="34%">
+      <el-form :model="form">
+        <el-form-item label="活动名称" :label-width="formLabelWidth">
+          <el-input v-model="form.name" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="活动区域" :label-width="formLabelWidth">
+          <el-select v-model="form.region" placeholder="请选择活动区域">
+            <el-option label="区域一" value="shanghai"></el-option>
+            <el-option label="区域二" value="beijing"></el-option>
+          </el-select>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogFormVisible = false">取 消</el-button>
+        <el-button type="success" @click="dialogFormVisible = false"
+          >确 定</el-button
+        >
+      </div>
+    </el-dialog>
+
     <pagination
       v-show="total > 0"
       :total="total"
@@ -148,6 +169,21 @@ export default {
         email: "",
         address: "",
       },
+
+      // just the form
+      dialogTableVisible: false,
+      dialogFormVisible: false,
+      form: {
+        name: "",
+        region: "",
+        date1: "",
+        date2: "",
+        delivery: false,
+        type: [],
+        resource: "",
+        desc: "",
+      },
+      formLabelWidth: "70px",
     };
   },
   created() {
@@ -246,7 +282,8 @@ export default {
       console.log("导出");
     },
     updateUserInfo(id) {
-      console.log("updateUserInfo");
+      this.dialogFormVisible = true;
+      console.log("id", id);
     },
     delectUserInfo(id) {
       console.log("id", id);
@@ -406,6 +443,55 @@ export default {
   background-color: #ff6864;
   border: 1px solid #ff6864;
   box-shadow: #fff 4px 4px 0 0, #ff6864 4px 4px 0 1px;
+}
+
+/* 弹窗样式修改 */
+.el-dialog {
+  border-radius: 20px;
+}
+
+.el-dialog__header {
+  background-color: #343a3f;
+  border-radius: 20px 20px 0 0;
+}
+
+.el-dialog__title {
+  color: #fff;
+  font-weight: 700;
+}
+
+.el-dialog__footer {
+  text-align: center;
+}
+
+/* 修改默认的success颜色，将其改为项目的button */
+.el-button--success {
+  background-color: #343a3f;
+  border: #343a3f;
+}
+
+.el-button--success.is-active,
+.el-button--success:active {
+  background-color: #96a0a9;
+  border: #96a0a9;
+}
+
+.el-button--success.is-active,
+.el-button--success:hover {
+  background-color: #96a0a9;
+  border: #96a0a9;
+}
+
+.el-button--default.is-active,
+.el-button--default:active {
+  background-color: #96a0a9;
+  border: #96a0a9;
+}
+
+.el-button--default:hover {
+  color: black;
+  background-color: #f3f5f6;
+  border-color: #f3f5f6;
 }
 </style>
 
