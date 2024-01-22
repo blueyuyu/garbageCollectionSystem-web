@@ -161,7 +161,7 @@ export default {
       total: 0,
       listLoading: true,
       listQuery: {
-        page: 1,
+        page: 1, 
         limit: 8,
       },
       input: {
@@ -257,11 +257,10 @@ export default {
     },
     async getList() {
       this.listLoading = true;
-      const res = await getUserList(1, 8);
+      const res = await getUserList(this.listQuery.page, this.listQuery.limit);
       this.list = res.records;
       this.total = res.total;
       this.listLoading = false;
-      console.log("res", res);
     },
     handleSearch() {
       console.log("搜索");
