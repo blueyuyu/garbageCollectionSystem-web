@@ -1,5 +1,6 @@
 <template>
   <div class="app-container">
+    <!-- 上方处理按钮 -->
     <div class="topList">
       <div
         style="
@@ -31,61 +32,30 @@
           class="input-margin"
         >
         </el-input>
-        <el-button
-          class="input-margin"
-          icon="el-icon-search"
-          type="success"
-          @click="handleSearch"
-        >
-          搜索
-        </el-button>
-        <el-button
-          class="input-margin"
-          icon="el-icon-remove-outline"
-          type="warning"
-          @click="handleCancel"
-        >
-          重置
-        </el-button>
+        <button class="topBtn searchBtn" @click="handleSearch">搜索</button>
+        <button class="topBtn resetBtn" @click="handleCancel">重置</button>
       </div>
       <div class="topListLeft" style="padding: 0 0 20px 20px">
-        <el-button
-          class="input-margin"
-          icon="el-icon-circle-plus-outline"
-          type="primary"
-          @click="handleAdd"
-        >
-          新增
-        </el-button>
-        <el-button
-          class="input-margin"
-          icon="el-icon-delete"
-          type="danger"
-          @click="handleDelete"
-        >
-          批量删除
-        </el-button>
-        <el-button
-          class="input-margin"
-          icon="el-icon-bottom"
-          type="primary"
-          @click="handleImport"
-        >
-          导入
-        </el-button>
-        <el-button
-          class="input-margin"
-          icon="el-icon-top"
-          type="primary"
-          @click="handleExport"
-        >
-          导出
-        </el-button>
+        <button class="topBtn searchBtn" @click="handleAdd">新增</button>
+        <button class="topBtn delBtn" @click="handleDelete">批量删除</button>
+        <button class="topBtn searchBtn" @click="handleImport">导入</button>
+        <button class="topBtn searchBtn" @click="handleExport">导出</button>
       </div>
     </div>
-
-    <el-table v-loading="listLoading" :data="list" stripe style="width: 100%">
-      <el-table-column align="center" prop="id" label="ID" min-width="10%">
+    <!-- 下方数据表 -->
+    <el-table
+      v-loading="listLoading"
+      :data="list"
+      style="width: 100%"
+      :cell-style="columnStyle"
+    >
+      <el-table-column
+        align="center"
+        prop="id"
+        label="ID"
+        min-width="10%"
+        style="font-weight: 800"
+      >
       </el-table-column>
 
       <el-table-column
@@ -120,23 +90,18 @@
 
       <el-table-column align="center" label="操作" min-width="20%">
         <template slot-scope="scope">
-          <el-button
-            type="primary"
-            size="mini"
-            icon="el-icon-edit"
+          <button
+            class="button updateBtn"
             @click="updateUserInfo(scope.row.id)"
           >
             修改
-          </el-button>
-          <el-button
-            style="margin: 10px"
-            type="danger"
-            size="mini"
-            icon="el-icon-edit"
+          </button>
+          <button
+            class="button deleteBtn"
             @click="delectUserInfo(scope.row.id)"
           >
             删除
-          </el-button>
+          </button>
         </template>
       </el-table-column>
     </el-table>
@@ -286,9 +251,163 @@ export default {
     delectUserInfo(id) {
       console.log("id", id);
     },
+    columnStyle({ columnIndex }) {
+      if (columnIndex == 0) {
+        return "font-weight: 800;font-size: 16px";
+      }
+    },
   },
 };
 </script>
+
+<style>
+.el-table__header {
+  margin-bottom: 0 !important;
+}
+.el-table th {
+  background-color: #343a3f !important;
+  color: #fff;
+}
+
+.el-table .el-table__cell {
+  padding: 8px 0;
+}
+
+.el-table td.el-table__cell,
+.el-table th.el-table__cell.is-leaf {
+  border: none;
+  border-bottom: 1px solid #ebeef5;
+}
+
+/* 自定义按钮样式 */
+/* CSS */
+/* 修改与删除按钮 */
+.button {
+  margin-right: 10px;
+  border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 16px;
+  min-height: 16px;
+  outline: 0;
+  padding: 4px 10px;
+  text-align: center;
+  text-rendering: geometricprecision;
+  text-transform: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+}
+
+.button:active {
+  opacity: 0.5;
+}
+
+.deleteBtn {
+  background: #ff4742;
+  border: 1px solid #ff4742;
+}
+
+.deleteBtn:hover,
+.deleteBtn:active {
+  background-color: initial;
+  background-position: 0 0;
+  color: #ff4742;
+}
+
+.updateBtn {
+  background: #494949;
+  border: 1px solid #494949;
+}
+
+.updateBtn:hover,
+.updateBtn:active {
+  background-color: initial;
+  background-position: 0 0;
+  color: #494949;
+}
+
+/* 上方搜索与重置按钮 */
+/* CSS */
+.topBtn {
+  appearance: button;
+  background-image: none;
+  /* border: 1px solid #000; */
+  border-radius: 4px;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: ITCAvantGardeStd-Bk, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  margin: 0 5px 10px 0;
+  overflow: visible;
+  /* 按钮长宽 */
+  padding: 8px 30px;
+  margin-right: 20px;
+  text-align: center;
+  text-transform: none;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.topBtn:focus {
+  text-decoration: none;
+}
+
+.topBtn:hover {
+  text-decoration: none;
+}
+
+.topBtn:active {
+  box-shadow: rgba(0, 0, 0, 0.125) 0 3px 5px inset;
+  outline: 0;
+}
+
+.topBtn:not([disabled]):active {
+  box-shadow: #fff 2px 2px 0 0, #000 2px 2px 0 1px;
+  transform: translate(2px, 2px);
+}
+
+@media (min-width: 768px) {
+  .topBtn {
+    padding: 7px 30px;
+  }
+}
+/* searchBtn */
+/* appendBtn import export */
+.searchBtn {
+  background-color: #000;
+  border: 1px solid #000;
+  box-shadow: #fff 4px 4px 0 0, #000 4px 4px 0 1px;
+}
+
+/* resetBtn */
+.resetBtn {
+  background-color: #efc381;
+  border: 1px solid #efc381;
+  box-shadow: #fff 4px 4px 0 0, #efc381 4px 4px 0 1px;
+}
+
+/* delBtn */
+.delBtn {
+  background-color: #ff6864;
+  border: 1px solid #ff6864;
+  box-shadow: #fff 4px 4px 0 0, #ff6864 4px 4px 0 1px;
+}
+</style>
 
 <style scoped>
 .input-margin {
@@ -322,12 +441,10 @@ export default {
 .flex {
   overflow: auto;
   -webkit-overflow-scrolling: touch;
-  /* flex样式呈现*/
   display: flex;
-  /*垂直排列*/
   flex-direction: column;
-  align-items: center; /*由于flex-direction: column，因此align-items代表的是水平方向*/
-  justify-content: center; /*由于flex-direction: column，因此justify-content代表的是垂直方向*/
+  align-items: center;
+  justify-content: center;
 }
 .flex {
   flex: 1;

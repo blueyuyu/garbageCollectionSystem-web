@@ -10,7 +10,14 @@
         </div>
       </div>
     </div>
-    <div style="display: flex;justify-content: center;background-color:#e5f2fd;padding-bottom: 60px;">
+    <div
+      style="
+        display: flex;
+        justify-content: center;
+        background-color: #e5f2fd;
+        padding-bottom: 60px;
+      "
+    >
       <el-form class="fromclass" ref="form" :model="form" label-width="100px">
         <el-row>
           <el-col :span="24">
@@ -18,15 +25,36 @@
               <el-row>
                 <el-col :span="12">
                   <el-form-item label="用户名：">
-                    <el-input style="width: 220px" v-model="form.username" :disabled="true"></el-input>
+                    <el-input
+                      style="width: 220px"
+                      v-model="form.username"
+                      :disabled="true"
+                    ></el-input>
                   </el-form-item>
                 </el-col>
                 <el-col :span="12">
-                  <el-form-item label="昵称：" prop="nickname" :rules="[
-                    { required: true, message: '请输入用户昵称', trigger: 'blur' },
-                    { min: 3, max: 9, message: '昵称长度为3-9个字符', trigger: ['blur', 'change'] }
-                  ]">
-                    <el-input style="width: 220px" v-model="form.nickname" clearable></el-input>
+                  <el-form-item
+                    label="昵称："
+                    prop="nickname"
+                    :rules="[
+                      {
+                        required: true,
+                        message: '请输入用户昵称',
+                        trigger: 'blur',
+                      },
+                      {
+                        min: 3,
+                        max: 9,
+                        message: '昵称长度为3-9个字符',
+                        trigger: ['blur', 'change'],
+                      },
+                    ]"
+                  >
+                    <el-input
+                      style="width: 220px"
+                      v-model="form.nickname"
+                      clearable
+                    ></el-input>
                   </el-form-item>
                 </el-col>
               </el-row>
@@ -35,26 +63,56 @@
         </el-row>
         <el-row>
           <el-col :span="12">
-            <el-form-item label="邮箱：" prop="email" :rules="[
-              { required: true, message: '请输入邮箱地址', trigger: 'blur' },
-              { type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change'] }
-            ]">
-              <el-input style="width: 220px" v-model="form.email" clearable></el-input>
+            <el-form-item
+              label="邮箱："
+              prop="email"
+              :rules="[
+                { required: true, message: '请输入邮箱地址', trigger: 'blur' },
+                {
+                  type: 'email',
+                  message: '请输入正确的邮箱地址',
+                  trigger: ['blur', 'change'],
+                },
+              ]"
+            >
+              <el-input
+                style="width: 220px"
+                v-model="form.email"
+                clearable
+              ></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="电话号码：" prop="phone" :rules="[
-              { required: true, message: '请输入电话号码', trigger: 'blur' },
-              { pattern: /^1\d{10}/, message: '请输入正确的电话号码', trigger: ['blur', 'change'] }
-            ]">
-              <el-input style="width: 220px" v-model="form.phone" clearable></el-input>
+            <el-form-item
+              label="电话号码："
+              prop="phone"
+              :rules="[
+                { required: true, message: '请输入电话号码', trigger: 'blur' },
+                {
+                  pattern: /^1\d{10}/,
+                  message: '请输入正确的电话号码',
+                  trigger: ['blur', 'change'],
+                },
+              ]"
+            >
+              <el-input
+                style="width: 220px"
+                v-model="form.phone"
+                clearable
+              ></el-input>
             </el-form-item>
           </el-col>
         </el-row>
-        <el-form-item label="地址：" prop="address" :rules="[
-          { required: true, message: '请输入地址', trigger: 'blur' }
-        ]">
-          <el-input style="width: 220px" v-model="form.address" clearable></el-input>
+        <el-form-item
+          label="地址："
+          prop="address"
+          :rules="[{ required: true, message: '请输入地址', trigger: 'blur' }]"
+        >
+          <el-input
+            style="width: 220px"
+            v-model="form.address"
+            clearable
+          ></el-input>
         </el-form-item>
         <el-form-item>
           <el-row type="flex" justify="center">
@@ -67,58 +125,56 @@
   </div>
 </template>
 <script>
-import { updateUserInfo } from '@/apis/user'
+import { updateUserInfo } from "@/apis/user";
 
-export default ({
+export default {
   created() {
-    this.getUserInfo()
+    this.getUserInfo();
   },
   methods: {
     getUserInfo() {
-      const user = JSON.parse(localStorage.getItem('__USER'))
-      this.user = user
-      console.log(this.user)
+      const user = JSON.parse(localStorage.getItem("__USER"));
+      this.user = user;
+      console.log(this.user);
       // 赋值
-      this.form.username = this.user.username
-      this.form.nickname = this.user.nickname
-      this.form.email = this.user.email
-      this.form.phone = this.user.phone
-      this.form.address = this.user.address
+      this.form.username = this.user.username;
+      this.form.nickname = this.user.nickname;
+      this.form.email = this.user.email;
+      this.form.phone = this.user.phone;
+      this.form.address = this.user.address;
     },
-     onSubmit(formname) {
-      this.$refs[formname].validate(async(valid) => {
+    onSubmit(formname) {
+      this.$refs[formname].validate(async (valid) => {
         if (valid) {
-          var that = this
+          var that = this;
           const res = await updateUserInfo(that.form);
           this.$notify({
-            title: '成功',
-            message: '更新用户信息成功',
-            type: 'success',
-            duration: 2000
-          })
+            title: "成功",
+            message: "更新用户信息成功",
+            type: "success",
+            duration: 2000,
+          });
         } else {
-          console.log('error submit!!');
+          console.log("error submit!!");
           return false;
         }
       });
-    }
+    },
   },
   data() {
     return {
       form: {
-        username: '',
-        nickname: '',
-        email: '',
-        phone: '',
-        address: '',
+        username: "",
+        nickname: "",
+        email: "",
+        phone: "",
+        address: "",
       },
       user: "", // 用户信息
-    }
+    };
   },
-  setup() {
-
-  },
-})
+  setup() {},
+};
 </script>
 
 
