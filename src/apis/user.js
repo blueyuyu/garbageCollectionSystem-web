@@ -40,6 +40,12 @@ export const deleteUserById = (id) => {
  * @returns 
  */
 export const exportUserExcel = () => {
-    return get('/user/export','' ,'blob')
+    return get('/user/export', '', 'blob')
 }
 
+/**
+ * 批量删除用户
+ */
+export const delUsersByIds = (ids) => {
+    return post('/user/del/batch', ids)
+}

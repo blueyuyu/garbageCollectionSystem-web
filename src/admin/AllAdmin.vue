@@ -48,7 +48,9 @@
       :data="list"
       style="width: 100%"
       :cell-style="columnStyle"
+      @selection-change="handleSelectionChange"
     >
+      <el-table-column type="selection" width="55"> </el-table-column>
       <el-table-column
         align="center"
         prop="id"
@@ -191,9 +193,9 @@ import {
   updateUserInfo,
   deleteUserById,
   exportUserExcel,
+  delUsersByIds,
 } from "@/apis/user";
 import { setValue } from "@/utils/datafn";
-import { write2File } from "@/utils/excel-tool";
 
 export default {
   name: "AllAdmin",
@@ -217,6 +219,7 @@ export default {
         page: 1,
         limit: 8,
       },
+      multipleSelection: [],
       input: {
         username: "",
         email: "",
@@ -349,10 +352,32 @@ export default {
       this.addOrUpdateForm.id = ""; // id 不置空会应发问题；
       this.isUpdate = false;
     },
-    handleDelete() {
-      console.log("删除");
+    async handleDelete() {
+      try {
+        await this.$confirm("是否确认批量删除？", "确认信息", {
+          distinguishCancelAndClose: true,
+          confirmButtonClass: "danger",
+          confirmButtonText: "删除",
+          cancelButtonText: "放弃删除",
+        });
+        await delUsersByIds(this.multipleSelection);
+        this.$notify({
+          title: "成功",
+          message: "批量删除成功",
+          type: "success",
+          duration: 2000,
+        });
+        this.getList();
+      } catch (error) {
+        this.$notify.error({
+          title: "失败",
+          message: "取消删除",
+        });
+      }
     },
-    async handleImport() {},
+    async handleImport() {
+      // 等待完成
+    },
     async handleExport() {
       console.log("导出");
       const res = await exportUserExcel();
@@ -436,6 +461,10 @@ export default {
       if (columnIndex == 0) {
         return "font-weight: 800;font-size: 16px";
       }
+    },
+    async handleSelectionChange(val) {
+      const idList = val.map((item) => item.id);
+      this.multipleSelection = idList;
     },
   },
 };
