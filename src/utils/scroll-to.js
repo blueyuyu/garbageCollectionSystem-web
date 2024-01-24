@@ -1,3 +1,12 @@
+// 定义了一个缓动函数，用于在动画中产生渐入渐出效果
+/**
+ *  
+ * @param {*} t 动画已经运行的时间
+ * @param {*} b 初始值
+ * @param {*} c 变化量
+ * @param {*} d 动画总时间
+ * @returns 
+ */
 Math.easeInOutQuad = function(t, b, c, d) {
   t /= d / 2
   if (t < 1) {
@@ -34,8 +43,8 @@ function position() {
 export function scrollTo(to, duration, callback) {
   const start = position()
   const change = to - start
-  const increment = 20
-  let currentTime = 0
+  const increment = 20 // 动画增量时间，每次滚动的时间步长
+  let currentTime = 0 // 用于跟踪动画已运行时间
   duration = (typeof (duration) === 'undefined') ? 500 : duration
   var animateScroll = function() {
     // increment the time
@@ -46,6 +55,7 @@ export function scrollTo(to, duration, callback) {
     move(val)
     // do the animation unless its over
     if (currentTime < duration) {
+      // 递归的调用animation 直到currentTime >= duration
       requestAnimFrame(animateScroll)
     } else {
       if (callback && typeof (callback) === 'function') {

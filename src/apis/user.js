@@ -1,7 +1,7 @@
 import { post, get } from '@/utils/requestFn'
 
 /**
- * 更新用户信息
+ * 更新用户信息,或者新增
  * @param {*} username 
  * @param {*} nickname
  * @param {*} email

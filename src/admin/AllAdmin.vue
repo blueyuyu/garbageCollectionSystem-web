@@ -108,20 +108,53 @@
 
     <!-- Form -->
     <el-dialog title="修改" :visible.sync="dialogFormVisible" width="34%">
-      <el-form :model="form">
-        <el-form-item label="活动名称" :label-width="formLabelWidth">
-          <el-input v-model="form.name" autocomplete="off"></el-input>
+      <el-form :model="addOrUpdateForm" :rules="rules">
+        <el-form-item
+          label="用户名"
+          :label-width="formLabelWidth"
+          prop="username"
+        >
+          <el-input
+            v-model="addOrUpdateForm.username"
+            autocomplete="off"
+          ></el-input>
         </el-form-item>
-        <el-form-item label="活动区域" :label-width="formLabelWidth">
-          <el-select v-model="form.region" placeholder="请选择活动区域">
-            <el-option label="区域一" value="shanghai"></el-option>
-            <el-option label="区域二" value="beijing"></el-option>
-          </el-select>
+        <el-form-item
+          label="昵称"
+          :label-width="formLabelWidth"
+          prop="nickname"
+        >
+          <el-input
+            v-model="addOrUpdateForm.nickname"
+            autocomplete="off"
+          ></el-input>
+        </el-form-item>
+        <el-form-item
+          label="密码"
+          :label-width="formLabelWidth"
+          prop="password"
+        >
+          <el-input
+            v-model="addOrUpdateForm.password"
+            autocomplete="off"
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="邮箱" :label-width="formLabelWidth" prop="email">
+          <el-input
+            v-model="addOrUpdateForm.email"
+            autocomplete="off"
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="电话" :label-width="formLabelWidth" prop="phone">
+          <el-input
+            v-model="addOrUpdateForm.phone"
+            autocomplete="off"
+          ></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogFormVisible = false">取 消</el-button>
-        <el-button type="success" @click="dialogFormVisible = false"
+        <el-button @click="resetDialog">取 消</el-button>
+        <el-button type="success" @click="confirmDialog(addOrUpdateForm)"
           >确 定</el-button
         >
       </div>
@@ -161,7 +194,7 @@ export default {
       total: 0,
       listLoading: true,
       listQuery: {
-        page: 1, 
+        page: 1,
         limit: 8,
       },
       input: {
@@ -169,21 +202,44 @@ export default {
         email: "",
         address: "",
       },
-
-      // just the form
-      dialogTableVisible: false,
+      // 为解决bug而引入的中间参数
+      searchParam: {
+        username: "",
+        email: "",
+        address: "",
+      },
+      isSearch: false,
+      // just the userForm
       dialogFormVisible: false,
-      form: {
-        name: "",
-        region: "",
-        date1: "",
-        date2: "",
-        delivery: false,
-        type: [],
-        resource: "",
-        desc: "",
+      addOrUpdateForm: {
+        username: "",
+        nickname: "",
+        password: "",
+        email: "",
+        address: "",
+        phone: "",
       },
       formLabelWidth: "70px",
+      rules: {
+        username: [
+          { required: true, message: "请输入用户名", trigger: "blur" },
+          { min: 3, max: 9, message: "长度在 3 到 5 个字符", trigger: "blur" },
+        ],
+        password: [
+          { required: true, message: "请输入密码", trigger: "blur" },
+          { min: 3, max: 9, message: "长度在 3 到 5 个字符", trigger: "blur" },
+        ],
+        email: [
+          { type: "email", message: "请输入正确的邮箱地址", trigger: "blur" },
+        ],
+        phone: [
+          {
+            pattern: /^1\d{10}/,
+            message: "请输入正确的电话号码",
+            trigger: ["blur", "change"],
+          },
+        ],
+      },
     };
   },
   created() {
@@ -257,19 +313,43 @@ export default {
     },
     async getList() {
       this.listLoading = true;
-      const res = await getUserList(this.listQuery.page, this.listQuery.limit);
+      let res;
+      if (this.isSearch) {
+        res = await getUserList(
+          this.listQuery.page,
+          this.listQuery.limit,
+          this.searchParam.username,
+          this.searchParam.address,
+          this.searchParam.email
+        );
+      } else {
+        res = await getUserList(this.listQuery.page, this.listQuery.limit);
+      }
       this.list = res.records;
       this.total = res.total;
       this.listLoading = false;
     },
-    handleSearch() {
-      console.log("搜索");
+    async handleSearch() {
+      this.isSearch = true;
+      this.listQuery.page = 1;
+      this.searchParam.username = this.input.username;
+      this.searchParam.address = this.input.address;
+      this.searchParam.email = this.input.email;
+      await this.getList();
     },
     handleCancel() {
-      console.log("重置");
+      this.input.username = "";
+      this.input.address = "";
+      this.input.email = "";
+      this.searchParam.username = "";
+      this.searchParam.address = "";
+      this.searchParam.email = "";
+      this.isSearch = false;
+      this.getList();
     },
     handleAdd() {
       console.log("添加");
+      this.dialogFormVisible = true;
     },
     handleDelete() {
       console.log("删除");
@@ -279,6 +359,30 @@ export default {
     },
     handleExport() {
       console.log("导出");
+    },
+    confirmDialog(formname) {
+      this.$refs[formname].validate(async (valid) => {
+        if (valid) {
+          var that = this;
+          const res = await updateUserInfo(that.updateUserInfo);
+          this.$notify({
+            title: "成功",
+            message: "新增用户信息成功",
+            type: "success",
+            duration: 2000,
+          });
+          this.listQuery.page = 1;
+          await this.getList();
+          this.resetDialog();
+        } else {
+          console.log("error submit!!");
+          return false;
+        }
+      });
+    },
+    resetDialog() {
+      this.$refs["addOrUpdateForm"].resetFields();
+      this.dialogFormVisible = false;
     },
     updateUserInfo(id) {
       this.dialogFormVisible = true;
