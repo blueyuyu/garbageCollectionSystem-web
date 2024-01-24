@@ -92,7 +92,7 @@
         <template slot-scope="scope">
           <button
             class="button updateBtn"
-            @click="updateUserInfo(scope.row.id)"
+            @click="updateUserInfo(scope.row, 'addOrUpdateForm')"
           >
             修改
           </button>
@@ -106,9 +106,14 @@
       </el-table-column>
     </el-table>
 
-    <!-- Form -->
-    <el-dialog title="修改" :visible.sync="dialogFormVisible" width="34%">
-      <el-form :model="addOrUpdateForm" :rules="rules">
+    <!--dialog Form -->
+    <el-dialog
+      title="修改"
+      :visible.sync="dialogFormVisible"
+      width="34%"
+      :before-close="resetDialog"
+    >
+      <el-form :model="addOrUpdateForm" ref="addOrUpdateForm" :rules="rules">
         <el-form-item
           label="用户名"
           :label-width="formLabelWidth"
@@ -129,16 +134,18 @@
             autocomplete="off"
           ></el-input>
         </el-form-item>
-        <el-form-item
-          label="密码"
-          :label-width="formLabelWidth"
-          prop="password"
-        >
-          <el-input
-            v-model="addOrUpdateForm.password"
-            autocomplete="off"
-          ></el-input>
-        </el-form-item>
+        <template v-if="!isUpdate">
+          <el-form-item
+            label="密码"
+            :label-width="formLabelWidth"
+            prop="password"
+          >
+            <el-input
+              v-model="addOrUpdateForm.password"
+              autocomplete="off"
+            ></el-input>
+          </el-form-item>
+        </template>
         <el-form-item label="邮箱" :label-width="formLabelWidth" prop="email">
           <el-input
             v-model="addOrUpdateForm.email"
@@ -151,10 +158,16 @@
             autocomplete="off"
           ></el-input>
         </el-form-item>
+        <el-form-item label="地址" :label-width="formLabelWidth" prop="address">
+          <el-input
+            v-model="addOrUpdateForm.address"
+            autocomplete="off"
+          ></el-input>
+        </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="resetDialog">取 消</el-button>
-        <el-button type="success" @click="confirmDialog(addOrUpdateForm)"
+        <el-button type="success" @click="confirmDialog('addOrUpdateForm')"
           >确 定</el-button
         >
       </div>
@@ -173,7 +186,14 @@
 <script>
 import Pagination from "@/components/Pagination";
 import { formatDate } from "@/utils/date.js";
-import { getUserList } from "@/apis/user";
+import {
+  getUserList,
+  updateUserInfo,
+  deleteUserById,
+  exportUserExcel,
+} from "@/apis/user";
+import { setValue } from "@/utils/datafn";
+import { write2File } from "@/utils/excel-tool";
 
 export default {
   name: "AllAdmin",
@@ -209,9 +229,11 @@ export default {
         address: "",
       },
       isSearch: false,
+      isUpdate: true,
       // just the userForm
       dialogFormVisible: false,
       addOrUpdateForm: {
+        id: "",
         username: "",
         nickname: "",
         password: "",
@@ -227,16 +249,16 @@ export default {
         ],
         password: [
           { required: true, message: "请输入密码", trigger: "blur" },
-          { min: 3, max: 9, message: "长度在 3 到 5 个字符", trigger: "blur" },
+          { min: 3, max: 9, message: "长度在 3 到 9 个字符", trigger: "blur" },
         ],
         email: [
           { type: "email", message: "请输入正确的邮箱地址", trigger: "blur" },
         ],
         phone: [
           {
-            pattern: /^1\d{10}/,
+            pattern: /^1\d{10}$/,
             message: "请输入正确的电话号码",
-            trigger: ["blur", "change"],
+            trigger: "blur",
           },
         ],
       },
@@ -282,31 +304,6 @@ export default {
 
       return "background-image: linear-gradient( 135deg, #FFD3A5 10%, #FD6585 100%);";
     },
-    delectArtive(id) {
-      this.$confirm("此操作将永久删除文章是否确认删除？", "确认信息", {
-        distinguishCancelAndClose: true,
-        confirmButtonClass: "danger",
-        confirmButtonText: "删除",
-        cancelButtonText: "放弃删除",
-      })
-        .then(() => {
-          DelectArticleById(id).then((resp) => {
-            this.$notify({
-              title: "成功",
-              message: "您已成功删除该文章",
-              type: "success",
-            });
-            //刷新当前页面
-            this.getList();
-          });
-        })
-        .catch((action) => {
-          this.$message({
-            type: "info",
-            message: action === "cancel" ? "放弃删除" : "保留当前文章",
-          });
-        });
-    },
     formatDate(time) {
       let data = new Date(time);
       return formatDate(data, "yyyy-MM-dd hh:mm ");
@@ -348,26 +345,45 @@ export default {
       this.getList();
     },
     handleAdd() {
-      console.log("添加");
       this.dialogFormVisible = true;
+      this.addOrUpdateForm.id = ""; // id 不置空会应发问题；
+      this.isUpdate = false;
     },
     handleDelete() {
       console.log("删除");
     },
-    handleImport() {
-      console.log("导入");
-    },
-    handleExport() {
+    async handleImport() {},
+    async handleExport() {
       console.log("导出");
+      const res = await exportUserExcel();
+      const blob = new Blob([res], { type: "application/vnd.ms-excel" });
+      console.log(res, "who are you");
+      // 创建 href 超链接，点击进行下载
+      window.URL = window.URL || window.webkitURL;
+      const href = URL.createObjectURL(blob);
+      const downA = document.createElement("a");
+      downA.href = href;
+      downA.download = "用户表";
+      downA.click();
+      // 销毁超连接
+      window.URL.revokeObjectURL(href);
+      this.$notify({
+        title: "成功",
+        message: "您已成功导出用户表",
+        type: "success",
+      });
     },
     confirmDialog(formname) {
       this.$refs[formname].validate(async (valid) => {
         if (valid) {
           var that = this;
-          const res = await updateUserInfo(that.updateUserInfo);
+          const message = this.isUpdate
+            ? "修改用户信息成功"
+            : "新增用户信息成功";
+          await updateUserInfo(that.addOrUpdateForm);
           this.$notify({
             title: "成功",
-            message: "新增用户信息成功",
+            message,
             type: "success",
             duration: 2000,
           });
@@ -384,12 +400,37 @@ export default {
       this.$refs["addOrUpdateForm"].resetFields();
       this.dialogFormVisible = false;
     },
-    updateUserInfo(id) {
+    updateUserInfo(data) {
       this.dialogFormVisible = true;
-      console.log("id", id);
+      this.isUpdate = true;
+      setValue(this.addOrUpdateForm, data);
     },
-    delectUserInfo(id) {
+    async delectUserInfo(id) {
       console.log("id", id);
+      try {
+        await this.$confirm(
+          "此操作将永久删除用户，是否确认删除？",
+          "确认信息",
+          {
+            distinguishCancelAndClose: true,
+            confirmButtonClass: "danger",
+            confirmButtonText: "删除",
+            cancelButtonText: "放弃删除",
+          }
+        );
+        await deleteUserById(id);
+        this.$notify({
+          title: "成功",
+          message: "您已成功删除该用户",
+          type: "success",
+        });
+      } catch (error) {
+        this.$notify.error({
+          title: "失败",
+          message: "取消删除",
+        });
+      }
+      this.getList();
     },
     columnStyle({ columnIndex }) {
       if (columnIndex == 0) {
@@ -595,6 +636,20 @@ export default {
   color: black;
   background-color: #f3f5f6;
   border-color: #f3f5f6;
+}
+
+/* 修改确认框的样式 */
+/* .el-message-box{
+border:none
+} */
+.el-message-box {
+  border: none;
+}
+.el-message-box__header {
+  background-color: #343a3f;
+}
+.el-message-box__title {
+  color: white;
 }
 </style>
 

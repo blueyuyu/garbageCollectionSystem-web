@@ -4,10 +4,11 @@ import service from './request'
 /**
  * 封装 get 方法
  * @param {*} url 
- * @param {*} params 
+ * @param {*} params
+ * @param {*} 响应类型
  * @returns {Promise}
  */
-export async function get(url, params) {
+export async function get(url, params, responseType = 'json') {
     // return new Promise((resolve, reject) => {
     //     service.get(url, {
     //         params
@@ -18,8 +19,12 @@ export async function get(url, params) {
     //     })
     // })
     try {
-        const response = await service.get(url, { params })
-        return response.data.data
+        const response = await service.get(url, { params, responseType })
+        if (responseType != 'json') {
+            return response.data
+        } else {
+            return response.data.data
+        }
     } catch (error) {
         return Promise.reject(error)
     }

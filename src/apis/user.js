@@ -1,4 +1,4 @@
-import { post, get } from '@/utils/requestFn'
+import { post, get, del } from '@/utils/requestFn'
 
 /**
  * 更新用户信息,或者新增
@@ -25,3 +25,21 @@ export const updateUserInfo = (user) => {
 export const getUserList = (pageNum, pageSize = 10, username = '', address = '', email = '') => {
     return get('/user/page', { pageNum, pageSize, username, address, email })
 }
+
+/**
+ * 
+ * @param {number} id  
+ * @returns 
+ */
+export const deleteUserById = (id) => {
+    return del(`/user/${id}`)
+}
+
+/**
+ * 导出excel
+ * @returns 
+ */
+export const exportUserExcel = () => {
+    return get('/user/export','' ,'blob')
+}
+
