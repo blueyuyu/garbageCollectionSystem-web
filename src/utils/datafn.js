@@ -10,3 +10,13 @@ export function setValue(obj, valueObj){
         }
     }
 }
+
+/**
+ * 置空对象
+ * @param {obj} obj 
+ */
+export function clearObj(obj){
+    Object.keys(obj).forEach(item => {
+        obj[item] = ''
+    })
+}

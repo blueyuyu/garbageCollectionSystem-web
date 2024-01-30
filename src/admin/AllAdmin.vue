@@ -110,7 +110,7 @@
 
     <!--dialog Form -->
     <el-dialog
-      title="修改"
+      :title="isUpdate ? '修改' : '新增'"
       :visible.sync="dialogFormVisible"
       width="34%"
       :before-close="resetDialog"
@@ -195,7 +195,7 @@ import {
   exportUserExcel,
   delUsersByIds,
 } from "@/apis/user";
-import { setValue } from "@/utils/datafn";
+import { setValue,clearObj } from "@/utils/datafn";
 
 export default {
   name: "AllAdmin",
@@ -332,18 +332,12 @@ export default {
     async handleSearch() {
       this.isSearch = true;
       this.listQuery.page = 1;
-      this.searchParam.username = this.input.username;
-      this.searchParam.address = this.input.address;
-      this.searchParam.email = this.input.email;
+      setValue(this.searchParam,this.input);
       await this.getList();
     },
     handleCancel() {
-      this.input.username = "";
-      this.input.address = "";
-      this.input.email = "";
-      this.searchParam.username = "";
-      this.searchParam.address = "";
-      this.searchParam.email = "";
+      clearObj(this.input)
+      clearObj(this.searchParam)
       this.isSearch = false;
       this.getList();
     },
@@ -423,12 +417,16 @@ export default {
     },
     resetDialog() {
       this.$refs["addOrUpdateForm"].resetFields();
+      this.addOrUpdateForm.password = "";
       this.dialogFormVisible = false;
     },
     updateUserInfo(data) {
+      // TODO 留意一下这里的执行顺序,Mounted()创建之后，就会执行resetField()记录初始值
       this.dialogFormVisible = true;
       this.isUpdate = true;
-      setValue(this.addOrUpdateForm, data);
+      this.$nextTick(() => {
+        setValue(this.addOrUpdateForm, data);
+      });
     },
     async delectUserInfo(id) {
       console.log("id", id);
@@ -469,218 +467,6 @@ export default {
   },
 };
 </script>
-
-<style>
-.el-table__header {
-  margin-bottom: 0 !important;
-}
-.el-table th {
-  background-color: #343a3f !important;
-  color: #fff;
-}
-
-.el-table .el-table__cell {
-  padding: 8px 0;
-}
-
-.el-table td.el-table__cell,
-.el-table th.el-table__cell.is-leaf {
-  border: none;
-  border-bottom: 1px solid #ebeef5;
-}
-
-/* 自定义按钮样式 */
-/* CSS */
-/* 修改与删除按钮 */
-.button {
-  margin-right: 10px;
-  border-radius: 6px;
-  box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
-  box-sizing: border-box;
-  color: #ffffff;
-  cursor: pointer;
-  display: inline-block;
-  font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
-  font-size: 12px;
-  font-weight: 700;
-  line-height: 16px;
-  min-height: 16px;
-  outline: 0;
-  padding: 4px 10px;
-  text-align: center;
-  text-rendering: geometricprecision;
-  text-transform: none;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  vertical-align: middle;
-}
-
-.button:active {
-  opacity: 0.5;
-}
-
-.deleteBtn {
-  background: #ff4742;
-  border: 1px solid #ff4742;
-}
-
-.deleteBtn:hover,
-.deleteBtn:active {
-  background-color: initial;
-  background-position: 0 0;
-  color: #ff4742;
-}
-
-.updateBtn {
-  background: #494949;
-  border: 1px solid #494949;
-}
-
-.updateBtn:hover,
-.updateBtn:active {
-  background-color: initial;
-  background-position: 0 0;
-  color: #494949;
-}
-
-/* 上方搜索与重置按钮 */
-/* CSS */
-.topBtn {
-  appearance: button;
-  background-image: none;
-  /* border: 1px solid #000; */
-  border-radius: 4px;
-  box-sizing: border-box;
-  color: #fff;
-  cursor: pointer;
-  display: inline-block;
-  font-family: ITCAvantGardeStd-Bk, Arial, sans-serif;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 20px;
-  margin: 0 5px 10px 0;
-  overflow: visible;
-  /* 按钮长宽 */
-  padding: 8px 30px;
-  margin-right: 20px;
-  text-align: center;
-  text-transform: none;
-  touch-action: manipulation;
-  user-select: none;
-  -webkit-user-select: none;
-  vertical-align: middle;
-  white-space: nowrap;
-}
-
-.topBtn:focus {
-  text-decoration: none;
-}
-
-.topBtn:hover {
-  text-decoration: none;
-}
-
-.topBtn:active {
-  box-shadow: rgba(0, 0, 0, 0.125) 0 3px 5px inset;
-  outline: 0;
-}
-
-.topBtn:not([disabled]):active {
-  box-shadow: #fff 2px 2px 0 0, #000 2px 2px 0 1px;
-  transform: translate(2px, 2px);
-}
-
-@media (min-width: 768px) {
-  .topBtn {
-    padding: 7px 30px;
-  }
-}
-/* searchBtn */
-/* appendBtn import export */
-.searchBtn {
-  background-color: #000;
-  border: 1px solid #000;
-  box-shadow: #fff 4px 4px 0 0, #000 4px 4px 0 1px;
-}
-
-/* resetBtn */
-.resetBtn {
-  background-color: #efc381;
-  border: 1px solid #efc381;
-  box-shadow: #fff 4px 4px 0 0, #efc381 4px 4px 0 1px;
-}
-
-/* delBtn */
-.delBtn {
-  background-color: #ff6864;
-  border: 1px solid #ff6864;
-  box-shadow: #fff 4px 4px 0 0, #ff6864 4px 4px 0 1px;
-}
-
-/* 弹窗样式修改 */
-.el-dialog {
-  border-radius: 20px;
-}
-
-.el-dialog__header {
-  background-color: #343a3f;
-  border-radius: 20px 20px 0 0;
-}
-
-.el-dialog__title {
-  color: #fff;
-  font-weight: 700;
-}
-
-.el-dialog__footer {
-  text-align: center;
-}
-
-/* 修改默认的success颜色，将其改为项目的button */
-.el-button--success {
-  background-color: #343a3f;
-  border: #343a3f;
-}
-
-.el-button--success.is-active,
-.el-button--success:active {
-  background-color: #96a0a9;
-  border: #96a0a9;
-}
-
-.el-button--success.is-active,
-.el-button--success:hover {
-  background-color: #96a0a9;
-  border: #96a0a9;
-}
-
-.el-button--default.is-active,
-.el-button--default:active {
-  background-color: #96a0a9;
-  border: #96a0a9;
-}
-
-.el-button--default:hover {
-  color: black;
-  background-color: #f3f5f6;
-  border-color: #f3f5f6;
-}
-
-/* 修改确认框的样式 */
-/* .el-message-box{
-border:none
-} */
-.el-message-box {
-  border: none;
-}
-.el-message-box__header {
-  background-color: #343a3f;
-}
-.el-message-box__title {
-  color: white;
-}
-</style>
 
 <style scoped>
 .input-margin {
