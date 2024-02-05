@@ -12,26 +12,27 @@
         "
       >
         <el-input
-          placeholder="请输入用户名"
+          placeholder="请输入垃圾名称"
           suffix-icon="el-icon-search"
-          v-model="input.username"
+          v-model="input.name"
           class="input-margin"
+          clearable
+          style="flex: 1"
         >
         </el-input>
-        <el-input
-          placeholder="请输入用户邮箱"
-          suffix-icon="el-icon-message"
-          v-model="input.email"
-          class="input-margin"
+        <el-select
+          v-model="input.category"
+          placeholder="请选择垃圾类型"
+          style="flex: 1; margin-right: 10px"
         >
-        </el-input>
-        <el-input
-          placeholder="请输入用户地址"
-          suffix-icon="el-icon-position"
-          v-model="input.address"
-          class="input-margin"
-        >
-        </el-input>
+          <el-option
+            v-for="item in options"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
+          >
+          </el-option>
+        </el-select>
         <button class="topBtn searchBtn" @click="handleSearch">搜索</button>
         <button class="topBtn resetBtn" @click="handleCancel">重置</button>
       </div>
@@ -61,46 +62,54 @@
       </el-table-column>
 
       <el-table-column
-        min-width="10%"
+        min-width="40%"
         align="center"
-        prop="username"
-        label="用户名"
+        prop="name"
+        label="垃圾名称"
       >
       </el-table-column>
 
       <el-table-column
-        min-width="10%"
+        min-width="30%"
         align="center"
-        prop="nickname"
-        label="昵称"
+        prop="category"
+        label="垃圾类型"
       >
-      </el-table-column>
-
-      <el-table-column min-width="15%" align="center" prop="email" label="邮箱">
-      </el-table-column>
-
-      <el-table-column min-width="15%" align="center" prop="phone" label="电话">
-      </el-table-column>
-
-      <el-table-column
-        min-width="15%"
-        align="center"
-        prop="address"
-        label="地址"
-      >
+        <template slot-scope="scope">
+          <div slot="reference" class="name-wrapper">
+            <el-tag size="medium" type="success" v-if="scope.row.category === 1"
+              >可回收垃圾</el-tag
+            >
+            <el-tag size="medium" type="danger" v-if="scope.row.category === 2"
+              >有害垃圾</el-tag
+            >
+            <el-tag size="medium" type="info" v-if="scope.row.category === 4"
+              >湿垃圾</el-tag
+            >
+            <el-tag size="medium" type="info" v-if="scope.row.category === 8"
+              >干垃圾</el-tag
+            >
+            <el-tag
+              size="medium"
+              type="warning"
+              v-if="scope.row.category === 16"
+              >大件垃圾</el-tag
+            >
+          </div>
+        </template>
       </el-table-column>
 
       <el-table-column align="center" label="操作" min-width="20%">
         <template slot-scope="scope">
           <button
             class="button updateBtn"
-            @click="updateUserInfo(scope.row, 'addOrUpdateForm')"
+            @click="updateGarbageInfo(scope.row, 'addOrUpdateForm')"
           >
             修改
           </button>
           <button
             class="button deleteBtn"
-            @click="delectUserInfo(scope.row.id)"
+            @click="delectGarbageInfo(scope.row.id)"
           >
             删除
           </button>
@@ -108,63 +117,43 @@
       </el-table-column>
     </el-table>
 
-    <!--dialog Form -->
+    <!-- add and update dialog Form -->
     <el-dialog
       :title="isUpdate ? '修改' : '新增'"
       :visible.sync="dialogFormVisible"
       width="34%"
       :before-close="resetDialog"
     >
-      <el-form :model="addOrUpdateForm" ref="addOrUpdateForm" :rules="rules">
-        <el-form-item
-          label="用户名"
-          :label-width="formLabelWidth"
-          prop="username"
-        >
+      <el-form
+        :model="addOrUpdateForm"
+        ref="addOrUpdateForm"
+        :rules="rules"
+        hide-required-asterisk
+      >
+        <el-form-item label="垃圾名" :label-width="formLabelWidth" prop="name">
           <el-input
-            v-model="addOrUpdateForm.username"
+            v-model="addOrUpdateForm.name"
             autocomplete="off"
           ></el-input>
         </el-form-item>
         <el-form-item
-          label="昵称"
+          label="垃圾类型"
           :label-width="formLabelWidth"
-          prop="nickname"
+          prop="category"
         >
-          <el-input
-            v-model="addOrUpdateForm.nickname"
-            autocomplete="off"
-          ></el-input>
-        </el-form-item>
-        <template v-if="!isUpdate">
-          <el-form-item
-            label="密码"
-            :label-width="formLabelWidth"
-            prop="password"
+          <el-select
+            v-model="addOrUpdateForm.category"
+            placeholder="请选择垃圾类型"
+            style="flex: 1; margin-right: 10px"
           >
-            <el-input
-              v-model="addOrUpdateForm.password"
-              autocomplete="off"
-            ></el-input>
-          </el-form-item>
-        </template>
-        <el-form-item label="邮箱" :label-width="formLabelWidth" prop="email">
-          <el-input
-            v-model="addOrUpdateForm.email"
-            autocomplete="off"
-          ></el-input>
-        </el-form-item>
-        <el-form-item label="电话" :label-width="formLabelWidth" prop="phone">
-          <el-input
-            v-model="addOrUpdateForm.phone"
-            autocomplete="off"
-          ></el-input>
-        </el-form-item>
-        <el-form-item label="地址" :label-width="formLabelWidth" prop="address">
-          <el-input
-            v-model="addOrUpdateForm.address"
-            autocomplete="off"
-          ></el-input>
+            <el-option
+              v-for="item in options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            >
+            </el-option>
+          </el-select>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -173,6 +162,39 @@
           >确 定</el-button
         >
       </div>
+    </el-dialog>
+
+    <el-dialog
+      title="导入垃圾资料"
+      :visible.sync="dialogVisibleExport"
+      width="34%"
+      :before-close="handleClose"
+    >
+      <el-upload
+        class="upload-demo"
+        drag
+        action="http://localhost:9091/garbage/import"
+        accept=".xls"
+        :multiple="false"
+        :disabled="uploadDisabled"
+        :on-success="handleExcelSuccess"
+      >
+        <!-- TODO 导入功能，导入数据不成功，到时候再修复-->
+        <i class="el-icon-upload"></i>
+        <div>
+          <el-button type="text" @click="downloadTemplate">
+            下载导入模板
+          </el-button>
+        </div>
+        <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+        <div class="el-upload__tip" slot="tip">请按照模板excel上传，只能上传.xls文件，且不超过5M</div>
+      </el-upload>
+      <span slot="footer" class="dialog-footer">
+        <el-button  @click="dialogVisible = false">取 消</el-button>
+        <el-button type="success" @click="dialogVisibleExport = false"
+          >确 定</el-button
+        >
+      </span>
     </el-dialog>
 
     <pagination
@@ -189,13 +211,14 @@
 import Pagination from "@/components/Pagination";
 import { formatDate } from "@/utils/date.js";
 import {
-  getUserList,
-  updateUserInfo,
-  deleteUserById,
-  exportUserExcel,
-  delUsersByIds,
-} from "@/apis/user";
-import { setValue, clearObj } from "@/utils/datafn";
+  getGarbageList,
+  updateGarbageInfo,
+  deleteGarbageById,
+  exportGarbageExcel,
+  exportGarbageExcelTemplate,
+  delGarbagesByIds,
+} from "@/apis/garbage";
+import { setValue, clearObj, exportExcel } from "@/utils/datafn";
 
 export default {
   name: "AllAdmin",
@@ -212,7 +235,7 @@ export default {
   },
   data() {
     return {
-      list: null, // userlist
+      list: null,
       total: 0,
       listLoading: true,
       listQuery: {
@@ -221,50 +244,45 @@ export default {
       },
       multipleSelection: [],
       input: {
-        username: "",
-        email: "",
-        address: "",
+        name: "",
+        category: "",
       },
       // 为解决bug而引入的中间参数
       searchParam: {
-        username: "",
-        email: "",
-        address: "",
+        name: "",
+        category: "",
       },
       isSearch: false,
       isUpdate: true,
+      // options
+      options: [
+        { value: 1, label: "可回收垃圾" },
+        { value: 2, label: "有害垃圾" },
+        { value: 4, label: "湿垃圾" },
+        { value: 8, label: "干垃圾" },
+        { value: "16", label: "大件垃圾" },
+      ],
       // just the userForm
       dialogFormVisible: false,
+      dialogVisibleExport: false,
       addOrUpdateForm: {
         id: "",
-        username: "",
-        nickname: "",
-        password: "",
-        email: "",
-        address: "",
-        phone: "",
+        name: "",
+        category: "",
       },
       formLabelWidth: "70px",
       rules: {
-        username: [
-          { required: true, message: "请输入用户名", trigger: "blur" },
-          { min: 3, max: 9, message: "长度在 3 到 5 个字符", trigger: "blur" },
-        ],
-        password: [
-          { required: true, message: "请输入密码", trigger: "blur" },
-          { min: 3, max: 9, message: "长度在 3 到 9 个字符", trigger: "blur" },
-        ],
-        email: [
-          { type: "email", message: "请输入正确的邮箱地址", trigger: "blur" },
-        ],
-        phone: [
+        name: [
+          { required: true, message: "请输入垃圾名", trigger: "blur" },
           {
-            pattern: /^1\d{10}$/,
-            message: "请输入正确的电话号码",
+            pattern: /[\u4e00-\u9fa5a-zA-Z]{0,20}/,
+            message: "长度在 0 到 20 个字符",
             trigger: "blur",
           },
         ],
+        category: [{ required: true, message: "请选择垃圾类型" }],
       },
+      uploadDisabled: false, // 是否允许上传文件
     };
   },
   created() {
@@ -315,15 +333,14 @@ export default {
       this.listLoading = true;
       let res;
       if (this.isSearch) {
-        res = await getUserList(
+        res = await getGarbageList(
           this.listQuery.page,
           this.listQuery.limit,
-          this.searchParam.username,
-          this.searchParam.address,
-          this.searchParam.email
+          this.searchParam.name,
+          this.searchParam.category
         );
       } else {
-        res = await getUserList(this.listQuery.page, this.listQuery.limit);
+        res = await getGarbageList(this.listQuery.page, this.listQuery.limit);
       }
       this.list = res.records;
       this.total = res.total;
@@ -354,7 +371,7 @@ export default {
           confirmButtonText: "删除",
           cancelButtonText: "放弃删除",
         });
-        await delUsersByIds(this.multipleSelection);
+        await delGarbagesByIds(this.multipleSelection);
         this.$notify({
           title: "成功",
           message: "批量删除成功",
@@ -370,36 +387,45 @@ export default {
       }
     },
     async handleImport() {
-      // 等待完成
+      // TODO
+      this.dialogVisibleExport = true;
     },
-    async handleExport() {
-      console.log("导出");
-      const res = await exportUserExcel();
-      const blob = new Blob([res], { type: "application/vnd.ms-excel" });
-      console.log(res, "who are you");
-      // 创建 href 超链接，点击进行下载
-      window.URL = window.URL || window.webkitURL;
-      const href = URL.createObjectURL(blob);
-      const downA = document.createElement("a");
-      downA.href = href;
-      downA.download = "用户表";
-      downA.click();
-      // 销毁超连接
-      window.URL.revokeObjectURL(href);
+    handleClose() {},
+    handleExcelSuccess() {
+      this.dialogVisibleExport = false;
       this.$notify({
         title: "成功",
-        message: "您已成功导出用户表",
+        message: "导入资料成功",
+        type: "success",
+        duration: 2000,
+      });
+      this.getList();
+    },
+    async downloadTemplate() {
+      this.uploadDisabled = true;
+      const res = await exportGarbageExcelTemplate();
+      exportExcel(res, "垃圾信息模板表");
+      this.uploadDisabled = false;
+    },
+    async handleExport() {
+      const res = await exportGarbageExcel();
+      // 销毁超连接
+      exportExcel(res, "垃圾信息表");
+      this.$notify({
+        title: "成功",
+        message: "您已成功导出垃圾表",
         type: "success",
       });
     },
+
     confirmDialog(formname) {
       this.$refs[formname].validate(async (valid) => {
         if (valid) {
           var that = this;
           const message = this.isUpdate
-            ? "修改用户信息成功"
-            : "新增用户信息成功";
-          await updateUserInfo(that.addOrUpdateForm);
+            ? "修改垃圾信息成功"
+            : "新增垃圾信息成功";
+          await updateGarbageInfo(that.addOrUpdateForm);
           this.$notify({
             title: "成功",
             message,
@@ -420,7 +446,7 @@ export default {
       this.addOrUpdateForm.password = "";
       this.dialogFormVisible = false;
     },
-    updateUserInfo(data) {
+    updateGarbageInfo(data) {
       // 留意一下这里的执行顺序,Mounted()创建之后，就会执行resetField()记录初始值
       this.dialogFormVisible = true;
       this.isUpdate = true;
@@ -428,11 +454,11 @@ export default {
         setValue(this.addOrUpdateForm, data);
       });
     },
-    async delectUserInfo(id) {
+    async delectGarbageInfo(id) {
       console.log("id", id);
       try {
         await this.$confirm(
-          "此操作将永久删除用户，是否确认删除？",
+          "此操作将永久删除垃圾，是否确认删除？",
           "确认信息",
           {
             distinguishCancelAndClose: true,
@@ -441,10 +467,10 @@ export default {
             cancelButtonText: "放弃删除",
           }
         );
-        await deleteUserById(id);
+        await deleteGarbageById(id);
         this.$notify({
           title: "成功",
-          message: "您已成功删除该用户",
+          message: "您已成功删除该垃圾",
           type: "success",
         });
       } catch (error) {

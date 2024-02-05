@@ -125,8 +125,10 @@ export const constantRoutes = [
       },
     ],
   },
+
+  // garbage
   {
-    path: "/newResource",
+    path: "/newGarbage",
     component: Layout,
     redirect: "/resource/Allresource",
     name: "newresource",
@@ -151,6 +153,7 @@ export const constantRoutes = [
       },
     ],
   },
+
   {
     path: "/article",
     component: Layout,
@@ -205,10 +208,10 @@ export const constantRoutes = [
   },
   // 这一块的垃圾资源的路由
   {
-    path: "/resource",
+    path: "/garbage",
     component: Layout,
-    redirect: "/resource/AllResource",
-    name: "resource",
+    redirect: "/garbage/AllGarbage",
+    name: "garbage",
     meta: {
       title: "垃圾管理",
       icon: "el-icon-discover",
@@ -223,17 +226,17 @@ export const constantRoutes = [
         meta: {
           title: "编辑资源",
           noCache: true,
-          activeMenu: "/resource/list",
+          activeMenu: "/garbage/list",
           requireAuth: true,
         },
         // 需要登录才能进入的页面可以增加一个requireAuth属性
         hidden: true,
       },
       {
-        path: "AllResource",
-        component: () => import("@/admin/ResourceList"),
-        name: "AllResource",
-        meta: { title: "资源列表", icon: "documentation", requireAuth: true },
+        path: "AllGarbage",
+        component: () => import("@/admin/AllGarbage"),
+        name: "AllGarbage",
+        meta: { title: "垃圾资源", icon: "documentation", requireAuth: true },
         // 需要登录才能进入的页面可以增加一个requireAuth属性
       },
       {

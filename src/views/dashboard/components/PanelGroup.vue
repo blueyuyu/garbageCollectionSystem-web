@@ -3,14 +3,17 @@
     <!-- 收录垃圾总数 -->
     <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
       <div class="card-panel" @click="handleSetLineChartData('rubbishes')">
-        <div class="card-panel-icon-wrapper icon-garbage" >
+        <div class="card-panel-icon-wrapper icon-garbage">
           <svg-icon icon-class="garbage" class-name="card-panel-icon" />
         </div>
         <div class="card-panel-description">
-          <div class="card-panel-text">
-            收录垃圾总数
-          </div>
-          <count-to :start-val="0" :end-val="136000" :duration="3600" class="card-panel-num" />
+          <div class="card-panel-text">收录垃圾总数</div>
+          <count-to
+            :start-val="0"
+            :end-val="136000"
+            :duration="3600"
+            class="card-panel-num"
+          />
         </div>
       </div>
     </el-col>
@@ -21,24 +24,30 @@
           <svg-icon icon-class="peoples" class-name="card-panel-icon" />
         </div>
         <div class="card-panel-description">
-          <div class="card-panel-text">
-            注册用户总数
-          </div>
-          <count-to :start-val="0" :end-val="102400" :duration="2600" class="card-panel-num" />
+          <div class="card-panel-text">注册用户总数</div>
+          <count-to
+            :start-val="0"
+            :end-val="102400"
+            :duration="2600"
+            class="card-panel-num"
+          />
         </div>
       </div>
     </el-col>
     <!-- 文章总数 -->
     <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
       <div class="card-panel" @click="handleSetLineChartData('articles')">
-        <div class="card-panel-icon-wrapper icon-article" >
+        <div class="card-panel-icon-wrapper icon-article">
           <svg-icon icon-class="article" class-name="card-panel-icon" />
         </div>
         <div class="card-panel-description">
-          <div class="card-panel-text">
-            垃圾分相关文章收录总数
-          </div>
-          <count-to :start-val="0" :end-val="9280" :duration="3200" class="card-panel-num" />
+          <div class="card-panel-text">相关文章收录总数</div>
+          <count-to
+            :start-val="0"
+            :end-val="9280"
+            :duration="3200"
+            class="card-panel-num"
+          />
         </div>
       </div>
     </el-col>
@@ -49,30 +58,32 @@
           <svg-icon icon-class="message" class-name="card-panel-icon" />
         </div>
         <div class="card-panel-description">
-          <div class="card-panel-text">
-            评论数目
-          </div>
-          <count-to :start-val="0" :end-val="81212" :duration="3000" class="card-panel-num" />
+          <div class="card-panel-text">评论数目</div>
+          <count-to
+            :start-val="0"
+            :end-val="81212"
+            :duration="3000"
+            class="card-panel-num"
+          />
         </div>
       </div>
     </el-col>
-
   </el-row>
 </template>
 
 <script>
-import CountTo from 'vue-count-to'
+import CountTo from "vue-count-to";
 
 export default {
   components: {
-    CountTo
+    CountTo,
   },
   methods: {
     handleSetLineChartData(type) {
-      this.$emit('handleSetLineChartData', type)
-    }
-  }
-}
+      this.$emit("handleSetLineChartData", type);
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -91,8 +102,8 @@ export default {
     overflow: hidden;
     color: #666;
     background: #fff;
-    box-shadow: 4px 4px 40px rgba(0, 0, 0, .05);
-    border-color: rgba(0, 0, 0, .05);
+    box-shadow: 4px 4px 40px rgba(0, 0, 0, 0.05);
+    border-color: rgba(0, 0, 0, 0.05);
 
     &:hover {
       // .card-panel-icon-wrapper {
@@ -165,7 +176,7 @@ export default {
   }
 }
 
-@media (max-width:550px) {
+@media (max-width: 550px) {
   .card-panel-description {
     display: none;
   }

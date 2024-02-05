@@ -52,7 +52,7 @@ export default {
   },
   data() {
     // To fix https://github.com/PanJiaChen/vue-admin-template/issues/237
-    // TODO: refactor with render function
+    45// TODO: refactor with render function
     this.onlyOneChild = null
     return {}
   },
@@ -78,7 +78,6 @@ export default {
         this.onlyOneChild = { ... parent, path: '', noShowingChildren: true }
         return true
       }
-
       return false
     },
     resolvePath(routePath) {
