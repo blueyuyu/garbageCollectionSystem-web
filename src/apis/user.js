@@ -7,6 +7,7 @@ import { post, get, del } from '@/utils/requestFn'
  * @param {*} email
  * @param {*} phone
  * @param {*} address
+ * * @param {*} role
  * @returns 
  */
 export const updateUserInfo = (user) => {

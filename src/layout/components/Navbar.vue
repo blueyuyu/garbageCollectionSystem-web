@@ -45,52 +45,51 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import Breadcrumb from '@/components/Breadcrumb'
-import Hamburger from '@/components/Hamburger'
-import Screenfull from '@/components/Screenfull'
+import { mapGetters } from "vuex";
+import Breadcrumb from "@/components/Breadcrumb";
+import Hamburger from "@/components/Hamburger";
+import Screenfull from "@/components/Screenfull";
 
 export default {
   components: {
     Breadcrumb,
     Hamburger,
-    Screenfull
+    Screenfull,
   },
   computed: {
-    ...mapGetters([
-      'sidebar',
-      'avatar'
-    ])
+    ...mapGetters(["sidebar", "avatar"]),
   },
   created() {
-    this.getUser()
+    this.getUser();
   },
   data() {
     return {
       name: "",
       profile: "",
-    }
+    };
   },
   methods: {
     getUser() {
-      const user = JSON.parse(window.localStorage.getItem('access-admin'))
-      this.userJudje = (user == null)
+      const user = JSON.parse(window.localStorage.getItem("access-admin"));
+      this.userJudje = user == null;
       if (!this.userJudje) {
-        this.userid = user.data.userid
-        this.name = user.data.name
-        this.profile = user.data.profile
+        this.userid = user.data.userid;
+        this.name = user.data.name;
+        this.profile = user.data.profile;
       }
     },
     toggleSideBar() {
-      this.$store.dispatch('app/toggleSideBar')
+      this.$store.dispatch("app/toggleSideBar");
     },
     async logout() {
-      this.$message('已推出登陆')
-      window.localStorage.removeItem('access-admin')
-      this.$router.push('/login')
-    }
-  }
-}
+      this.$message("已退出登陆");
+      window.localStorage.removeItem("__TOKEN");
+      window.localStorage.removeItem("__MENUS");
+      window.localStorage.removeItem("__USER");
+      this.$router.push("/login");
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>

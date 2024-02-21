@@ -1,6 +1,19 @@
 <template>
-  <div class="base" style="position: relative;">
-    <video src="../../static/images/background-video.mp4" style="position: absolute; top: 0;left: 0; width: 100%;height: 100%;object-fit: cover;" autoplay="autoplay" loop="loop" muted="muted"></video>
+  <div class="base" style="position: relative">
+    <video
+      src="../../static/images/background-video.mp4"
+      style="
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      "
+      autoplay="autoplay"
+      loop="loop"
+      muted="muted"
+    ></video>
     <div class="backHui" v-show="showDialog"></div>
     <!-- 注册登录界面 -->
     <div class="loginAndRegist">
@@ -206,7 +219,12 @@
                 align-items: center;
               "
             >
-              <el-button style="margin-top: 4px;" v-show="isShowyan" type="primary" @click="showemoge()">
+              <el-button
+                style="margin-top: 4px"
+                v-show="isShowyan"
+                type="primary"
+                @click="showemoge()"
+              >
                 <div>
                   <a class="nav-link p-0 cursor-pointer"
                     ><i class="icon-smile fs-18" />
@@ -369,6 +387,7 @@ import img5 from "@/static/image/verify/verify5.jpg";
 import img6 from "@/static/image/verify/verify6.jpg";
 
 import "animate.css";
+import { setRoutes } from "@/router";
 // eslint-disable-next-line no-unused-vars
 export default {
   name: "Login",
@@ -476,14 +495,20 @@ export default {
       }
       var that = this;
       this.loading = true;
-      const userInfo = await loginAdmin(that.loginUser.username,that.loginUser.password)
-      localStorage.setItem('__USER',JSON.stringify(userInfo));
-      localStorage.setItem('__TOKEN',userInfo.token);
+      const userInfo = await loginAdmin(
+        that.loginUser.username,
+        that.loginUser.password
+      );
+      localStorage.setItem("__USER", JSON.stringify(userInfo));
+      localStorage.setItem("__TOKEN", userInfo.token);
+      console.log("userInfo", userInfo);
+      localStorage.setItem("__MENUS", JSON.stringify(userInfo.menuList));
+      setRoutes();
       that.$message({
         message: "登陆成功",
-        type: "success"
-      })
-      that.$router.push({ path: "/admin" }); 
+        type: "success",
+      });
+      that.$router.push({ path: "/admin" });
       this.loading = false;
     },
     //加载管理员信息
@@ -565,7 +590,7 @@ export default {
 }
 
 .loginArea {
-  background-color: rgba(255, 255, 255,0.9);
+  background-color: rgba(255, 255, 255, 0.9);
   border-top-left-radius: 15px;
   border-bottom-left-radius: 15px;
   height: 400px;

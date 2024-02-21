@@ -90,8 +90,37 @@
       >
       </el-table-column>
 
+      <el-table-column min-width="15%" align="center" prop="role" label="权限">
+        <template slot-scope="scope">
+          <div slot="reference" class="name-wrapper">
+            <el-tag
+              size="medium"
+              type="danger"
+              v-if="scope.row.role === 'TOP_ADMIN'"
+              >最高权限管理</el-tag
+            >
+            <el-tag
+              size="medium"
+              type="success"
+              v-if="scope.row.role === 'DATA_ADMIN'"
+            >
+              资料管理员
+            </el-tag>
+            <el-tag size="medium" type="info" v-if="!scope.row.role"
+              >未分配权限</el-tag
+            >
+          </div>
+        </template>
+      </el-table-column>
+
       <el-table-column align="center" label="操作" min-width="20%">
         <template slot-scope="scope">
+          <button
+            class="button deleteBtn"
+            @click="PermissionAssignment(scope.row.id)"
+          >
+            分配权限
+          </button>
           <button
             class="button updateBtn"
             @click="updateUserInfo(scope.row, 'addOrUpdateForm')"
@@ -175,6 +204,25 @@
       </div>
     </el-dialog>
 
+    <el-dialog
+      title="权限分配"
+      :visible.sync="permissionDialogVisible"
+      width="34%"
+      center
+    >
+      <div>
+        <span style="margin-right: 10px">权限分配</span>
+        <el-select v-model="addOrUpdateForm.role" placeholder="请选择权限">
+          <el-option label="最高权限管理" value="TOP_ADMIN"></el-option>
+          <el-option label="资料管理" value="DATA_ADMIN"></el-option>
+        </el-select>
+      </div>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="permissionDialogVisible = false">取 消</el-button>
+        <el-button type="success" @click="permissionFn">确 定</el-button>
+      </span>
+    </el-dialog>
+
     <pagination
       v-show="total > 0"
       :total="total"
@@ -235,6 +283,7 @@ export default {
       isUpdate: true,
       // just the userForm
       dialogFormVisible: false,
+      permissionDialogVisible: false,
       addOrUpdateForm: {
         id: "",
         username: "",
@@ -243,6 +292,7 @@ export default {
         email: "",
         address: "",
         phone: "",
+        role: "",
       },
       formLabelWidth: "70px",
       rules: {
@@ -463,6 +513,26 @@ export default {
     async handleSelectionChange(val) {
       const idList = val.map((item) => item.id);
       this.multipleSelection = idList;
+    },
+    PermissionAssignment(id) {
+      // 赋值id
+      this.addOrUpdateForm.id = id;
+      this.permissionDialogVisible = true;
+    },
+    async permissionFn() {
+      await updateUserInfo({
+        id: this.addOrUpdateForm.id,
+        role: this.addOrUpdateForm.role,
+      });
+      this.$notify({
+        title: "成功",
+        message: "权限分配成功",
+        type: "success",
+      });
+      await this.getList();
+      this.addOrUpdateForm.id = ""
+      this.addOrUpdateForm.role = ""
+      this.permissionDialogVisible = false;
     },
   },
 };
