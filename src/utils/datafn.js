@@ -5,7 +5,7 @@
  */
 export function setValue(obj, valueObj){
     for (const key in obj) {
-        if (valueObj.hasOwnProperty(key)) {
+        if (valueObj[key] != undefined && valueObj.hasOwnProperty(key)) {
             obj[key] = valueObj[key];
         }
     }

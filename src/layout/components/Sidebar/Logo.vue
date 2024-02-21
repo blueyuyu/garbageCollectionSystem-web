@@ -40,7 +40,7 @@ export default {
   },
   data() {
     return {
-      title: "垃圾回收后台",
+      title: "垃圾分类后台",
       logo: true,
     };
   },

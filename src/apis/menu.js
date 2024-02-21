@@ -24,12 +24,12 @@ export const getMenuList = ()=>{
 * 删除菜单
 */
 export const deleteMenuById = (id) => {
-    return del(`/Menu/${id}`)
+    return del(`/menu/${id}`)
 }
 
 /**
 * 批量删除菜单
 */
 export const deleteMenuByIds = (ids) => {
-    return post(`/Menu/del/batch`,ids)
+    return post(`/menu/del/batch`,ids)
 }

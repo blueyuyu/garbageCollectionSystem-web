@@ -38,6 +38,14 @@
       <el-table-column
         min-width="20%"
         align="center"
+        prop="icon"
+        label="菜单图标"
+      >
+      </el-table-column>
+
+      <el-table-column
+        min-width="20%"
+        align="center"
         prop="path"
         label="菜单路径"
       >
@@ -46,7 +54,7 @@
       <el-table-column
         min-width="20%"
         align="center"
-        prop="icon"
+        prop="description"
         label="菜单描述"
       >
       </el-table-column>
@@ -56,14 +64,14 @@
           <template v-if="scope.row.children">
             <button
               class="button updateBtn"
-              @click="setRoleAuthority(scope.row, 'addOrUpdateForm')"
+              @click="updateMenu(scope.row, 'addOrUpdateForm', true)"
             >
-              增加子菜单
+              添加子菜单
             </button>
           </template>
           <button
             class="button updateBtn"
-            @click="setRoleAuthority(scope.row, 'addOrUpdateForm')"
+            @click="updateMenu(scope.row, 'addOrUpdateForm')"
           >
             编辑
           </button>
@@ -84,54 +92,42 @@
       width="34%"
       :before-close="resetDialog"
     >
-      <el-form :model="addOrUpdateForm" ref="addOrUpdateForm" :rules="rules">
+      <el-form
+        :model="addOrUpdateForm"
+        ref="addOrUpdateForm"
+        :rules="rules"
+        hide-required-asterisk
+      >
         <el-form-item
-          label="用户名"
-          :label-width="formLabelWidth"
-          prop="username"
+          label="菜单名称"
+          :label-width="`${parseInt(formLabelWidth) + 10}px`"
+          prop="name"
         >
           <el-input
-            v-model="addOrUpdateForm.username"
+            v-model="addOrUpdateForm.name"
+            autocomplete="off"
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="路径" :label-width="formLabelWidth" prop="path">
+          <el-input
+            v-model="addOrUpdateForm.path"
+            autocomplete="off"
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="图标" :label-width="formLabelWidth" prop="icon">
+          <el-input
+            v-model="addOrUpdateForm.icon"
             autocomplete="off"
           ></el-input>
         </el-form-item>
         <el-form-item
-          label="昵称"
+          label="描述"
           :label-width="formLabelWidth"
-          prop="nickname"
+          prop="description"
         >
           <el-input
-            v-model="addOrUpdateForm.nickname"
-            autocomplete="off"
-          ></el-input>
-        </el-form-item>
-        <template v-if="!isUpdate">
-          <el-form-item
-            label="密码"
-            :label-width="formLabelWidth"
-            prop="password"
-          >
-            <el-input
-              v-model="addOrUpdateForm.password"
-              autocomplete="off"
-            ></el-input>
-          </el-form-item>
-        </template>
-        <el-form-item label="邮箱" :label-width="formLabelWidth" prop="email">
-          <el-input
-            v-model="addOrUpdateForm.email"
-            autocomplete="off"
-          ></el-input>
-        </el-form-item>
-        <el-form-item label="电话" :label-width="formLabelWidth" prop="phone">
-          <el-input
-            v-model="addOrUpdateForm.phone"
-            autocomplete="off"
-          ></el-input>
-        </el-form-item>
-        <el-form-item label="地址" :label-width="formLabelWidth" prop="address">
-          <el-input
-            v-model="addOrUpdateForm.address"
+            type="textarea"
+            v-model="addOrUpdateForm.description"
             autocomplete="off"
           ></el-input>
         </el-form-item>
@@ -192,12 +188,10 @@ export default {
         name: "",
         category: "",
       },
-      // 为解决bug而引入的中间参数
       searchParam: {
         name: "",
         category: "",
       },
-      isSearch: false,
       isUpdate: true,
       // just the userForm
       dialogFormVisible: false, // 分配
@@ -205,15 +199,35 @@ export default {
       addOrUpdateForm: {
         id: "",
         name: "",
-        desctiption: "",
+        path: "",
+        icon: "",
+        description: "",
+        pid: "",
       },
       formLabelWidth: "70px",
       rules: {
         name: [
-          { required: true, message: "请输入角色名", trigger: "blur" },
+          { required: true, message: "请输入菜单名称", trigger: "blur" },
           {
-            pattern: /[\u4e00-\u9fa5a-zA-Z]{0,20}/,
-            message: "长度在 0 到 20 个字符",
+            pattern: /^[\u4e00-\u9fa5]{0,7}$/,
+            message: "请输入0-7个中文字符",
+            trigger: "blur",
+          },
+        ],
+        path: [
+          { required: true, message: "请输入路径", trigger: "blur" },
+          {
+            pattern: /^\/[a-zA-Z]{0,20}/,
+            message: "请输入以/开头的英文路径",
+            trigger: "blur",
+          },
+        ],
+        icon: [{ required: true, message: "请输入图标", trigger: "blur" }],
+        description: [
+          { required: true, message: "请输入菜单描述", trigger: "blur" },
+          {
+            pattern: /^.{0,30}$/,
+            message: "请输入0-30个字符的描述",
             trigger: "blur",
           },
         ],
@@ -314,9 +328,10 @@ export default {
         if (valid) {
           var that = this;
           await updateMenuInfo(that.addOrUpdateForm);
+          const message = this.isUpdate ? "修改菜单成功" : "新增菜单成功";
           this.$notify({
             title: "成功",
-            message: "新增用户成功",
+            message,
             type: "success",
             duration: 2000,
           });
@@ -328,6 +343,16 @@ export default {
           return false;
         }
       });
+    },
+    updateMenu(data, formname, child) {
+      this.dialogFormVisible = true;
+      if (child) {
+        this.isUpdate = false;
+        console.log("data.pid", data.id);
+        this.addOrUpdateForm.pid = data.id;
+      } else {
+        setValue(this.addOrUpdateForm, data);
+      }
     },
     resetDialog() {
       this.dialogFormVisible = false;
