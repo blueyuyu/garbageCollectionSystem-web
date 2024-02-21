@@ -102,7 +102,7 @@ export const constantRoutes = [
   {
     path: "/newArticle",
     component: Layout,
-    redirect: "/article/AllArticle",
+    // redirect: "/article/AllArticle",
     name: "newArticle",
     meta: {
       title: "文章",
@@ -283,7 +283,7 @@ export const constantRoutes = [
         name: "allAdmin",
         meta: { title: "管理员信息", icon: "el-icon-s-custom" },
       },
-      {
+      {                 
         path: "RoleAdmin",
         component: () => import("@/admin/RoleAdmin"),
         name: "角色管理",

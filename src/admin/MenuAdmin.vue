@@ -217,8 +217,8 @@ export default {
         path: [
           { required: true, message: "请输入路径", trigger: "blur" },
           {
-            pattern: /^\/[a-zA-Z]{0,20}/,
-            message: "请输入以/开头的英文路径",
+            pattern: /^[a-zA-Z]{0,20}/,
+            message: "请输入英文路径",
             trigger: "blur",
           },
         ],
