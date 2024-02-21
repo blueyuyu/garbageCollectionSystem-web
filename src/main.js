@@ -119,7 +119,9 @@ import {
 
   Loading,
   Skeleton,
-  skeletonItem
+  skeletonItem,
+
+  Tree,
 } from 'element-ui';
 
 Vue.use(skeletonItem);
@@ -177,6 +179,7 @@ Vue.use(Radio);
 Vue.use(RadioGroup);
 Vue.use(RadioButton);
 Vue.use(Pagination);
+Vue.use(Tree)
 Vue.prototype.$notify = Notification;
 Vue.prototype.$msgbox = MessageBox;
 Vue.prototype.$alert = MessageBox.alert;

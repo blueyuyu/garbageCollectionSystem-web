@@ -284,10 +284,16 @@ export const constantRoutes = [
         meta: { title: "管理员信息", icon: "el-icon-s-custom" },
       },
       {
-        path: "RoleEdit",
-        component: () => import("@/admin/RoleEdit"),
+        path: "RoleAdmin",
+        component: () => import("@/admin/RoleAdmin"),
         name: "角色管理",
         meta: { title: "角色管理", icon: "el-icon-s-check" },
+      },
+      {
+        path: "MenuAdmin",
+        component: () => import("@/admin/MenuAdmin"),
+        name: "菜单管理",
+        meta: { title: "菜单管理", icon: "el-icon-s-check" },
       },
     ],
   },
