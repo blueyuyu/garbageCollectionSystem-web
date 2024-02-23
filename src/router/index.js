@@ -3,90 +3,45 @@ import Router from "vue-router";
 import { constantRoutes } from './router'
 import Layout from "@/layout";
 
+Vue.use(Router);
 
-
-const createRouter = () =>
-  new Router({
+const createRouter = () => {
+  return new Router({
     mode: "history",
     // mode: 'history', // require service support
     scrollBehavior: () => ({ y: 0 }),
     routes: constantRoutes,
   });
+}
 
 const router = createRouter();
 
 
 // 动态路由拼装
 export const setRoutes = () => {
-  const storeMenus = localStorage.getItem("__MENUS")
-  const currentRouteName = router.getRoutes().map(v => v.name)
-  if (storeMenus && !currentRouteName.includes('首页')) {
-    const adminRoute = []
-    const menus = JSON.parse(storeMenus)
-    console.log('menus', menus);
-    // menus.forEach(item => {
-    //   let itemMenu = {
-    //     path: item.path,
-    //     component: Layout,
-    //     name: item.path.slice(1),
-    //     meta: {
-    //       title: item.name,
-    //       icon: item.icon,
-    //       requireAuth: true,
-    //     },
-    //     children: []
-    //   }
-
-    //   if (item.children.length > 0) {
-    //     item.children.forEach(item => {
-    //       const childMenu = {
-    //         path: item.path,
-    //         component: () => import(`@/views/${item.path}`),
-    //         name: item.path,
-    //         meta: {
-    //           title: item.name,
-    //           icon: item.icon,
-    //           requireAuth: true,
-    //         },
-    //       }
-    //       itemMenu.children.push(childMenu)
-    //     })
-    //   }
-    //   console.log('item.Menu', itemMenu);
-    //   router.addRoute(itemMenu)
-    //   adminRoute.push(itemMenu)
-    // });
-    // debugger
-    router.addRoute(
-      {
-        path: "/admin",
-        name: "admin",
-        component: Layout,
-        redirect: "/admin/dashboard",
-      }
-    )
-
-
-    router.addRoute(
-      "admin",
+  const adminRouter = {
+    path: "/admin",
+    name: "admin",
+    component: Layout,
+    redirect: "/admin/dashboard",
+    children: [
       {
         path: "dashboard",
-        name: "首页",
+        name: "dashboard",
         component: () => import("@/views/dashboard/index"),
         meta: { title: "首页", icon: "dashboard", requireAuth: true },
         // 需要登录才能进入的页面可以增加一个requireAuth属性
       },
-    )
-
-    
-    console.log('adminRoute', adminRoute);
-    console.log('router. get', router.getRoutes());
-    // router.addRoutes(adminRoute);
+    ]
   }
+  router.addRoute(adminRouter)
+  localStorage.setItem('__ADMINROUTER',JSON.stringify([adminRouter]))
+  console.log('122', 122);
 }
 
+setRoutes();
 
-Vue.use(Router);
+
 // Detail see: https://github.com/vuejs/vue-router/issues/1234#issuecomment-357941465
 // 这是一个remove-router 的帖子,重置路由
 export function resetRouter() {

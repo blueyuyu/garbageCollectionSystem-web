@@ -28,14 +28,17 @@ import { mapGetters } from "vuex";
 import Logo from "./Logo";
 import SidebarItem from "./SidebarItem";
 import variables from "@/styles/variables.scss";
+import Cookie from "js-cookie";
 
 export default {
   components: { SidebarItem, Logo },
   computed: {
     ...mapGetters(["sidebar"]),
     routes() {
-      console.log("this.$router.options.routes", this.$router.options.routes);
-      return this.$router.options.routes;
+      // console.log("this.$router.options.routes", this.$router.options.routes);
+      const myRouter = JSON.parse(localStorage.getItem("__ADMINROUTER"));
+      console.log("myRouter", myRouter);
+      return myRouter;
     },
     activeMenu() {
       const route = this.$route;
