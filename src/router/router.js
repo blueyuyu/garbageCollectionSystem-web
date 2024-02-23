@@ -75,12 +75,13 @@ export const constantRoutes = [
     // // admin page home
     // {
     //     path: "/admin",
+    //     name: "admin",
     //     component: Layout,
     //     redirect: "/admin/dashboard",
     //     children: [
     //         {
     //             path: "dashboard",
-    //             name: "首页",
+    //             name: "dashboard",
     //             component: () => import("@/views/dashboard/index"),
     //             meta: { title: "首页", icon: "dashboard", requireAuth: true },
     //             // 需要登录才能进入的页面可以增加一个requireAuth属性
@@ -288,8 +289,10 @@ export const constantRoutes = [
     //     ],
     // },
     // #endregion
-    
+
     // 404 page must be placed at the end !!!
     // 全部匹配不成功，就会到404页面
     { path: "*", redirect: "/404", hidden: true },
 ];
+
+console.log('constantRoutes', constantRoutes.length);

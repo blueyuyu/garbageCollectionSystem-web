@@ -435,7 +435,7 @@ export default {
       this.showDialog = !this.showDialog;
     },
     onSuccess(times) {
-      console.log("验证通过，耗时 " + times + "毫秒");
+      // console.log("验证通过，耗时 " + times + "毫秒");
       this.msg = "验证通过，耗时 " + times + "毫秒";
 
       //延时两秒
@@ -445,18 +445,18 @@ export default {
       }, 1000);
     },
     onFail() {
-      console.log("验证不通过");
+      // console.log("验证不通过");
       this.msg = "";
     },
     onRefresh() {
-      console.log("点击了刷新小图标");
+      // console.log("点击了刷新小图标");
       this.msg = "";
     },
     onFulfilled() {
-      console.log("刷新成功啦！");
+      // console.log("刷新成功啦！");
     },
     onAgain() {
-      console.log("检测到非人为操作的哦！");
+      // console.log("检测到非人为操作的哦！");
       this.msg = "try again";
       // 刷新
       this.$refs.slideblock.reset();

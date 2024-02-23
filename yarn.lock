@@ -11210,10 +11210,10 @@
   "resolved" "https://registry.npmmirror.com/vue-qriously/-/vue-qriously-1.1.1.tgz"
   "version" "1.1.1"
 
-"vue-router@3.0.6":
-  "integrity" "sha512-Ox0ciFLswtSGRTHYhGvx2L44sVbTPNS+uD2kRISuo8B39Y79rOo0Kw0hzupTmiVtftQYCZl87mwldhh2L9Aquw=="
-  "resolved" "https://registry.npmmirror.com/vue-router/-/vue-router-3.0.6.tgz"
-  "version" "3.0.6"
+"vue-router@^3.5.0":
+  "integrity" "sha512-QYrPzHMJiJCq20ezhlGok+NbrmjzhQDG6pnpJaD14Eg3NvT07s3acYz2ktxJ7vGHd/Ts4TgG9Tt8a2PA+Js5fw=="
+  "resolved" "https://registry.npmmirror.com/vue-router/-/vue-router-3.5.0.tgz"
+  "version" "3.5.0"
 
 "vue-side-catalog@^2.0.0":
   "integrity" "sha512-KNBVcAOwiO08QtnkOkWK+D5es1HoC3t0hpj4ru2EmIdFTQoyQMrV6qFL/YNIJkIvb06EivKnbVK3MFWLKdZFqw=="
