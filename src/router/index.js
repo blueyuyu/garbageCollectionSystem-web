@@ -16,27 +16,47 @@ const createRouter = () => {
 
 const router = createRouter();
 
-
-// 动态路由拼装
+// 动态路由拼接
 export const setRoutes = () => {
-  const adminRouter = {
-    path: "/admin",
-    name: "admin",
-    component: Layout,
-    redirect: "/admin/dashboard",
-    children: [
-      {
-        path: "dashboard",
-        name: "dashboard",
-        component: () => import("@/views/dashboard/index"),
-        meta: { title: "首页", icon: "dashboard", requireAuth: true },
-        // 需要登录才能进入的页面可以增加一个requireAuth属性
-      },
-    ]
+  const adminRouter = [] // 存储拼接出的所有router
+  const storeMenus = JSON.parse(localStorage.getItem('__MENUS'))
+  if (storeMenus) {
+    console.log('storeMenus', storeMenus);
+    storeMenus.forEach(item => {
+      let itemMenu = {
+        path: item.path,
+        component: Layout,
+        name: item.path.slice(1),
+        // redirect: item.path + '/' +item.children[0].path,
+        meta: {
+          title: item.name,
+          icon: item.icon,
+          requireAuth: true,
+        },
+        children: []
+      }
+
+      if (item.children.length > 0) {
+        item.children.forEach(item => {
+          const childMenu = {
+            path: item.path,
+            component: () => import(`../views/${item.path}`),
+            name: item.path,
+            meta: {
+              title: item.name,
+              icon: item.icon,
+              requireAuth: true,
+            },
+          }
+          itemMenu.children.push(childMenu)
+        })
+      }
+      router.addRoute(itemMenu)
+      adminRouter.push(itemMenu)
+    });
   }
-  router.addRoute(adminRouter)
-  localStorage.setItem('__ADMINROUTER',JSON.stringify([adminRouter]))
-  console.log('122', 122);
+  console.log('itemMenu', adminRouter);
+  localStorage.setItem('__ADMINROUTER', JSON.stringify(adminRouter))
 }
 
 setRoutes();
