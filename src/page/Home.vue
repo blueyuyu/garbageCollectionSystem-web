@@ -8,177 +8,127 @@
           <div>
             <section class="layout-index pc-model">
               <div class="outsection">
-                <!-- 首页轮播图 -->
-
-                <el-carousel indicator-position="outside" class="index1 banner-index mb-6 Thecarousel"
-                  :height="dataHeight" :interval="3000" arrow="always">
-                  <el-carousel-item style="" v-for="(item, id) in Carousel" :key="id">
-                    <div>
-
-
-                      <div data-v-bffc9160="" class="index-banner el-carousel el-carousel--horizontal">
-
-
-                        <div class="el-carousel__container" style="height: 450px">
-                          <i class="el-icon-arrow-right"></i>
-
-                          <div data-v-bffc9160="" class="el-carousel__item is-active is-animating"
-                            style="transform: translateX(0px) scale(1)">
-                            <div data-v-bffc9160="" class="
-                                index
-                                section
-                                white1
-                                h-450
-                                position-relative
-                                radius-4x
-                                d-flex
-                                align-items-center
-                              ">
-                              <div data-v-bffc9160="" class="bg-shape-holder">
-                                <img data-v-bffc9160="" src="../static/image/shape-1.svg" class="shape-three" />
-                                <img data-v-bffc9160="" src="../static/image/shape-55.svg" class="shape-four" />
-                                <img data-v-bffc9160="" src="../static/image/shape-56.svg" class="shape-five" />
-                                <img data-v-bffc9160="" src="../static/image/shape-57.svg" class="shape-six" />
-                                <img data-v-bffc9160="" src="../static/image/shape-58.svg" class="shape-seven" />
-                                <img data-v-bffc9160="" src="../static/image/shape-59.svg" class="shape-eight" />
-                                <img data-v-bffc9160="" src="../static/image/shape-60.svg" class="shape-nine" />
-                                <img data-v-bffc9160="" src="../static/image/shape-61.svg" class="shape-ten" />
-                                <img data-v-bffc9160="" src="../static/image/shape-62.svg" class="shape-eleven" />
-                                <img data-v-bffc9160="" src="../static/image/shape-10.svg" class="shape-10" />
-                                <img data-v-bffc9160="" src="../static/image/shape-11.svg" class="shape-11" />
-                                <span data-v-bffc9160="" class="big-round-one"></span>
-                                <span data-v-bffc9160="" class="big-round-two"></span>
-                                <span data-v-bffc9160="" class="big-round-three"></span>
-                              </div>
-                              <div data-v-bffc9160="" class="
-                                  w-600
-                                  pl-10
-                                  position-relative
-                                  z-index-9999
-                                ">
-                                <h2 data-v-bffc9160="">{{ item.title }}</h2>
-                                <p data-v-bffc9160="" class="text-muted fs-18">
-                                  {{ item.introduce }}
-                                </p>
-                                <a data-v-bffc9160="" class="btn btn-theme btn-round px-6">
-                                  {{ item.button }}</a>
-                              </div>
-                              <div data-v-bffc9160="" class="index-banner-image-two">
-                                <img data-v-bffc9160="" :src="item.img" />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </el-carousel-item>
-                </el-carousel>
+                <!-- 视频区 -->
+                <div class="video_overlay"></div>
+                <video
+                  id="video"
+                  poster="../static/images/background-img.jpg"
+                  src="../static/video/sorting.mp4"
+                  autoplay="autoplay"
+                  loop
+                  muted
+                  style="width: 86%"
+                ></video>
+              </div>
+              <div class="sectionText">
+                <div class="vedio_header">
+                  垃圾分类<span class="strong">刻不容缓</span>
+                </div>
+                <div class="vedio_text">
+                  在这里，我们将分享给你详细的垃圾分类教程，与最新咨询。每一个垃圾都有它自己的归宿，让我们为环保做一份贡献
+                </div>
+                <el-button
+                  ref="playVideo"
+                  type="primary"
+                  style="margin-top: 40px"
+                  @click="watchVideo"
+                  >观看学习视频</el-button
+                >
               </div>
               <!-- class="container" -->
               <div class="container">
                 <div data-v-0a1f67c4="" class="index-special row mb-6">
                   <div data-v-0a1f67c4="" class="col-3">
                     <a data-v-0a1f67c4="" class="">
-                      <div data-v-0a1f67c4="" class="
-                          macwk-card
-                          bg-gradient-green
-                          hover-shadow-6
-                          py-3
-                          text-center
-                        " style="
+                      <div
+                        data-v-0a1f67c4=""
+                        class="macwk-card bg-gradient-green hover-shadow-6 py-3 text-center"
+                        style="
                           will-change: transform;
                           transform: perspective(1000px) rotateX(0deg)
                             rotateY(0deg) scale3d(1, 1, 1);
-                        ">
-
-                        <div class="
-                            macwk-card__collapsible-content
-                            vs-con-loading__container
-                          ">
+                        "
+                      >
+                        <div
+                          class="macwk-card__collapsible-content vs-con-loading__container"
+                        >
                           <div class="macwk-card__body">
                             <h6 data-v-0a1f67c4="" class="mb-0 text-white">
-                              <i data-v-0a1f67c4="" class="icon-office fs-22 mr-3 v-m-3"></i>
+                              <i
+                                data-v-0a1f67c4=""
+                                class="icon-office fs-22 mr-3 v-m-3"
+                              ></i>
                               <span data-v-0a1f67c4="">新人必备</span>
                             </h6>
                           </div>
-
                         </div>
                       </div>
                     </a>
                   </div>
                   <div data-v-0a1f67c4="" class="col-3">
                     <a data-v-0a1f67c4="" class="">
-                      <div data-v-0a1f67c4="" class="
-                          macwk-card
-                          bg-gradient-orange
-                          hover-shadow-6
-                          py-3
-                          text-center
-                        ">
-
-                        <div class="
-                            macwk-card__collapsible-content
-                            vs-con-loading__container
-                          ">
+                      <div
+                        data-v-0a1f67c4=""
+                        class="macwk-card bg-gradient-orange hover-shadow-6 py-3 text-center"
+                      >
+                        <div
+                          class="macwk-card__collapsible-content vs-con-loading__container"
+                        >
                           <div class="macwk-card__body">
                             <h6 data-v-0a1f67c4="" class="mb-0 text-white">
-                              <i data-v-0a1f67c4="" class="icon-gallery fs-22 mr-3 v-m-3"></i>
+                              <i
+                                data-v-0a1f67c4=""
+                                class="icon-gallery fs-22 mr-3 v-m-3"
+                              ></i>
                               <span data-v-0a1f67c4="">图像处理工具</span>
                             </h6>
                           </div>
-
                         </div>
                       </div>
                     </a>
                   </div>
                   <div data-v-0a1f67c4="" class="col-3">
                     <a data-v-0a1f67c4="" class="">
-                      <div data-v-0a1f67c4="" class="
-                          macwk-card
-                          bg-gradient-blue
-                          hover-shadow-6
-                          py-3
-                          text-center
-                        ">
-
-                        <div class="
-                            macwk-card__collapsible-content
-                            vs-con-loading__container
-                          ">
+                      <div
+                        data-v-0a1f67c4=""
+                        class="macwk-card bg-gradient-blue hover-shadow-6 py-3 text-center"
+                      >
+                        <div
+                          class="macwk-card__collapsible-content vs-con-loading__container"
+                        >
                           <div class="macwk-card__body">
                             <h6 data-v-0a1f67c4="" class="mb-0 text-white">
-                              <i data-v-0a1f67c4="" class="icon-cp fs-22 mr-3 v-m-3"></i>
+                              <i
+                                data-v-0a1f67c4=""
+                                class="icon-cp fs-22 mr-3 v-m-3"
+                              ></i>
                               <span data-v-0a1f67c4="">产品经理工具</span>
                             </h6>
                           </div>
-
                         </div>
                       </div>
                     </a>
                   </div>
                   <div data-v-0a1f67c4="" class="col-3">
                     <a data-v-0a1f67c4="" class="">
-                      <div data-v-0a1f67c4="" class="
-                          macwk-card
-                          bg-gradient-purple
-                          hover-shadow-6
-                          py-3
-                          text-center
-                        ">
-
-                        <div class="
-                            macwk-card__collapsible-content
-                            vs-con-loading__container
-                          ">
+                      <div
+                        data-v-0a1f67c4=""
+                        class="macwk-card bg-gradient-purple hover-shadow-6 py-3 text-center"
+                      >
+                        <div
+                          class="macwk-card__collapsible-content vs-con-loading__container"
+                        >
                           <router-link to="/class">
                             <div class="macwk-card__body">
                               <h6 data-v-0a1f67c4="" class="mb-0 text-white">
-                                <i data-v-0a1f67c4="" class="icon-code fs-22 mr-3 v-m-3"></i>
+                                <i
+                                  data-v-0a1f67c4=""
+                                  class="icon-code fs-22 mr-3 v-m-3"
+                                ></i>
                                 <span data-v-0a1f67c4="">更多专题</span>
                               </h6>
                             </div>
                           </router-link>
-
                         </div>
                       </div>
                     </a>
@@ -189,81 +139,140 @@
                 <div class="d-flex app-content-header mb-6">
                   <div class="main-title">
                     <h4 class="i-con-h-a mb-0">
-                      <i class="mr-1 text-muted i-con i-con-calendar v-m-4"><i></i></i>
+                      <i class="mr-1 text-muted i-con i-con-calendar v-m-4"
+                        ><i></i
+                      ></i>
                       <span>精品资源</span>
                     </h4>
                   </div>
                   <nav class="nav nav-title flex-grow-1">
-                    <a @click="r_changeNews()" :class="{
-                      'active': r_news === r_sortOrder,
-                    }" class="nav-link ">新鲜发布</a>
-                    <a @click="r_changeDownload()" :class="{
-                      'active': r_download === r_sortOrder,
-                    }" class="nav-link">热门下载</a>
-                    <a @click="r_changeRecommend()" :class="{
-                      'active': r_recommend === r_sortOrder,
-                    }" class="nav-link">站长推荐</a>
-                    <a @click="r_changeDiscuss()" :class="{
-                      'active': r_discuss === r_sortOrder,
-                    }" class="nav-link">最多评论</a>
+                    <a
+                      @click="r_changeNews()"
+                      :class="{
+                        active: r_news === r_sortOrder,
+                      }"
+                      class="nav-link"
+                      >新鲜发布</a
+                    >
+                    <a
+                      @click="r_changeDownload()"
+                      :class="{
+                        active: r_download === r_sortOrder,
+                      }"
+                      class="nav-link"
+                      >热门下载</a
+                    >
+                    <a
+                      @click="r_changeRecommend()"
+                      :class="{
+                        active: r_recommend === r_sortOrder,
+                      }"
+                      class="nav-link"
+                      >站长推荐</a
+                    >
+                    <a
+                      @click="r_changeDiscuss()"
+                      :class="{
+                        active: r_discuss === r_sortOrder,
+                      }"
+                      class="nav-link"
+                      >最多评论</a
+                    >
                   </nav>
                   <div class="more-action">
                     <router-link to="/list">
                       <a class="btn btn-more active">
                         更多软件
-                        <i class="icon-arrow-right fw-600 fs-12 v-2"></i></a>
+                        <i class="icon-arrow-right fw-600 fs-12 v-2"></i
+                      ></a>
                     </router-link>
                   </div>
                 </div>
                 <!---->
-                <div id="listAppContainer" class="app-content-body listAppContainer">
+                <div
+                  id="listAppContainer"
+                  class="app-content-body listAppContainer"
+                >
                   <div class="mw-row">
-                    <div v-for="item, index in rlist" :key="item.id" class="mw-col list-animation-leftIn delay-3">
+                    <div
+                      v-for="(item, index) in rlist"
+                      :key="item.id"
+                      class="mw-col list-animation-leftIn delay-3"
+                    >
                       <div v-if="!glabledata.glableImageFormat">
                         <div v-if="item.status.includes('published')">
                           <router-link :to="'/list/' + item.id">
                             <a class="macwk-app border white cursor-pointer">
-                              <el-image v-show="item.thumb != null" class="listtitleimg delay-3" :src="item.thumb" lazy>
+                              <el-image
+                                v-show="item.thumb != null"
+                                class="listtitleimg delay-3"
+                                :src="item.thumb"
+                                lazy
+                              >
                                 <div slot="placeholder" class="image-slot">
-                                  <img style="
-                                        width: 100%;
-                                        height: 100%;object-fit: cover;
-                                      " src="../static/image/loding.gif" />
+                                  <img
+                                    style="
+                                      width: 100%;
+                                      height: 100%;
+                                      object-fit: cover;
+                                    "
+                                    src="../static/image/loding.gif"
+                                  />
                                 </div>
                               </el-image>
-                              <div v-show="item.thumb == null" class="delayImgss" :style="getStyles()">
-                                <h3 class="
-                                      flex
-                                      text-center text-white
-                                      opacity-50
-                                    ">
+                              <div
+                                v-show="item.thumb == null"
+                                class="delayImgss"
+                                :style="getStyles()"
+                              >
+                                <h3
+                                  class="flex text-center text-white opacity-50"
+                                >
                                   NOPIC
                                 </h3>
                               </div>
                               <div class="macwk-app__body">
                                 <div class="card-meta">
                                   <div class="meta-item post-author">
-                                    <el-avatar style=" margin-bottom: 3px;  margin-right: 3px;"
-                                      :src="item.authorThumb"></el-avatar>
-                                    <a href="blog-list.html" class="author-name">天天</a>
+                                    <el-avatar
+                                      style="
+                                        margin-bottom: 3px;
+                                        margin-right: 3px;
+                                      "
+                                      :src="item.authorThumb"
+                                    ></el-avatar>
+                                    <a href="blog-list.html" class="author-name"
+                                      >天天</a
+                                    >
                                   </div>
-                                  <span v-if="item.createTime != null" class="meta-item">
-                                    {{ rformatDate(item.createTime) }}</span>
-                                  <span v-else class="meta-item"> {{ rformatDate(item.addTime) }}</span>
-
+                                  <span
+                                    v-if="item.createTime != null"
+                                    class="meta-item"
+                                  >
+                                    {{ rformatDate(item.createTime) }}</span
+                                  >
+                                  <span v-else class="meta-item">
+                                    {{ rformatDate(item.addTime) }}</span
+                                  >
                                 </div>
-                                <h3 class="heading-tertiary-list">{{ item.title }}</h3>
+                                <h3 class="heading-tertiary-list">
+                                  {{ item.title }}
+                                </h3>
                               </div>
                               <div class="extend">
                                 <div class="button">
-                                  <div style="margin-left:12px">
-                                    <span style="font-size: 36px;line-height: 1;">
-
-                                      <i data-v-1c369514="" class="light-icon-more icon-next-arrow"></i>
+                                  <div style="margin-left: 12px">
+                                    <span
+                                      style="font-size: 36px; line-height: 1"
+                                    >
+                                      <i
+                                        data-v-1c369514=""
+                                        class="light-icon-more icon-next-arrow"
+                                      ></i>
                                     </span>
                                   </div>
 
-                                  <div style="margin-right:12px">
+                                  <div style="margin-right: 12px">
                                     <span class="value">${{ item.price }}</span>
                                   </div>
                                 </div>
@@ -273,48 +282,93 @@
                         </div>
                       </div>
                       <div v-else>
-                        <div @mouseover="dowmloadover(index)" @mouseleave="downloadleave(index)"
-                          v-if="item.status.includes('published')">
+                        <div
+                          @mouseover="dowmloadover(index)"
+                          @mouseleave="downloadleave(index)"
+                          v-if="item.status.includes('published')"
+                        >
                           <router-link :to="'/list/' + item.id">
-                            <a class="macwk-app border white cursor-pointer padding-xl">
-
+                            <a
+                              class="macwk-app border white cursor-pointer padding-xl"
+                            >
                               <div data-v-2661c954="" class="soft-card">
                                 <div data-v-2661c954="" class="li-card-img-div">
-                                  <img data-v-2661c954="" :src="item.thumb" class="budongImg img72 dingweiImg" />
+                                  <img
+                                    data-v-2661c954=""
+                                    :src="item.thumb"
+                                    class="budongImg img72 dingweiImg"
+                                  />
                                   <transition name="fade">
-                                    <img data-v-2661c954="" v-if="isAcitive === index" :src="item.thumb"
-                                      class="gaosiImg img72 dingweiImg" />
+                                    <img
+                                      data-v-2661c954=""
+                                      v-if="isAcitive === index"
+                                      :src="item.thumb"
+                                      class="gaosiImg img72 dingweiImg"
+                                    />
                                   </transition>
                                 </div>
-                                <div data-v-2661c954="" class="size-12 text-B6BABF margin-top-90"
-                                  style="min-height: 20px;">
-                                  <span data-v-2661c954="">{{ item.subhead }}</span>
+                                <div
+                                  data-v-2661c954=""
+                                  class="size-12 text-B6BABF margin-top-90"
+                                  style="min-height: 20px"
+                                >
+                                  <span data-v-2661c954="">{{
+                                    item.subhead
+                                  }}</span>
                                 </div>
-                                <div data-v-2661c954="" class="margin-top size-18 text-bold  text-block card-hover-red">
-                                  <span data-v-2661c954="">{{ item.title }} </span>
+                                <div
+                                  data-v-2661c954=""
+                                  class="margin-top size-18 text-bold text-block card-hover-red"
+                                >
+                                  <span data-v-2661c954=""
+                                    >{{ item.title }}
+                                  </span>
                                 </div>
-                                <div data-v-2661c954="" class="margin-top1 size-14 text-B6BABF limitText">
-                                  <span data-v-2661c954="">{{ item.intro }}</span>
+                                <div
+                                  data-v-2661c954=""
+                                  class="margin-top1 size-14 text-B6BABF limitText"
+                                >
+                                  <span data-v-2661c954="">{{
+                                    item.intro
+                                  }}</span>
                                 </div>
-                                <div data-v-2661c954="" class="margin-top2 text-B6BABF flex-row size-12"
-                                  style=" bottom: 20px; width: 100%;">
+                                <div
+                                  data-v-2661c954=""
+                                  class="margin-top2 text-B6BABF flex-row size-12"
+                                  style="bottom: 20px; width: 100%"
+                                >
                                   <div data-v-2661c954="">
-                                    <i data-v-2661c954="" class="el-icon-view"></i>
+                                    <i
+                                      data-v-2661c954=""
+                                      class="el-icon-view"
+                                    ></i>
                                     <span data-v-2661c954="">34.5k</span>
                                   </div>
-                                  <div data-v-2661c954="" style="margin-left: 6px;" class="margin-left">
-                                    <i data-v-2661c954="" class="el-icon-download"></i>
+                                  <div
+                                    data-v-2661c954=""
+                                    style="margin-left: 6px"
+                                    class="margin-left"
+                                  >
+                                    <i
+                                      data-v-2661c954=""
+                                      class="el-icon-download"
+                                    ></i>
                                     <span data-v-2661c954="">1500</span>
                                   </div>
-                                  <div data-v-2661c954="" style="position: absolute; right: 35px;">
-                                    <span v-if="item.createTime != null"> {{ formatDate(item.createTime) }}</span>
-                                    <span v-else> {{ formatDate(item.addTime) }}</span>
+                                  <div
+                                    data-v-2661c954=""
+                                    style="position: absolute; right: 35px"
+                                  >
+                                    <span v-if="item.createTime != null">
+                                      {{ formatDate(item.createTime) }}</span
+                                    >
+                                    <span v-else>
+                                      {{ formatDate(item.addTime) }}</span
+                                    >
                                   </div>
                                 </div>
                               </div>
-
                             </a>
-
                           </router-link>
                         </div>
                       </div>
@@ -327,86 +381,119 @@
                   <div class="d-flex app-content-header mb-6">
                     <div class="main-title">
                       <h4 class="i-con-h-a mb-0">
-                        <i class="mr-1 text-muted i-con i-con-layer v-m-4"><i></i></i>
+                        <i class="mr-1 text-muted i-con i-con-layer v-m-4"
+                          ><i></i
+                        ></i>
                         <span>教程文章</span>
                       </h4>
                     </div>
                     <nav class="nav nav-title flex-grow-1">
-                      <a @click="a_changeNews()" :class="{
-                        'active': a_news === a_sortOrder,
-                      }" class="nav-link">新鲜发布</a>
-                      <a @click="a_changeRecommend()" :class="{
-                        'active': a_recommend === a_sortOrder,
-                      }" class="nav-link">站长推荐</a>
-                      <a @click="a_changeDiscuss()" :class="{
-                        'active': a_discuss === a_sortOrder,
-                      }" class="nav-link">最多评论</a>
+                      <a
+                        @click="a_changeNews()"
+                        :class="{
+                          active: a_news === a_sortOrder,
+                        }"
+                        class="nav-link"
+                        >新鲜发布</a
+                      >
+                      <a
+                        @click="a_changeRecommend()"
+                        :class="{
+                          active: a_recommend === a_sortOrder,
+                        }"
+                        class="nav-link"
+                        >站长推荐</a
+                      >
+                      <a
+                        @click="a_changeDiscuss()"
+                        :class="{
+                          active: a_discuss === a_sortOrder,
+                        }"
+                        class="nav-link"
+                        >最多评论</a
+                      >
                     </nav>
                     <div class="more-action">
-                      <router-link target="_self" class="nav-link" data-v-122eae44="" to="post/all">
+                      <router-link
+                        target="_self"
+                        class="nav-link"
+                        data-v-122eae44=""
+                        to="post/all"
+                      >
                         更多文章
-                        <i class="icon-arrow-right fw-600 fs-12 v-2"></i></router-link>
+                        <i class="icon-arrow-right fw-600 fs-12 v-2"></i
+                      ></router-link>
                     </div>
                   </div>
                   <div class="row gap-a">
                     <div class="com-md-12 col-lg-6">
-                      <a v-for="(item, id) in this.leftArr" :key="id" class="
-                          feature-block-three
-                          border
-                          white
-                          dk
-                          hover-shadow-6
-                          delay-0
-                          list-animation-leftIn
-                        ">
+                      <a
+                        v-for="(item, id) in this.leftArr"
+                        :key="id"
+                        class="feature-block-three border white dk hover-shadow-6 delay-0 list-animation-leftIn"
+                      >
                         <div v-if="item.status.includes('published')">
                           <router-link :to="'/post/' + item.id">
                             <div class="d-flex align-items-center">
                               <div class="icon-box icon-one">
-                                <el-image v-show="item.thumb != null" class="delayImg" :src="item.thumb" lazy>
+                                <el-image
+                                  v-show="item.thumb != null"
+                                  class="delayImg"
+                                  :src="item.thumb"
+                                  lazy
+                                >
                                   <div slot="placeholder" class="image-slot">
-                                    <img style="
+                                    <img
+                                      style="
                                         width: 100%;
                                         height: 100%;
                                         object-fit: cover;
-                                      " src="../static/image/loding.gif" />
+                                      "
+                                      src="../static/image/loding.gif"
+                                    />
                                   </div>
                                 </el-image>
-                                <div v-show="item.thumb == null" class="delayImg" :style="getStyles()">
-                                  <h3 class="
-                                      flex
-                                      text-center text-white
-                                      opacity-50
-                                    ">
+                                <div
+                                  v-show="item.thumb == null"
+                                  class="delayImg"
+                                  :style="getStyles()"
+                                >
+                                  <h3
+                                    class="flex text-center text-white opacity-50"
+                                  >
                                     NOPIC
                                   </h3>
                                 </div>
                               </div>
                               <div class="text">
-                                <h5 style="
+                                <h5
+                                  style="
                                     display: -webkit-box;
                                     -webkit-box-orient: vertical;
                                     overflow: hidden;
                                     word-break: break-all;
                                     text-overflow: ellipsis;
                                     -webkit-line-clamp: 2;
-                                  ">
+                                  "
+                                >
                                   {{ item.title }}
                                 </h5>
                                 <div class="text-muted fs-16 mr-3">
-                                  <span v-if="item.createTime != null" v-text="formatDate(item.createTime)">
+                                  <span
+                                    v-if="item.createTime != null"
+                                    v-text="formatDate(item.createTime)"
+                                  >
                                   </span>
-                                  <span v-else v-text="formatDate(item.addTime)">
+                                  <span
+                                    v-else
+                                    v-text="formatDate(item.addTime)"
+                                  >
                                   </span>
                                 </div>
                               </div>
-                              <div class="
-                                  read-more
-                                  d-flex
-                                  justify-content-end
-                                  w-80
-                                  pr-3
-                                ">
+                              <div
+                                class="read-more d-flex justify-content-end w-80 pr-3"
+                              >
                                 <i class="light-icon-more icon-next-arrow"></i>
                               </div>
                             </div>
@@ -416,62 +503,73 @@
                     </div>
 
                     <div class="com-md-12 col-lg-6">
-                      <a v-for="(item, id) in this.rightArr" :key="id" class="
-                          feature-block-three
-                          border
-                          white
-                          dk
-                          hover-shadow-6
-                          delay-5
-                          list-animation-leftIn
-                        ">
+                      <a
+                        v-for="(item, id) in this.rightArr"
+                        :key="id"
+                        class="feature-block-three border white dk hover-shadow-6 delay-5 list-animation-leftIn"
+                      >
                         <div v-if="item.status.includes('published')">
                           <router-link :to="'/post/' + item.id">
                             <div class="d-flex align-items-center">
                               <div class="icon-box icon-one">
-                                <el-image v-show="item.thumb != null" class="delayImg" :src="item.thumb" lazy>
+                                <el-image
+                                  v-show="item.thumb != null"
+                                  class="delayImg"
+                                  :src="item.thumb"
+                                  lazy
+                                >
                                   <div slot="placeholder" class="image-slot">
-                                    <img style="
+                                    <img
+                                      style="
                                         width: 100%;
-                                        height: 100%;object-fit: cover;
-                                      " src="../static/image/loding.gif" />
+                                        height: 100%;
+                                        object-fit: cover;
+                                      "
+                                      src="../static/image/loding.gif"
+                                    />
                                   </div>
                                 </el-image>
-                                <div v-show="item.thumb == null" class="delayImg" :style="getStyles()">
-                                  <h3 class="
-                                      flex
-                                      text-center text-white
-                                      opacity-50
-                                    ">
+                                <div
+                                  v-show="item.thumb == null"
+                                  class="delayImg"
+                                  :style="getStyles()"
+                                >
+                                  <h3
+                                    class="flex text-center text-white opacity-50"
+                                  >
                                     NOPIC
                                   </h3>
                                 </div>
                               </div>
                               <div class="text">
-                                <h5 style="
+                                <h5
+                                  style="
                                     display: -webkit-box;
                                     -webkit-box-orient: vertical;
                                     overflow: hidden;
                                     word-break: break-all;
                                     text-overflow: ellipsis;
                                     -webkit-line-clamp: 2;
-                                  ">
+                                  "
+                                >
                                   {{ item.title }}
                                 </h5>
                                 <div class="text-muted fs-16 mr-3">
-                                  <span v-if="item.createTime != null" v-text="formatDate(item.createTime)">
+                                  <span
+                                    v-if="item.createTime != null"
+                                    v-text="formatDate(item.createTime)"
+                                  >
                                   </span>
-                                  <span v-else v-text="formatDate(item.addTime)">
+                                  <span
+                                    v-else
+                                    v-text="formatDate(item.addTime)"
+                                  >
                                   </span>
                                 </div>
                               </div>
-                              <div class="
-                                  read-more
-                                  d-flex
-                                  justify-content-end
-                                  w-80
-                                  pr-3
-                                ">
+                              <div
+                                class="read-more d-flex justify-content-end w-80 pr-3"
+                              >
                                 <i class="light-icon-more icon-next-arrow"></i>
                               </div>
                             </div>
@@ -484,12 +582,9 @@
               </div>
             </section>
             <div class="mobile-model">
-              <div class="
-                  d-flex
-                  layout-min-full-height
-                  justify-content-center
-                  align-items-center
-                ">
+              <div
+                class="d-flex layout-min-full-height justify-content-center align-items-center"
+              >
                 <div class="text-center" style="width: 80%; margin: 0px auto">
                   <h1 class="mb-4">哇，窗口太小啦</h1>
                   <p class="mb-6">请调整浏览器窗口大小或者请使用手机查看！</p>
@@ -499,17 +594,23 @@
           </div>
           <foot />
           <div infos="0">
-            <div class="
-                adBanner
-                pub_300x250 pub_300x250m pub_728x90
-                text-ad
-                textAd
-                text_ad text_ads text-ads text-ad-links
-              "></div>
+            <div
+              class="adBanner pub_300x250 pub_300x250m pub_728x90 text-ad textAd text_ad text_ads text-ads text-ad-links"
+            ></div>
           </div>
         </div>
       </div>
     </div>
+    <el-dialog :visible.sync="dialogPlay" width="40%" @close="closeDialog">
+      <video
+        :src="videoUrl"
+        controls
+        autoplay
+        class="video"
+        :ref="dialogVideo"
+        width="100%"
+      ></video>
+    </el-dialog>
   </div>
 </template>
 
@@ -522,15 +623,19 @@ import { getCarousel } from "@/api/websetting";
 import top from "./components/Top.vue";
 import foot from "./components/Foots.vue";
 
-import { mapState, mapMutations } from 'vuex'
+import { mapState, mapMutations } from "vuex";
 export default {
   name: "Home",
   components: { top, foot },
   computed: {
-    ...mapState(['playlist', 'glabledata', 'count'])
+    ...mapState(["playlist", "glabledata", "count"]),
   },
   data() {
     return {
+      dialogPlay: false,
+      videoUrl: "../static/video/sorting.mp4",
+      dialogVideo: "",
+      playVideo: "", // 点击按钮实例
       isAcitive: false,
       r_sortOrder: "new",
       r_news: "new",
@@ -554,6 +659,19 @@ export default {
     this.getList();
     this.getSetting();
   },
+  mounted() {
+    // console.log("this.$refs.playVideo", this.$refs.playVideo.onClick);
+    // this.$refs.playVideo.onClick(() => {
+    //   console.log("2333", 2333);
+    // });
+    // this.$refs.playVideo.onclick(function(){
+    //   if(this.$refs.dialogVideo.paused){
+    //     this.$refs.dialogVideo.play();
+    //   }else{
+    //     this.$refs.dialogVideo.pause();
+    //   }
+    // })
+  },
   props: {
     dataHeight: {
       type: String,
@@ -561,8 +679,16 @@ export default {
     },
   },
   methods: {
+    //TODO video
+    watchVideo() {
+      this.dialogPlay = true;
+      // this.videoUrl = "../static/video/sorting.mp4";
+    },
+    closeDialog() {
+      this.videoUrl = "";
+    },
     a_changeDiscuss() {
-      this.a_sortOrder = "discuss"
+      this.a_sortOrder = "discuss";
       this.listLoading = true;
       getNewArticle(6, this.a_sortOrder).then((resp) => {
         this.list = resp.data;
@@ -576,7 +702,7 @@ export default {
       this.listLoading = false;
     },
     a_changeRecommend() {
-      this.a_sortOrder = "recommend"
+      this.a_sortOrder = "recommend";
       this.listLoading = true;
       getNewArticle(6, this.a_sortOrder).then((resp) => {
         this.list = resp.data;
@@ -590,7 +716,7 @@ export default {
       this.listLoading = false;
     },
     a_changeNews() {
-      this.a_sortOrder = "new"
+      this.a_sortOrder = "new";
       this.listLoading = true;
       getNewArticle(6, this.a_sortOrder).then((resp) => {
         this.list = resp.data;
@@ -603,16 +729,16 @@ export default {
       });
       this.listLoading = false;
     },
-    // 鼠标移入赋值index 
+    // 鼠标移入赋值index
     dowmloadover(index) {
-      this.isAcitive = index
+      this.isAcitive = index;
     },
-    // 鼠标移出 
+    // 鼠标移出
     downloadleave(index) {
-      this.isAcitive = false
+      this.isAcitive = false;
     },
     r_changeRecommend() {
-      this.r_sortOrder = "recommend"
+      this.r_sortOrder = "recommend";
       this.listLoading = true;
       getNewResource(10, this.r_sortOrder).then((resp) => {
         this.rlist = resp.data;
@@ -620,7 +746,7 @@ export default {
       this.listLoading = false;
     },
     r_changeNews() {
-      this.r_sortOrder = "new"
+      this.r_sortOrder = "new";
       this.listLoading = true;
       getNewResource(10, this.r_sortOrder).then((resp) => {
         this.rlist = resp.data;
@@ -628,7 +754,7 @@ export default {
       this.listLoading = false;
     },
     r_changeDiscuss() {
-      this.r_sortOrder = "discuss"
+      this.r_sortOrder = "discuss";
       this.listLoading = true;
       getNewResource(10, this.r_sortOrder).then((resp) => {
         this.rlist = resp.data;
@@ -636,7 +762,7 @@ export default {
       this.listLoading = false;
     },
     r_changeDownload() {
-      this.r_sortOrder = "download"
+      this.r_sortOrder = "download";
       this.listLoading = true;
       getNewResource(10, this.r_sortOrder).then((resp) => {
         this.rlist = resp.data;
@@ -724,8 +850,48 @@ export default {
 }
 </style>
 
-
 <style scoped>
+.outsection {
+  position: relative;
+}
+
+.video_overlay::before {
+  content: "";
+  display: block;
+  background: hsla(0, 0%, 7%, 0.4);
+}
+
+.video_overlay,
+.video_overlay::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.sectionText {
+  position: absolute;
+  top: 46%;
+  left: 10%;
+  width: 30%;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.sectionText .vedio_header {
+  font-size: 40px;
+  letter-spacing: 6px;
+}
+
+.strong {
+  margin: 0 10px;
+  font-size: 50px;
+  color: #2f86e3;
+}
+
 .white1 {
   background-color: rgb(255, 255, 255);
   z-index: -1;
@@ -823,7 +989,9 @@ export default {
   top: 0;
   content: "";
   height: 100%;
-  background: rgba(0, 0, 0, 0) linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.65) 100%) repeat scroll 0 0;
+  background: rgba(0, 0, 0, 0)
+    linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.65) 100%)
+    repeat scroll 0 0;
   width: 100%;
   z-index: -1;
 }
@@ -857,7 +1025,6 @@ export default {
 }
 
 .index-special {
-
   margin-top: 35px;
 }
 
@@ -898,7 +1065,7 @@ export default {
   color: #ffffff;
   display: inline-block;
   text-transform: capitalize;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 20px;
   font-weight: 400;
   letter-spacing: 0.6px;
@@ -964,11 +1131,12 @@ export default {
   background-image: none;
   border: 1px solid #ccc;
   border-radius: 4px;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
-  -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
-  -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -webkit-transition: border-color ease-in-out 0.15s,
+    -webkit-box-shadow ease-in-out 0.15s;
+  -o-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 }
 
 .search-box form button {
@@ -1044,7 +1212,7 @@ export default {
   font-weight: 700;
   line-height: 10px;
   letter-spacing: 0.0015em;
-  color: #50A0FF;
+  color: #50a0ff;
 }
 
 .button {
@@ -1091,16 +1259,15 @@ export default {
 <style  scoped>
 .gaosiImg {
   filter: blur(20px) opacity(70%) brightness(110%);
-  transition: .3s;
-  ;
-  z-index: 8
+  transition: 0.3s;
+  z-index: 8;
 }
 
 .dingweiImg,
 .recommendDingweiImg {
   position: absolute;
   top: 15px !important;
-  left: 20px !important
+  left: 20px !important;
 }
 
 .img72,

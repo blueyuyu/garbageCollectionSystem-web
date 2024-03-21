@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        function TreeNode(x) {
+            this.val = x;
+            this.left = null;
+            this.right = null;
+        }
+
+        /**
+         * 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可
+         *
+         * 
+         * @param inorder int整型一维数组 中序遍历序列
+         * @param postorder int整型一维数组 后序遍历序列
+         * @return TreeNode类
+         */
+        function buildTree(inorder, postorder) {
+            // write code here
+            if (inorder.length === 0 || postorder.length == 0) return null;
+            const node = postorder[inorder.length - 1];
+            const root = new TreeNode(node);
+
+            // 中序切割
+            const index = inorder.indexOf(node);
+            const inleft = inorder.slice(0, index);
+            const inright = inorder.slice(index+1)
+            console.log('inleft', inleft);
+
+            // 后序切割
+            const index2 = postorder.indexOf(inright[0]);
+            const postleft = postorder.slice(0, index2);
+            const postRight = postorder.slice(index2, -1);
+
+
+            // 遍历
+            root.left = buildTree(inleft, postleft)
+            root.right = buildTree(inright, postRight)
+
+            // 输出
+            return root
+        }
+
+        const result = buildTree([1,10,100,1000,10000,1000000000,100000],[1000000000,100000,10000,1000,100,10,1])
+        console.log('result', result);
+    </script>
+</body>
+
+</html>
