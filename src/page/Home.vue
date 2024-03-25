@@ -17,7 +17,7 @@
                   autoplay="autoplay"
                   loop
                   muted
-                  style="width: 86%"
+                  style="width: 70%"
                 ></video>
               </div>
               <div class="sectionText">
@@ -35,11 +35,11 @@
                   >观看学习视频</el-button
                 >
               </div>
-              <!-- class="container" -->
+              <!-- class="container"  垃圾四大类型 -->
               <div class="container">
                 <div data-v-0a1f67c4="" class="index-special row mb-6">
                   <div data-v-0a1f67c4="" class="col-3">
-                    <a data-v-0a1f67c4="" class="">
+                    <router-link to="/content" data-v-0a1f67c4="" class="">
                       <div
                         data-v-0a1f67c4=""
                         class="macwk-card bg-gradient-green hover-shadow-6 py-3 text-center"
@@ -58,40 +58,18 @@
                                 data-v-0a1f67c4=""
                                 class="icon-office fs-22 mr-3 v-m-3"
                               ></i>
-                              <span data-v-0a1f67c4="">新人必备</span>
+                              <span data-v-0a1f67c4="">可回收垃圾</span>
                             </h6>
                           </div>
                         </div>
                       </div>
-                    </a>
+                    </router-link>
                   </div>
                   <div data-v-0a1f67c4="" class="col-3">
-                    <a data-v-0a1f67c4="" class="">
+                    <router-link to="/content" data-v-0a1f67c4="" class="">
                       <div
                         data-v-0a1f67c4=""
-                        class="macwk-card bg-gradient-orange hover-shadow-6 py-3 text-center"
-                      >
-                        <div
-                          class="macwk-card__collapsible-content vs-con-loading__container"
-                        >
-                          <div class="macwk-card__body">
-                            <h6 data-v-0a1f67c4="" class="mb-0 text-white">
-                              <i
-                                data-v-0a1f67c4=""
-                                class="icon-gallery fs-22 mr-3 v-m-3"
-                              ></i>
-                              <span data-v-0a1f67c4="">图像处理工具</span>
-                            </h6>
-                          </div>
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-                  <div data-v-0a1f67c4="" class="col-3">
-                    <a data-v-0a1f67c4="" class="">
-                      <div
-                        data-v-0a1f67c4=""
-                        class="macwk-card bg-gradient-blue hover-shadow-6 py-3 text-center"
+                        class="macwk-card bg-gradient-danger hover-shadow-6 py-3 text-center"
                       >
                         <div
                           class="macwk-card__collapsible-content vs-con-loading__container"
@@ -102,39 +80,60 @@
                                 data-v-0a1f67c4=""
                                 class="icon-cp fs-22 mr-3 v-m-3"
                               ></i>
-                              <span data-v-0a1f67c4="">产品经理工具</span>
+                              <span data-v-0a1f67c4="">有害垃圾</span>
                             </h6>
                           </div>
                         </div>
                       </div>
-                    </a>
+                    </router-link>
                   </div>
                   <div data-v-0a1f67c4="" class="col-3">
-                    <a data-v-0a1f67c4="" class="">
+                    <router-link to="/content" data-v-0a1f67c4="" class="">
                       <div
                         data-v-0a1f67c4=""
-                        class="macwk-card bg-gradient-purple hover-shadow-6 py-3 text-center"
+                        class="macwk-card bg-gradient-warning hover-shadow-6 py-3 text-center"
                       >
                         <div
                           class="macwk-card__collapsible-content vs-con-loading__container"
                         >
-                          <router-link to="/class">
-                            <div class="macwk-card__body">
-                              <h6 data-v-0a1f67c4="" class="mb-0 text-white">
-                                <i
-                                  data-v-0a1f67c4=""
-                                  class="icon-code fs-22 mr-3 v-m-3"
-                                ></i>
-                                <span data-v-0a1f67c4="">更多专题</span>
-                              </h6>
-                            </div>
-                          </router-link>
+                          <div class="macwk-card__body">
+                            <h6 data-v-0a1f67c4="" class="mb-0 text-white">
+                              <i
+                                data-v-0a1f67c4=""
+                                class="icon-cp fs-22 mr-3 v-m-3"
+                              ></i>
+                              <span data-v-0a1f67c4="">湿垃圾</span>
+                            </h6>
+                          </div>
                         </div>
                       </div>
-                    </a>
+                    </router-link>
+                  </div>
+                  <div data-v-0a1f67c4="" class="col-3">
+                    <router-link to="/content" data-v-0a1f67c4="" class="">
+                      <div
+                        data-v-0a1f67c4=""
+                        class="macwk-card bg-gradient-info hover-shadow-6 py-3 text-center"
+                      >
+                        <div
+                          class="macwk-card__collapsible-content vs-con-loading__container"
+                        >
+                          <div class="macwk-card__body">
+                            <h6 data-v-0a1f67c4="" class="mb-0 text-white">
+                              <i
+                                data-v-0a1f67c4=""
+                                class="icon-code fs-22 mr-3 v-m-3"
+                              ></i>
+                              <span data-v-0a1f67c4="">干垃圾</span>
+                            </h6>
+                          </div>
+                        </div>
+                      </div>
+                    </router-link>
                   </div>
                 </div>
               </div>
+              <!-- 介绍信息区 -->
               <div class="container mb-5">
                 <div class="d-flex app-content-header mb-6">
                   <div class="main-title">
@@ -142,239 +141,125 @@
                       <i class="mr-1 text-muted i-con i-con-calendar v-m-4"
                         ><i></i
                       ></i>
-                      <span>精品资源</span>
+                      <a id="garbageClassify"><span>垃圾分类：1-2-3</span></a>
                     </h4>
                   </div>
-                  <nav class="nav nav-title flex-grow-1">
-                    <a
-                      @click="r_changeNews()"
-                      :class="{
-                        active: r_news === r_sortOrder,
-                      }"
-                      class="nav-link"
-                      >新鲜发布</a
-                    >
-                    <a
-                      @click="r_changeDownload()"
-                      :class="{
-                        active: r_download === r_sortOrder,
-                      }"
-                      class="nav-link"
-                      >热门下载</a
-                    >
-                    <a
-                      @click="r_changeRecommend()"
-                      :class="{
-                        active: r_recommend === r_sortOrder,
-                      }"
-                      class="nav-link"
-                      >站长推荐</a
-                    >
-                    <a
-                      @click="r_changeDiscuss()"
-                      :class="{
-                        active: r_discuss === r_sortOrder,
-                      }"
-                      class="nav-link"
-                      >最多评论</a
-                    >
-                  </nav>
-                  <div class="more-action">
-                    <router-link to="/list">
-                      <a class="btn btn-more active">
-                        更多软件
-                        <i class="icon-arrow-right fw-600 fs-12 v-2"></i
-                      ></a>
-                    </router-link>
-                  </div>
+                  <div></div>
                 </div>
-                <!---->
-                <div
-                  id="listAppContainer"
-                  class="app-content-body listAppContainer"
-                >
-                  <div class="mw-row">
-                    <div
-                      v-for="(item, index) in rlist"
-                      :key="item.id"
-                      class="mw-col list-animation-leftIn delay-3"
-                    >
-                      <div v-if="!glabledata.glableImageFormat">
-                        <div v-if="item.status.includes('published')">
-                          <router-link :to="'/list/' + item.id">
-                            <a class="macwk-app border white cursor-pointer">
-                              <el-image
-                                v-show="item.thumb != null"
-                                class="listtitleimg delay-3"
-                                :src="item.thumb"
-                                lazy
-                              >
-                                <div slot="placeholder" class="image-slot">
-                                  <img
-                                    style="
-                                      width: 100%;
-                                      height: 100%;
-                                      object-fit: cover;
-                                    "
-                                    src="../static/image/loding.gif"
-                                  />
-                                </div>
-                              </el-image>
-                              <div
-                                v-show="item.thumb == null"
-                                class="delayImgss"
-                                :style="getStyles()"
-                              >
-                                <h3
-                                  class="flex text-center text-white opacity-50"
-                                >
-                                  NOPIC
-                                </h3>
-                              </div>
-                              <div class="macwk-app__body">
-                                <div class="card-meta">
-                                  <div class="meta-item post-author">
-                                    <el-avatar
-                                      style="
-                                        margin-bottom: 3px;
-                                        margin-right: 3px;
-                                      "
-                                      :src="item.authorThumb"
-                                    ></el-avatar>
-                                    <a href="blog-list.html" class="author-name"
-                                      >天天</a
-                                    >
-                                  </div>
-                                  <span
-                                    v-if="item.createTime != null"
-                                    class="meta-item"
-                                  >
-                                    {{ rformatDate(item.createTime) }}</span
-                                  >
-                                  <span v-else class="meta-item">
-                                    {{ rformatDate(item.addTime) }}</span
-                                  >
-                                </div>
-                                <h3 class="heading-tertiary-list">
-                                  {{ item.title }}
-                                </h3>
-                              </div>
-                              <div class="extend">
-                                <div class="button">
-                                  <div style="margin-left: 12px">
-                                    <span
-                                      style="font-size: 36px; line-height: 1"
-                                    >
-                                      <i
-                                        data-v-1c369514=""
-                                        class="light-icon-more icon-next-arrow"
-                                      ></i>
-                                    </span>
-                                  </div>
-
-                                  <div style="margin-right: 12px">
-                                    <span class="value">${{ item.price }}</span>
-                                  </div>
-                                </div>
-                              </div>
-                            </a>
-                          </router-link>
+                <div>
+                  <el-row class="garbage-tips" :gutter="20">
+                    <el-col :span="8">
+                      <div
+                        class="tips"
+                        :class="{ tips_active: tips.isTipsOne }"
+                        @click="changeTips(1)"
+                      >
+                        <div class="tips_num">1</div>
+                        <div class="tips_dis">
+                          <h3 class="tips_title">知道什么是可以回收的</h3>
+                          <div
+                            class="tips_content"
+                            :class="{ title_active: tips.isTipsOne }"
+                          >
+                            纸板、纸张、金属罐、塑料瓶、罐子
+                          </div>
                         </div>
                       </div>
-                      <div v-else>
-                        <div
-                          @mouseover="dowmloadover(index)"
-                          @mouseleave="downloadleave(index)"
-                          v-if="item.status.includes('published')"
-                        >
-                          <router-link :to="'/list/' + item.id">
-                            <a
-                              class="macwk-app border white cursor-pointer padding-xl"
-                            >
-                              <div data-v-2661c954="" class="soft-card">
-                                <div data-v-2661c954="" class="li-card-img-div">
-                                  <img
-                                    data-v-2661c954=""
-                                    :src="item.thumb"
-                                    class="budongImg img72 dingweiImg"
-                                  />
-                                  <transition name="fade">
-                                    <img
-                                      data-v-2661c954=""
-                                      v-if="isAcitive === index"
-                                      :src="item.thumb"
-                                      class="gaosiImg img72 dingweiImg"
-                                    />
-                                  </transition>
-                                </div>
-                                <div
-                                  data-v-2661c954=""
-                                  class="size-12 text-B6BABF margin-top-90"
-                                  style="min-height: 20px"
-                                >
-                                  <span data-v-2661c954="">{{
-                                    item.subhead
-                                  }}</span>
-                                </div>
-                                <div
-                                  data-v-2661c954=""
-                                  class="margin-top size-18 text-bold text-block card-hover-red"
-                                >
-                                  <span data-v-2661c954=""
-                                    >{{ item.title }}
-                                  </span>
-                                </div>
-                                <div
-                                  data-v-2661c954=""
-                                  class="margin-top1 size-14 text-B6BABF limitText"
-                                >
-                                  <span data-v-2661c954="">{{
-                                    item.intro
-                                  }}</span>
-                                </div>
-                                <div
-                                  data-v-2661c954=""
-                                  class="margin-top2 text-B6BABF flex-row size-12"
-                                  style="bottom: 20px; width: 100%"
-                                >
-                                  <div data-v-2661c954="">
-                                    <i
-                                      data-v-2661c954=""
-                                      class="el-icon-view"
-                                    ></i>
-                                    <span data-v-2661c954="">34.5k</span>
-                                  </div>
-                                  <div
-                                    data-v-2661c954=""
-                                    style="margin-left: 6px"
-                                    class="margin-left"
-                                  >
-                                    <i
-                                      data-v-2661c954=""
-                                      class="el-icon-download"
-                                    ></i>
-                                    <span data-v-2661c954="">1500</span>
-                                  </div>
-                                  <div
-                                    data-v-2661c954=""
-                                    style="position: absolute; right: 35px"
-                                  >
-                                    <span v-if="item.createTime != null">
-                                      {{ formatDate(item.createTime) }}</span
-                                    >
-                                    <span v-else>
-                                      {{ formatDate(item.addTime) }}</span
-                                    >
-                                  </div>
-                                </div>
-                              </div>
-                            </a>
-                          </router-link>
+                    </el-col>
+                    <el-col :span="8">
+                      <div
+                        class="tips"
+                        :class="{ tips_active: tips.isTipsTwo }"
+                        @click="changeTips(2)"
+                      >
+                        <div class="tips_num">2</div>
+                        <div class="tips_dis">
+                          <h3 class="tips_title">保持回收物品的干净与干燥</h3>
+                          <div
+                            class="tips_content"
+                            :class="{ title_active: tips.isTipsTwo }"
+                          >
+                            确保所有回收物品中不含食物和液体
+                          </div>
                         </div>
                       </div>
+                    </el-col>
+                    <el-col :span="8">
+                      <div
+                        class="tips"
+                        :class="{ tips_active: tips.isTipsThree }"
+                        @click="changeTips(3)"
+                      >
+                        <div class="tips_num">3</div>
+                        <div class="tips_dis">
+                          <h3 class="tips_title">请勿装袋处理</h3>
+                          <div
+                            class="tips_content"
+                            :class="{ title_active: tips.isTipsThree }"
+                          >
+                            请勿将回收物品放入容器或袋子中
+                          </div>
+                        </div>
+                      </div>
+                    </el-col>
+                  </el-row>
+                  <div class="garbage-tips-dis" v-show="tips.isTipsOne">
+                    <div class="dis_img img_margin">
+                      <img
+                        src="../static/image/home/rules-loose-recyclables.webp"
+                        alt="纸板回收的图片"
+                        srcset=""
+                      />
+                    </div>
+                    <div class="dis_content">
+                      <div class="content_header tips_title">纸和纸板子</div>
+                      <p>压平的纸板、报纸、杂志、办公用纸和普通邮件</p>
+                      <div class="content_header tips_title">金属罐</div>
+                      <p>饮料和食品罐头</p>
+                      <div class="content_header tips_title">塑料瓶和水壶</div>
+                      <p>盖上盖子的食品和液体容器</p>
+                    </div>
+                  </div>
+                  <div class="garbage-tips-dis" v-show="tips.isTipsTwo">
+                    <div class="dis_img">
+                      <img
+                        src="../static/image/home/rules-clean-items.webp"
+                        alt="东西清理干净的图片"
+                        srcset=""
+                      />
+                    </div>
+                    <div class="dis_content">
+                      <div class="content_header tips_title">
+                        没有弄脏或潮湿的材料
+                      </div>
+                      <p>
+                        仅仅一个脏瓶子或脏东西就可能污染整个回收容器内的回收物品。因为纸板或者纸张接触到污染物，将会无法再回收利用。
+                      </p>
+                    </div>
+                  </div>
+                  <div class="garbage-tips-dis" v-show="tips.isTipsThree">
+                    <div class="dis_img">
+                      <img
+                        src="../static/image/home/rules-bagged-recyclables.webp"
+                        alt="物品装袋处理的图片"
+                        srcset=""
+                      />
+                    </div>
+                    <div class="dis_content">
+                      <div class="content_header tips_title">不要装袋处理</div>
+                      <p>
+                        请勿将一整袋物品放入回收容器中，也请不要将回收物品放入袋中或者用容器包裹。所有回收物单个放入
+                      </p>
+                      <div class="content_header tips_title">
+                        不存在混合材料
+                      </div>
+                      <p>
+                        请注意，当需要回收物品中存在多种混合材料。回收者们应该把这些材料拆开，分别回收处理
+                      </p>
                     </div>
                   </div>
                 </div>
+                <!-- TODO 位置布局有一些问题 -->
               </div>
               <div class="white dk py-7">
                 <div class="container">
@@ -384,200 +269,103 @@
                         <i class="mr-1 text-muted i-con i-con-layer v-m-4"
                           ><i></i
                         ></i>
-                        <span>教程文章</span>
+                        <a id="regulations"><span>条例处罚问题</span></a>
                       </h4>
                     </div>
-                    <nav class="nav nav-title flex-grow-1">
-                      <a
-                        @click="a_changeNews()"
-                        :class="{
-                          active: a_news === a_sortOrder,
-                        }"
-                        class="nav-link"
-                        >新鲜发布</a
-                      >
-                      <a
-                        @click="a_changeRecommend()"
-                        :class="{
-                          active: a_recommend === a_sortOrder,
-                        }"
-                        class="nav-link"
-                        >站长推荐</a
-                      >
-                      <a
-                        @click="a_changeDiscuss()"
-                        :class="{
-                          active: a_discuss === a_sortOrder,
-                        }"
-                        class="nav-link"
-                        >最多评论</a
-                      >
-                    </nav>
-                    <div class="more-action">
-                      <router-link
-                        target="_self"
-                        class="nav-link"
-                        data-v-122eae44=""
-                        to="post/all"
-                      >
-                        更多文章
-                        <i class="icon-arrow-right fw-600 fs-12 v-2"></i
-                      ></router-link>
+                  </div>
+                  <el-row :gutter="20">
+                    <el-col :xs="24" :md="12" :lg="8">
+                      <div class="garbage-problem">
+                        <div class="problem_header tips_title">
+                          如生活垃圾分类投放管理责任人违反本条例第十九条第一款第六项规定，将已分类的生活垃圾交由不符合要求的单位收集、运输的，应当如何处罚?
+                        </div>
+                        <div class="problem_content">
+                          环境卫生主管部门处以二千元以上二万元以下罚款。
+                        </div>
+                      </div>
+                    </el-col>
+                    <el-col :xs="24" :md="12" :lg="8">
+                      <div class="garbage-problem">
+                        <div class="problem_header tips_title">
+                          如违反本条例第二十一条第一款规定，未按照规定分类投放生活垃圾的，由环境卫生主管部门批评教育、责令改正;拒不改正的，应当如何处罚?
+                        </div>
+                        <div class="problem_content">
+                          对单位处以五千元以上五万元以下罚款、对个人处以五十元以上二百元以下罚款。
+                        </div>
+                      </div>
+                    </el-col>
+                    <el-col :xs="24" :md="12" :lg="8">
+                      <div class="garbage-problem">
+                        <div class="problem_header tips_title">
+                          如违反本条例第二十一条第五款规定，将建筑装修垃圾、绿化
+                          作业垃圾投放至生活垃圾收集容器内的，应当如何处罚?
+                        </div>
+                        <div class="problem_content">
+                          由环境卫生主管部门对单位处以五百元以上五千元以下罚款、对个人处以二百元以上一千元以下罚款。
+                        </div>
+                      </div>
+                    </el-col>
+                    <!-- 第三个元素的过度有一些问题 -->
+                    <el-col :xs="24" :md="12" :lg="8">
+                      <div class="garbage-problem">
+                        <div class="problem_header tips_title">
+                          如生活垃圾分类投放管理责任人违反本条例第十八条第一款规定，未按照生活垃圾分类收集容器的类别、标识、规格要求合理配置生活垃圾分类收集容器的，应当如何处罚?
+                        </div>
+                        <div class="problem_content">
+                          由环境卫生主管部
+                          门责令改正;拒不改正的，处以一千元以上一万元以下罚款。
+                        </div>
+                      </div>
+                    </el-col>
+                    <el-col :xs="24" :md="12" :lg="8">
+                      <div class="garbage-problem">
+                        <div class="problem_header tips_title">
+                          有害垃圾应按照规定如何分类处置?
+                        </div>
+                        <div class="problem_content">
+                          有害垃圾应当由具有相应处置资质的单位按照规定进行处置。
+                        </div>
+                      </div>
+                    </el-col>
+                    <el-col :xs="24" :md="12" :lg="8">
+                      <div class="garbage-problem">
+                        <div class="problem_header tips_title">
+                          生活垃圾收集、运输单位违反本条例第二十四条规定，有下列情形之一的，(一)未保持运输工具功能完好、标识明显、外观整洁的;(二)未及时将生活垃圾运送至集中收集设施或者符合规定
+                          的中转、处置场所的;(三)未建立台账，记录生活垃圾来源、种类、数量、去向的,应当如何处罚?
+                        </div>
+                        <div class="problem_content">
+                          由环境卫生主管部门处以五千元以上三万元以下罚款。
+                        </div>
+                      </div>
+                    </el-col>
+                  </el-row>
+                </div>
+              </div>
+              <!-- 处罚通讯录 -->
+              <div class="white dk py-7">
+                <div class="container">
+                  <div class="d-flex app-content-header mb-6">
+                    <div class="main-title">
+                      <h4 class="i-con-h-a mb-0">
+                        <i class="mr-1 text-muted i-con i-con-layer v-m-4"
+                          ><i></i
+                        ></i>
+                        <a id="units"><span>垃圾分类示范单位</span></a>
+                      </h4>
                     </div>
                   </div>
-                  <div class="row gap-a">
-                    <div class="com-md-12 col-lg-6">
-                      <a
-                        v-for="(item, id) in this.leftArr"
-                        :key="id"
-                        class="feature-block-three border white dk hover-shadow-6 delay-0 list-animation-leftIn"
-                      >
-                        <div v-if="item.status.includes('published')">
-                          <router-link :to="'/post/' + item.id">
-                            <div class="d-flex align-items-center">
-                              <div class="icon-box icon-one">
-                                <el-image
-                                  v-show="item.thumb != null"
-                                  class="delayImg"
-                                  :src="item.thumb"
-                                  lazy
-                                >
-                                  <div slot="placeholder" class="image-slot">
-                                    <img
-                                      style="
-                                        width: 100%;
-                                        height: 100%;
-                                        object-fit: cover;
-                                      "
-                                      src="../static/image/loding.gif"
-                                    />
-                                  </div>
-                                </el-image>
-                                <div
-                                  v-show="item.thumb == null"
-                                  class="delayImg"
-                                  :style="getStyles()"
-                                >
-                                  <h3
-                                    class="flex text-center text-white opacity-50"
-                                  >
-                                    NOPIC
-                                  </h3>
-                                </div>
-                              </div>
-                              <div class="text">
-                                <h5
-                                  style="
-                                    display: -webkit-box;
-                                    -webkit-box-orient: vertical;
-                                    overflow: hidden;
-                                    word-break: break-all;
-                                    text-overflow: ellipsis;
-                                    -webkit-line-clamp: 2;
-                                  "
-                                >
-                                  {{ item.title }}
-                                </h5>
-                                <div class="text-muted fs-16 mr-3">
-                                  <span
-                                    v-if="item.createTime != null"
-                                    v-text="formatDate(item.createTime)"
-                                  >
-                                  </span>
-                                  <span
-                                    v-else
-                                    v-text="formatDate(item.addTime)"
-                                  >
-                                  </span>
-                                </div>
-                              </div>
-                              <div
-                                class="read-more d-flex justify-content-end w-80 pr-3"
-                              >
-                                <i class="light-icon-more icon-next-arrow"></i>
-                              </div>
-                            </div>
-                          </router-link>
-                        </div>
-                      </a>
-                    </div>
-
-                    <div class="com-md-12 col-lg-6">
-                      <a
-                        v-for="(item, id) in this.rightArr"
-                        :key="id"
-                        class="feature-block-three border white dk hover-shadow-6 delay-5 list-animation-leftIn"
-                      >
-                        <div v-if="item.status.includes('published')">
-                          <router-link :to="'/post/' + item.id">
-                            <div class="d-flex align-items-center">
-                              <div class="icon-box icon-one">
-                                <el-image
-                                  v-show="item.thumb != null"
-                                  class="delayImg"
-                                  :src="item.thumb"
-                                  lazy
-                                >
-                                  <div slot="placeholder" class="image-slot">
-                                    <img
-                                      style="
-                                        width: 100%;
-                                        height: 100%;
-                                        object-fit: cover;
-                                      "
-                                      src="../static/image/loding.gif"
-                                    />
-                                  </div>
-                                </el-image>
-                                <div
-                                  v-show="item.thumb == null"
-                                  class="delayImg"
-                                  :style="getStyles()"
-                                >
-                                  <h3
-                                    class="flex text-center text-white opacity-50"
-                                  >
-                                    NOPIC
-                                  </h3>
-                                </div>
-                              </div>
-                              <div class="text">
-                                <h5
-                                  style="
-                                    display: -webkit-box;
-                                    -webkit-box-orient: vertical;
-                                    overflow: hidden;
-                                    word-break: break-all;
-                                    text-overflow: ellipsis;
-                                    -webkit-line-clamp: 2;
-                                  "
-                                >
-                                  {{ item.title }}
-                                </h5>
-                                <div class="text-muted fs-16 mr-3">
-                                  <span
-                                    v-if="item.createTime != null"
-                                    v-text="formatDate(item.createTime)"
-                                  >
-                                  </span>
-                                  <span
-                                    v-else
-                                    v-text="formatDate(item.addTime)"
-                                  >
-                                  </span>
-                                </div>
-                              </div>
-                              <div
-                                class="read-more d-flex justify-content-end w-80 pr-3"
-                              >
-                                <i class="light-icon-more icon-next-arrow"></i>
-                              </div>
-                            </div>
-                          </router-link>
-                        </div>
-                      </a>
-                    </div>
-                  </div>
+                  <el-row :gutter="20">
+                    <el-col :span="12">
+                      <h5 class="tips_title">生活垃圾分类示范社区</h5>
+                      <p>石鼓区青山街道西湖一村社区、蒸湘区红湘街道冶金社区</p>
+                    </el-col>
+                    <el-col :span="12">
+                      <h5 class="tips_title">生活垃圾分类示范机关单位</h5>
+                      <p>
+                        衡阳市机关事务管理局、衡阳市城市管理和综合执法局、衡阳市司法局、衡阳市商务局
+                      </p>
+                    </el-col>
+                  </el-row>
                 </div>
               </div>
             </section>
@@ -607,7 +395,7 @@
         controls
         autoplay
         class="video"
-        :ref="dialogVideo"
+        ref="dialogVideo"
         width="100%"
       ></video>
     </el-dialog>
@@ -633,10 +421,14 @@ export default {
   data() {
     return {
       dialogPlay: false,
-      videoUrl: "../static/video/sorting.mp4",
-      dialogVideo: "",
+      videoUrl: "",
       playVideo: "", // 点击按钮实例
       isAcitive: false,
+      tips: {
+        isTipsOne: true,
+        isTipsTwo: false,
+        isTipsThree: false,
+      },
       r_sortOrder: "new",
       r_news: "new",
       r_download: "download",
@@ -659,19 +451,8 @@ export default {
     this.getList();
     this.getSetting();
   },
-  mounted() {
-    // console.log("this.$refs.playVideo", this.$refs.playVideo.onClick);
-    // this.$refs.playVideo.onClick(() => {
-    //   console.log("2333", 2333);
-    // });
-    // this.$refs.playVideo.onclick(function(){
-    //   if(this.$refs.dialogVideo.paused){
-    //     this.$refs.dialogVideo.play();
-    //   }else{
-    //     this.$refs.dialogVideo.pause();
-    //   }
-    // })
-  },
+  mounted() {},
+  updated() {},
   props: {
     dataHeight: {
       type: String,
@@ -679,13 +460,40 @@ export default {
     },
   },
   methods: {
-    //TODO video
+    //TODO video 这里的链接地址，选择挂载吧
     watchVideo() {
+      this.$nextTick(() => {
+        // 给视频的src赋值操作
+        this.videoUrl =
+          "https://cdn.theguardian.tv/webM/2015/07/20/150716YesMen_synd_768k_vp8.webm";
+        // 如何获取b站这个url地址，或者换一种，把静态资源挂载在服务器上
+      });
       this.dialogPlay = true;
-      // this.videoUrl = "../static/video/sorting.mp4";
     },
     closeDialog() {
       this.videoUrl = "";
+    },
+    //  传入一个data,checked为需要置换为false的属性的键名
+    singleChoose(data, checked) {
+      for (const key in data) {
+        if (Object.hasOwnProperty.call(data, key)) {
+          if (key == checked) {
+            data[key] = true;
+          } else {
+            data[key] = false;
+          }
+        }
+      }
+      return data;
+    },
+    changeTips(num) {
+      if (num == 1) {
+        this.tips = this.singleChoose(this.tips, "isTipsOne");
+      } else if (num == 2) {
+        this.tips = this.singleChoose(this.tips, "isTipsTwo");
+      } else if (num == 3) {
+        this.tips = this.singleChoose(this.tips, "isTipsThree");
+      }
     },
     a_changeDiscuss() {
       this.a_sortOrder = "discuss";
@@ -851,6 +659,13 @@ export default {
 </style>
 
 <style scoped>
+/* title的样式 */
+.tips_title {
+  color: #00497e;
+  font-weight: 300;
+  font-size: 20px;
+}
+
 .outsection {
   position: relative;
 }
@@ -858,7 +673,7 @@ export default {
 .video_overlay::before {
   content: "";
   display: block;
-  background: hsla(0, 0%, 7%, 0.4);
+  background: hsla(0, 2%, 8%, 0.4);
 }
 
 .video_overlay,
@@ -873,8 +688,8 @@ export default {
 
 .sectionText {
   position: absolute;
-  top: 46%;
-  left: 10%;
+  top: 40%;
+  left: 20%;
   width: 30%;
   color: #fff;
   font-size: 18px;
@@ -890,6 +705,76 @@ export default {
   margin: 0 10px;
   font-size: 50px;
   color: #2f86e3;
+}
+
+/* TODO css 垃圾样式区域 */
+.tips {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  padding: 20px 10px;
+  position: relative;
+  border-radius: 10px;
+}
+
+.tips_active {
+  background-color: #c8e0f3;
+}
+
+.title_active::after {
+  content: "";
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-top: 20px solid #c8e0f3;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translate(-20px);
+}
+
+.garbage-tips .tips_num {
+  color: #2f86e3;
+  font-size: 34px;
+  padding: 0 25px 25px 25px;
+  text-align: left;
+}
+
+.garbage-tips .tips_dis {
+  margin-left: 30px;
+}
+
+.garbage-tips-dis {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.garbage-tips-dis .dis_img {
+  margin: 20px;
+}
+
+.garbage-tips-dis .img_margin {
+  margin: 0 60px;
+}
+
+.content_header {
+  font-size: 18px;
+}
+
+.dis_content {
+  padding: 0 15px;
+}
+/* 垃圾问题 */
+.garbage-problem{
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #f8fafc;
+}
+
+.problem_header {
+  font-size: 16px;
+  margin-bottom: 10px;
 }
 
 .white1 {
