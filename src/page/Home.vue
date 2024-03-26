@@ -766,7 +766,7 @@ export default {
   padding: 0 15px;
 }
 /* 垃圾问题 */
-.garbage-problem{
+.garbage-problem {
   padding: 20px;
   border-radius: 8px;
   background-color: #f8fafc;
@@ -775,6 +775,25 @@ export default {
 .problem_header {
   font-size: 16px;
   margin-bottom: 10px;
+}
+/* 电脑屏幕与显示大屏条例布局 */
+@media only screen and (min-width: 992px) {
+  .garbage-problem {
+    height: 36vh;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .el-col-lg-8 {
+    width: 33%;
+  }
+  .garbage-problem {
+    height: 24vh;
+  }
+}
+
+.el-col {
+  margin-bottom: 20px;
 }
 
 .white1 {
