@@ -39,7 +39,11 @@
               <div class="container">
                 <div data-v-0a1f67c4="" class="index-special row mb-6">
                   <div data-v-0a1f67c4="" class="col-3">
-                    <router-link to="/content" data-v-0a1f67c4="" class="">
+                    <router-link
+                      :to="{ path: '/content', query: { id: 're-garbage' } }"
+                      data-v-0a1f67c4=""
+                      class=""
+                    >
                       <div
                         data-v-0a1f67c4=""
                         class="macwk-card bg-gradient-green hover-shadow-6 py-3 text-center"
@@ -66,7 +70,11 @@
                     </router-link>
                   </div>
                   <div data-v-0a1f67c4="" class="col-3">
-                    <router-link to="/content" data-v-0a1f67c4="" class="">
+                    <router-link
+                      :to="{ path: '/content', query: { id: 'harm-garbage' } }"
+                      data-v-0a1f67c4=""
+                      class=""
+                    >
                       <div
                         data-v-0a1f67c4=""
                         class="macwk-card bg-gradient-danger hover-shadow-6 py-3 text-center"
@@ -88,7 +96,11 @@
                     </router-link>
                   </div>
                   <div data-v-0a1f67c4="" class="col-3">
-                    <router-link to="/content" data-v-0a1f67c4="" class="">
+                    <router-link
+                      :to="{ path: '/content', query: { id: 'wet-garbage' } }"
+                      data-v-0a1f67c4=""
+                      class=""
+                    >
                       <div
                         data-v-0a1f67c4=""
                         class="macwk-card bg-gradient-warning hover-shadow-6 py-3 text-center"
@@ -110,7 +122,11 @@
                     </router-link>
                   </div>
                   <div data-v-0a1f67c4="" class="col-3">
-                    <router-link to="/content" data-v-0a1f67c4="" class="">
+                    <router-link
+                      :to="{ path: '/content', query: { id: 'dry-garbage' } }"
+                      data-v-0a1f67c4=""
+                      class=""
+                    >
                       <div
                         data-v-0a1f67c4=""
                         class="macwk-card bg-gradient-info hover-shadow-6 py-3 text-center"
@@ -779,7 +795,7 @@ export default {
 /* 电脑屏幕与显示大屏条例布局 */
 @media only screen and (min-width: 992px) {
   .garbage-problem {
-    height: 36vh;
+    height: 36vh !important;
   }
 }
 
