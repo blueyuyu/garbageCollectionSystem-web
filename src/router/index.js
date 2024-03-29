@@ -51,7 +51,7 @@ export const setRoutes = () => {
           itemMenu.children.push(childMenu)
         })
       }
-      router.addRoute(itemMenu)
+      // router.addRoute(itemMenu)
       adminRouter.push(itemMenu)
     });
   }

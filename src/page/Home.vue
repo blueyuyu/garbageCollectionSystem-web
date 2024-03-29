@@ -419,10 +419,7 @@
 </template>
 
 <script>
-import { getNewResource } from "@/api/webresource";
-import { getNewArticle } from "@/api/webarticle";
 import { formatDate } from "@/utils/date.js";
-import { getCarousel } from "@/api/websetting";
 
 import top from "./components/Top.vue";
 import foot from "./components/Foots.vue";
@@ -445,27 +442,10 @@ export default {
         isTipsTwo: false,
         isTipsThree: false,
       },
-      r_sortOrder: "new",
-      r_news: "new",
-      r_download: "download",
-      r_discuss: "discuss",
-      r_recommend: "recommend",
-      a_sortOrder: "new",
-      a_news: "new",
-      a_download: "download",
-      a_discuss: "discuss",
-      a_recommend: "recommend",
-      rlist: "",
       acticve: "nav-link active",
-      Carousel: {},
-      list: null,
-      leftArr: null,
-      rightArr: null,
     };
   },
   created() {
-    this.getList();
-    this.getSetting();
   },
   mounted() {},
   updated() {},
@@ -502,6 +482,7 @@ export default {
       }
       return data;
     },
+    // 修改显示内容
     changeTips(num) {
       if (num == 1) {
         this.tips = this.singleChoose(this.tips, "isTipsOne");
@@ -511,48 +492,6 @@ export default {
         this.tips = this.singleChoose(this.tips, "isTipsThree");
       }
     },
-    a_changeDiscuss() {
-      this.a_sortOrder = "discuss";
-      this.listLoading = true;
-      getNewArticle(6, this.a_sortOrder).then((resp) => {
-        this.list = resp.data;
-        this.total = resp.data.total;
-        this.listLoading = false;
-        //将array进行处理,他的index索引余2===0的就放到一个新数组中leftArr
-        this.leftArr = this.list.filter((_item, index) => index % 2 === 0);
-        //将array进行处理,他的index索引余2 ！===0的就放到一个新数组中rightArr
-        this.rightArr = this.list.filter((_item, index) => index % 2 !== 0);
-      });
-      this.listLoading = false;
-    },
-    a_changeRecommend() {
-      this.a_sortOrder = "recommend";
-      this.listLoading = true;
-      getNewArticle(6, this.a_sortOrder).then((resp) => {
-        this.list = resp.data;
-        this.total = resp.data.total;
-        this.listLoading = false;
-        //将array进行处理,他的index索引余2===0的就放到一个新数组中leftArr
-        this.leftArr = this.list.filter((_item, index) => index % 2 === 0);
-        //将array进行处理,他的index索引余2 ！===0的就放到一个新数组中rightArr
-        this.rightArr = this.list.filter((_item, index) => index % 2 !== 0);
-      });
-      this.listLoading = false;
-    },
-    a_changeNews() {
-      this.a_sortOrder = "new";
-      this.listLoading = true;
-      getNewArticle(6, this.a_sortOrder).then((resp) => {
-        this.list = resp.data;
-        this.total = resp.data.total;
-        this.listLoading = false;
-        //将array进行处理,他的index索引余2===0的就放到一个新数组中leftArr
-        this.leftArr = this.list.filter((_item, index) => index % 2 === 0);
-        //将array进行处理,他的index索引余2 ！===0的就放到一个新数组中rightArr
-        this.rightArr = this.list.filter((_item, index) => index % 2 !== 0);
-      });
-      this.listLoading = false;
-    },
     // 鼠标移入赋值index
     dowmloadover(index) {
       this.isAcitive = index;
@@ -560,38 +499,6 @@ export default {
     // 鼠标移出
     downloadleave(index) {
       this.isAcitive = false;
-    },
-    r_changeRecommend() {
-      this.r_sortOrder = "recommend";
-      this.listLoading = true;
-      getNewResource(10, this.r_sortOrder).then((resp) => {
-        this.rlist = resp.data;
-      });
-      this.listLoading = false;
-    },
-    r_changeNews() {
-      this.r_sortOrder = "new";
-      this.listLoading = true;
-      getNewResource(10, this.r_sortOrder).then((resp) => {
-        this.rlist = resp.data;
-      });
-      this.listLoading = false;
-    },
-    r_changeDiscuss() {
-      this.r_sortOrder = "discuss";
-      this.listLoading = true;
-      getNewResource(10, this.r_sortOrder).then((resp) => {
-        this.rlist = resp.data;
-      });
-      this.listLoading = false;
-    },
-    r_changeDownload() {
-      this.r_sortOrder = "download";
-      this.listLoading = true;
-      getNewResource(10, this.r_sortOrder).then((resp) => {
-        this.rlist = resp.data;
-      });
-      this.listLoading = false;
     },
     getStyles() {
       //生成随机颜色
@@ -635,26 +542,6 @@ export default {
     rformatDate(time) {
       let data = new Date(time);
       return formatDate(data, "yyyy-MM-dd ");
-    },
-    getSetting() {
-      getCarousel().then((resp) => {
-        this.Carousel = resp.data;
-      });
-    },
-    getList() {
-      this.listLoading = true;
-      getNewResource(10, this.r_sortOrder).then((resp) => {
-        this.rlist = resp.data;
-      });
-      getNewArticle(6, this.a_sortOrder).then((resp) => {
-        this.list = resp.data;
-        this.total = resp.data.total;
-        this.listLoading = false;
-        //将array进行处理,他的index索引余2===0的就放到一个新数组中leftArr
-        this.leftArr = this.list.filter((_item, index) => index % 2 === 0);
-        //将array进行处理,他的index索引余2 ！===0的就放到一个新数组中rightArr
-        this.rightArr = this.list.filter((_item, index) => index % 2 !== 0);
-      });
     },
   },
 };

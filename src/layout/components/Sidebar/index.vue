@@ -37,7 +37,7 @@ export default {
     routes() {
       // console.log("this.$router.options.routes", this.$router.options.routes);
       const myRouter = JSON.parse(localStorage.getItem("__ADMINROUTER"));
-      console.log("myRouter", myRouter);
+      // console.log("myRouter", myRouter);
       return myRouter;
     },
     activeMenu() {
