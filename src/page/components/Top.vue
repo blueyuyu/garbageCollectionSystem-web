@@ -1,14 +1,7 @@
 <template>
   <header class="app-header" data-v-7cf0e7dc="">
     <!-- 登陆 -->
-    <el-dialog
-      class="dialogdeep"
-      width="30%"
-      top="30px"
-      center
-      title=""
-      :visible.sync="dialogRegisterFormVisible"
-    >
+    <el-dialog class="dialogdeep" width="30%" top="30px" center title="" :visible.sync="dialogRegisterFormVisible">
       <div class="box">
         <div class="login-logo">
           <img height="40" width="40" src="../../static/image/logo.svg" />
@@ -16,49 +9,19 @@
         <div class="login-title">
           <span><b>立即注册</b></span>
         </div>
-        <label class="login-form-item" style="display: none"
-          ><input
-            type="text"
-            name="nickname"
-            tabindex="1"
-            spellcheck="false"
-            autocomplete="off"
-            class=""
-          />
-          <span><b>可爱的昵称</b></span></label
-        >
-        <el-form
-          ref="RegisterForm"
-          :model="RegisterForm"
-          :rules="registerRules"
-          class="login-form"
-          auto-complete="on"
-          label-position="left"
-        >
+        <label class="login-form-item" style="display: none"><input type="text" name="nickname" tabindex="1"
+            spellcheck="false" autocomplete="off" class="" />
+          <span><b>可爱的昵称</b></span></label>
+        <el-form ref="RegisterForm" :model="RegisterForm" :rules="registerRules" class="login-form" auto-complete="on"
+          label-position="left">
           <el-form-item prop="username">
-            <el-input
-              ref="username"
-              v-model="RegisterForm.username"
-              placeholder="用户名"
-              name="username"
-              type="text"
-              tabindex="1"
-              auto-complete="on"
-            />
+            <el-input ref="username" v-model="RegisterForm.username" placeholder="用户名" name="username" type="text"
+              tabindex="1" auto-complete="on" />
           </el-form-item>
 
           <el-form-item prop="password">
-            <el-input
-              :key="passwordType"
-              ref="password"
-              v-model="RegisterForm.password"
-              :type="passwordType"
-              placeholder="密码"
-              name="password"
-              tabindex="2"
-              auto-complete="on"
-              @keyup.enter.native="handleLogin"
-            />
+            <el-input :key="passwordType" ref="password" v-model="RegisterForm.password" :type="passwordType"
+              placeholder="密码" name="password" tabindex="2" auto-complete="on" @keyup.enter.native="handleLogin" />
             <!-- <span class="show-pwd" @click="showPwd">
           <svg-icon
             :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'"
@@ -66,38 +29,23 @@
         </span> -->
           </el-form-item>
           <el-form-item prop="confirmpassword">
-            <el-input
-              :key="passwordType"
-              ref="password"
-              v-model="RegisterForm.confirmpassword"
-              :type="passwordType"
-              placeholder="确认密码"
-              name="confirmpassword"
-              tabindex="2"
-              auto-complete="on"
-              @keyup.enter.native="handleLogin"
-            />
+            <el-input :key="passwordType" ref="password" v-model="RegisterForm.confirmpassword" :type="passwordType"
+              placeholder="确认密码" name="confirmpassword" tabindex="2" auto-complete="on"
+              @keyup.enter.native="handleLogin" />
             <!-- <span class="show-pwd" @click="showPwd">
           <svg-icon
             :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'"
           />
         </span> -->
           </el-form-item>
-          <el-button
-            :loading="loading"
-            type="primary"
-            style="width: 100%; margin-bottom: 30px"
-            @click.native.prevent="userRegister"
-            >立即注册</el-button
-          >
+          <el-button :loading="loading" type="primary" style="width: 100%; margin-bottom: 30px"
+            @click.native.prevent="userRegister">立即注册</el-button>
           <div data-v-11bb2e85="" class="ss-login_statement">
             <span data-v-11bb2e85="">登陆注册即代表同意</span>
             <router-link to="/Protocol">
-              <a data-v-11bb2e85="" target="_blank">用户协议</a></router-link
-            ><span data-v-11bb2e85="">及</span>
+              <a data-v-11bb2e85="" target="_blank">用户协议</a></router-link><span data-v-11bb2e85="">及</span>
             <router-link to="/Privacy">
-              <a data-v-11bb2e85="" target="_blank">隐私条款</a></router-link
-            >
+              <a data-v-11bb2e85="" target="_blank">隐私条款</a></router-link>
           </div>
           <div data-v-11bb2e85="" class="line"></div>
           <div data-v-11bb2e85="" class="footer">
@@ -105,9 +53,7 @@
               其他登录方式
               <a style="text-decoration: none">或</a>
               {{ "\xa0" }}
-                <a data-v-11bb2e85="" @click="ChangeLogin" class="text-align-center"
-                  >立即登陆</a
-                >
+              <a data-v-11bb2e85="" @click="ChangeLogin" class="text-align-center">立即登陆</a>
             </p>
             <div data-v-11bb2e85="" class="other-login">
               <button data-v-11bb2e85="" class="btn-login circle weixin">
@@ -127,14 +73,7 @@
       </div>
       <el-form :model="form"> </el-form>
     </el-dialog>
-    <el-dialog
-      class="dialogdeep"
-      width="30%"
-      top="30px"
-      center
-      title=""
-      :visible.sync="dialogFormVisible"
-    >
+    <el-dialog class="dialogdeep" width="30%" top="30px" center title="" :visible.sync="dialogFormVisible">
       <div class="box">
         <div class="login-logo">
           <img height="40" width="40" src="../../static/image/logo.svg" />
@@ -142,49 +81,19 @@
         <div class="login-title">
           <span><b>快速登录</b></span>
         </div>
-        <label class="login-form-item" style="display: none"
-          ><input
-            type="text"
-            name="nickname"
-            tabindex="1"
-            spellcheck="false"
-            autocomplete="off"
-            class=""
-          />
-          <span><b>可爱的昵称</b></span></label
-        >
-        <el-form
-          ref="loginForm"
-          :model="loginForm"
-          :rules="loginRules"
-          class="login-form"
-          auto-complete="on"
-          label-position="left"
-        >
+        <label class="login-form-item" style="display: none"><input type="text" name="nickname" tabindex="1"
+            spellcheck="false" autocomplete="off" class="" />
+          <span><b>可爱的昵称</b></span></label>
+        <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on"
+          label-position="left">
           <el-form-item prop="username">
-            <el-input
-              ref="username"
-              v-model="loginForm.username"
-              placeholder="用户名"
-              name="username"
-              type="text"
-              tabindex="1"
-              auto-complete="on"
-            />
+            <el-input ref="username" v-model="loginForm.username" placeholder="用户名" name="username" type="text"
+              tabindex="1" auto-complete="on" />
           </el-form-item>
 
           <el-form-item prop="password">
-            <el-input
-              :key="passwordType"
-              ref="password"
-              v-model="loginForm.password"
-              :type="passwordType"
-              placeholder="密码"
-              name="password"
-              tabindex="2"
-              auto-complete="on"
-              @keyup.enter.native="handleLogin"
-            />
+            <el-input :key="passwordType" ref="password" v-model="loginForm.password" :type="passwordType"
+              placeholder="密码" name="password" tabindex="2" auto-complete="on" @keyup.enter.native="handleLogin" />
             <!-- <span class="show-pwd" @click="showPwd">
           <svg-icon
             :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'"
@@ -192,21 +101,14 @@
         </span> -->
           </el-form-item>
 
-          <el-button
-            :loading="loading"
-            type="primary"
-            style="width: 100%; margin-bottom: 30px"
-            @click.native.prevent="handleLogin"
-            >登陆</el-button
-          >
+          <el-button :loading="loading" type="primary" style="width: 100%; margin-bottom: 30px"
+            @click.native.prevent="handleLogin">登陆</el-button>
           <div data-v-11bb2e85="" class="ss-login_statement">
             <span data-v-11bb2e85="">登陆注册即代表同意</span>
             <router-link to="/Protocol">
-              <a data-v-11bb2e85="" target="_blank">用户协议</a></router-link
-            ><span data-v-11bb2e85="">及</span>
+              <a data-v-11bb2e85="" target="_blank">用户协议</a></router-link><span data-v-11bb2e85="">及</span>
             <router-link to="/Privacy">
-              <a data-v-11bb2e85="" target="_blank">隐私条款</a></router-link
-            >
+              <a data-v-11bb2e85="" target="_blank">隐私条款</a></router-link>
           </div>
           <div data-v-11bb2e85="" class="line"></div>
           <div data-v-11bb2e85="" class="footer">
@@ -214,9 +116,7 @@
               其他登录方式
               <a style="text-decoration: none">或</a>
               {{ "\xa0" }}
-                <a data-v-11bb2e85="" @click="ChangeRegister" class="text-align-center"
-                  >立即注册</a
-                >
+              <a data-v-11bb2e85="" @click="ChangeRegister" class="text-align-center">立即注册</a>
             </p>
             <div data-v-11bb2e85="" class="other-login">
               <button data-v-11bb2e85="" class="btn-login circle weixin">
@@ -236,234 +136,104 @@
       </div>
       <el-form :model="form"> </el-form>
     </el-dialog>
-    <div
-      class="app-header-navbar white shadow-4 border-bottom pc-model"
-      data-v-122eae44=""
-      data-v-7cf0e7dc=""
-    >
+    <div class="app-header-navbar white shadow-4 border-bottom pc-model" data-v-122eae44="" data-v-7cf0e7dc="">
       <div class="app-header-main" data-v-122eae44="">
-        <router-link
-          target="_self"
-          data-v-122eae44=""
-          aria-current="page"
-          to="/"
-        >
-          <a
-            class="app-header-logo active"
-            data-v-122eae44=""
-            aria-current="page"
-          >
+        <router-link target="_self" data-v-122eae44="" aria-current="page" to="/">
+          <a class="app-header-logo active" data-v-122eae44="" aria-current="page">
             <img src="../../static/image/logo.svg" />
             <span data-v-122eae44="">{{
-              this.glabledata.glableSitTitle
-            }}</span></a
-          >
+      this.glabledata.glableSitTitle
+    }}</span></a>
         </router-link>
         <div class="app-header-nav nav" data-v-122eae44="">
-          <router-link
-            target="_self"
-            class="nav-link"
-            :class="message1"
-            data-v-122eae44=""
-            aria-current="page"
-            to="/"
-            >首页</router-link
-          >
-          <router-link
-            target="_self"
-            class="nav-link"
-            :class="message2"
-            data-v-1f33282a=""
-            to="/list"
-            >资源</router-link
-          >
-          <router-link
-            target="_self"
-            class="nav-link"
-            :class="message3"
-            data-v-122eae44=""
-            to="/post/all"
-            >文章</router-link
-          >
-          <router-link
-            target="_self"
-            class="nav-link display-top"
-            :class="message5"
-            data-v-1f33282a=""
-            to="/planet"
-            >圈子</router-link
-          >
-          <router-link
-            target="_self"
-            class="nav-link "
-            :class="message4"
-            data-v-1f33282a=""
-            to="/class"
-            >分类</router-link
-          >
+          <router-link target="_self" class="nav-link" :class="message1" data-v-122eae44="" aria-current="page"
+            to="/">首页</router-link>
+          <router-link target="_self" class="nav-link" :class="message2" data-v-1f33282a="" to="/list">资源</router-link>
+          <router-link target="_self" class="nav-link" :class="message3" data-v-122eae44=""
+            to="/post/all">文章</router-link>
+          <router-link target="_self" class="nav-link display-top" :class="message5" data-v-1f33282a=""
+            to="/planet">圈子</router-link>
+          <router-link target="_self" class="nav-link " :class="message4" data-v-1f33282a=""
+            to="/class">分类</router-link>
         </div>
-        <div
-          class="app-header-search grid-list lazy-transition"
-          data-v-122eae44=""
-        >
+        <div class="app-header-search grid-list lazy-transition" data-v-122eae44="">
           <div id="autosuggest" data-v-122eae44="">
-            <div
-              role="combobox"
-              aria-expanded="false"
-              aria-haspopup="listbox"
-              aria-owns="autosuggest-autosuggest__results"
-            >
-              <el-input
-                @keyup.native="keyup()"
-                @focus="focus()"
-                @blur="blur()"
-                v-model="seachcontent"
-                type="text"
-                autocomplete="off"
-                aria-autocomplete="list"
-                aria-activedescendant=""
-                aria-controls="autosuggest-autosuggest__results"
-                id="autosuggest__input"
-                placeholder="输入关键词搜索软件或文章…"
-                value=""
-                class=""
-              />
+            <div role="combobox" aria-expanded="false" aria-haspopup="listbox"
+              aria-owns="autosuggest-autosuggest__results">
+              <el-input @keyup.native="keyup()" @focus="focus()" @blur="blur()" v-model="seachcontent" type="text"
+                autocomplete="off" aria-autocomplete="list" aria-activedescendant=""
+                aria-controls="autosuggest-autosuggest__results" id="autosuggest__input" placeholder="输入关键词搜索软件或文章…"
+                value="" class="" />
             </div>
-            <div
-              class="popUp"
-              v-show="searchshow"
-              @mouseenter="enter"
-              @mouseleave="leave"
-            >
+            <div class="popUp" v-show="searchshow" @mouseenter="enter" @mouseleave="leave">
               <div aria-labelledby="autosuggest" class="autosuggest__results">
                 <div data-v-6d6103b4="" class="overflow-hidden">
-                  <div
-                    data-v-6d6103b4=""
-                    class="d-flex align-items-center px-5"
-                  >
-                    <a
-                      @click="codeshows()"
-                      data-v-6d6103b4=""
-                      :class="{ 'active search-active': codeshow }"
-                      class="flex flex-grow-1 text-center py-3 fs-16"
-                      ><span data-v-6d6103b4="" class="fw-400">资源</span>
-                      <span data-v-6d6103b4="" class="fs-12"
-                        >({{ ResourceNumber }})</span
-                      ></a
-                    >
-                    <a
-                      @click="articleshows()"
-                      data-v-6d6103b4=""
-                      :class="{ 'active search-active': articleshow }"
-                      class="flex flex-grow-1 text-center py-3 fs-16"
-                      ><span data-v-6d6103b4="" class="">文章</span>
-                      <span data-v-6d6103b4="" class="fs-12"
-                        >({{ articleCount }})</span
-                      ></a
-                    >
+                  <div data-v-6d6103b4="" class="d-flex align-items-center px-5">
+                    <a @click="codeshows()" data-v-6d6103b4="" :class="{ 'active search-active': codeshow }"
+                      class="flex flex-grow-1 text-center py-3 fs-16"><span data-v-6d6103b4="" class="fw-400">资源</span>
+                      <span data-v-6d6103b4="" class="fs-12">({{ ResourceNumber }})</span></a>
+                    <a @click="articleshows()" data-v-6d6103b4="" :class="{ 'active search-active': articleshow }"
+                      class="flex flex-grow-1 text-center py-3 fs-16"><span data-v-6d6103b4="" class="">文章</span>
+                      <span data-v-6d6103b4="" class="fs-12">({{ articleCount }})</span></a>
                   </div>
                 </div>
                 <ul role="listbox">
                   <div v-for="(item, id) in this.tempdata" :key="id">
-                    <div v-if="item.status.includes('published')">
-                      <router-link :to="howto + item.id">
-                        <li
-                          role="option"
-                          data-suggestion-index="0"
-                          data-section-name="default"
-                          id="autosuggest__results-item--0"
-                          class="autosuggest__results-item"
-                        >
-                          <a
-                            data-v-6d6103b4=""
-                            class="macwk-app white border-top"
-                            ><span data-v-6d6103b4="" class="snow-dot"></span>
+                    <div>
+                      <router-link :to="{ path: '/content', query: { id: item.category ,garbarge: item.name } }">
+                        <li role="option" data-suggestion-index="0" data-section-name="default"
+                          id="autosuggest__results-item--0" class="autosuggest__results-item">
+                          <a data-v-6d6103b4="" class="macwk-app white border-top">
                             <span data-v-6d6103b4="" class="snow-dot"></span>
                             <span data-v-6d6103b4="" class="snow-dot"></span>
                             <span data-v-6d6103b4="" class="snow-dot"></span>
                             <span data-v-6d6103b4="" class="snow-dot"></span>
                             <span data-v-6d6103b4="" class="snow-dot"></span>
                             <span data-v-6d6103b4="" class="snow-dot"></span>
-                            <div
-                              data-v-6d6103b4=""
-                              class="macwk-app__hover--content"
-                            ></div>
-                            <div
-                              data-v-6d6103b4=""
-                              class="macwk-app__header--icon"
-                            >
-                              <div
-                                data-v-6d6103b4=""
-                                class="macwk-app__header--icon--content"
-                              ></div>
-                              <img
-                                data-v-6d6103b4=""
-                                :src="item.thumb"
-                                lazy="loaded"
-                              />
+                            <span data-v-6d6103b4="" class="snow-dot"></span>
+                            <div data-v-6d6103b4="" class="macwk-app__hover--content"></div>
+                            <div data-v-6d6103b4="" class="macwk-app__header--icon">
+                              <div data-v-6d6103b4="" class="macwk-app__header--icon--content"></div>
+                              <img data-v-6d6103b4="" :src="item.thumb" lazy="loaded" />
                             </div>
-                            <div
-                              data-v-6d6103b4=""
-                              class="macwk-app__body py-1"
-                            >
-                              <h5
-                                data-v-6d6103b4=""
-                                class="macwk-app__body--title fs-14"
-                                style="
+                            <div data-v-6d6103b4="" class="macwk-app__body py-1">
+                              <h5 data-v-6d6103b4="" class="macwk-app__body--title fs-14" style="
                                   display: -webkit-box;
                                   -webkit-box-orient: vertical;
                                   overflow: hidden;
                                   word-break: break-all;
                                   text-overflow: ellipsis;
                                   -webkit-line-clamp: 1;
-                                "
-                              >
-                                <span data-v-6d6103b4="">{{ item.title }}</span>
-                                <!-- <span
-                            data-v-6d6103b4=""
-                            class="
-                              macwk-app__body--title--version
-                              text-muted
-                              fs-14
-                            "
-                            ><span data-v-6d6103b4="" class="mx-1">-</span
-                            >1.0.1</span
-                          > -->
+                                ">
+                                <span data-v-6d6103b4="">{{ item.name }}</span>
                               </h5>
-                              <p
-                                data-v-6d6103b4=""
-                                class="macwk-app__body--info"
-                                style="
+                              <p data-v-6d6103b4="" class="macwk-app__body--info" style="
                                   display: -webkit-box;
                                   -webkit-box-orient: vertical;
                                   overflow: hidden;
                                   word-break: break-all;
                                   text-overflow: ellipsis;
                                   -webkit-line-clamp: 1;
-                                "
-                              >
-                                <span data-v-6d6103b4="">{{ item.intro }}</span>
+                                ">
+                                <span data-v-6d6103b4="" v-if="item.category == 1">可回收垃圾</span>
+                                <span data-v-6d6103b4="" v-if="item.category == 2">有害垃圾</span>
+                                <span data-v-6d6103b4="" v-if="item.category == 4">湿垃圾</span>
+                                <span data-v-6d6103b4="" v-if="item.category == 8">干垃圾</span>
+                                <span data-v-6d6103b4="" v-if="item.category == 16">大件垃圾</span>
                               </p>
                             </div>
                             <!---->
-                            <div
-                              data-v-6d6103b4=""
-                              class="macwk-box__more fs-24"
-                            >
-                              <i
-                                data-v-6d6103b4=""
-                                class="light-icon-more icon-next-arrow"
-                              ></i></div
-                          ></a>
+                            <div data-v-6d6103b4="" class="macwk-box__more fs-24">
+                              <i data-v-6d6103b4="" class="light-icon-more icon-next-arrow"></i>
+                            </div>
+                          </a>
                         </li>
                       </router-link>
                     </div>
                   </div>
                 </ul>
                 <div data-v-6d6103b4="">
-                  <button
-                    data-v-6d6103b4=""
-                    class="
+                  <button data-v-6d6103b4="" class="
                       btn btn-block
                       border-top
                       no-radius
@@ -471,8 +241,7 @@
                       hover-primary
                       cursor-pointer
                       fs-14
-                    "
-                  >
+                    ">
                     查看更多
                     <span data-v-6d6103b4="" class="fw-400"></span>
                     <!---->
@@ -482,17 +251,10 @@
             </div>
 
             <!---->
-            <button
-              class="btn search-to"
-              @click="queryssubmit()"
-              data-v-122eae44=""
-            >
+            <button class="btn search-to" @click="queryssubmit()" data-v-122eae44="">
               <i class="icon-search" data-v-122eae44=""></i>
             </button>
-            <div
-              id="autosuggest-autosuggest__results"
-              class="autosuggest__results-container"
-            >
+            <div id="autosuggest-autosuggest__results" class="autosuggest__results-container">
               <!---->
             </div>
           </div>
@@ -506,18 +268,14 @@
               <div class="topic-names">
                 <div>
                   <div class="topic-name-datas">
-                    <a target="_blank"
-                      ><b>{{ user.name }}</b></a
-                    >
+                    <a target="_blank"><b>{{ user.name }}</b></a>
                     <!---->
                     <!---->
                   </div>
                   <div class="topic-user-lvs">
                     <p>
-                      <span class="user-vips"
-                        ><i style="border-color: #ff8223"></i
-                        ><b v-show="vipTrue" style="color: #ff8223">会员</b></span
-                      >
+                      <span class="user-vips"><i style="border-color: #ff8223"></i><b v-show="vipTrue"
+                          style="color: #ff8223">会员</b></span>
                     </p>
                     <p>
                       <span class="user-lvs"><b>荣誉用户</b><i>lv5</i></span>
@@ -527,127 +285,29 @@
               </div>
             </div>
 
-            <div
-              data-title="退出登录"
-              @click="loginout()"
-              class="login-outs user-tips"
-            >
-              <a href="javascript:void(0)"
-                ><i class="el-icon-caret-left"></i
-              ></a>
+            <div data-title="退出登录" @click="loginout()" class="login-outs user-tips">
+              <a href="javascript:void(0)"><i class="el-icon-caret-left"></i></a>
             </div>
           </div>
           <div class="top-user-info-box-count">
-                <p><span>文章</span> <b>0</b></p>
-                <p><span>评论</span> <b>0</b></p>
-                <p><span>关注</span> <b>0</b></p>
-                <p><span>粉丝</span> <b>0</b></p>
-                <a
-                  href="https://www.zmki.cn/users/dCACBojqs"
-                  target="_blank"
-                  class="link-block"
-                ></a>
-              </div>
-              <div class="user-w-gold">
-                <div data-title="余额" class="user-money user-tips">
-                  <a href="https://www.zmki.cn/gold" target="_blank"
-                    ><i>￥</i>0.00</a
-                  >
-                </div>
-                <div data-title="积分" class="user-credit user-tips">
-                  <a href="https://www.zmki.cn/gold" target="_blank"
-                    ><i class="b2font b2-coin-line"></i>20</a
-                  >
-                </div>
-              </div>
-              <div class="user-w-rw b2-radius">
-                <div class="user-w-rw-bg" style="width: 0%"></div>
-                <a
-                  href="https://www.zmki.cn/task"
-                  target="_blank"
-                  class="link-block"
-                  ><span>您已完成今天任务的<b>0%</b></span></a
-                >
-              </div>
-
-          <!-- <ul>
-              <li>
-                <a href="https://www.zmki.cn/directmessage"
-                  ><i class="b2font b2-mail-send-line"></i>
-                  <p>
-                    私信列表<span class="top-user-link-des">所有往来私信</span>
-                  </p></a
-                >
-              </li>
-              <li>
-                <a href="https://www.zmki.cn/gold"
-                  ><i class="b2font b2-bit-coin-line"></i>
-                  <p>
-                    财富管理<span class="top-user-link-des"
-                      >余额、积分管理</span
-                    >
-                  </p></a
-                >
-              </li>
-              <li>
-                <a href="https://www.zmki.cn/distribution"
-                  ><i class="b2font b2-share-line"></i>
-                  <p>
-                    推广中心<span class="top-user-link-des">推广有奖励</span>
-                  </p>
-                  <i class="menu-new">NEW</i></a
-                >
-              </li>
-              <li>
-                <a href="https://www.zmki.cn/task"
-                  ><i class="b2font b2-task-line"></i>
-                  <p>任务中心<span class="top-user-link-des">每日任务</span></p>
-                  <i class="menu-new">NEW</i></a
-                >
-              </li>
-              <li>
-                <a href="https://www.zmki.cn/vips"
-                  ><i class="b2font b2-vip-crown-2-line"></i>
-                  <p>
-                    成为会员<span class="top-user-link-des">购买付费会员</span>
-                  </p></a
-                >
-              </li>
-              <li>
-                <a href="https://www.zmki.cn/verify"
-                  ><i class="b2font b2-shield-user-line"></i>
-                  <p>认证服务<span class="top-user-link-des">申请认证</span></p>
-                  <i class="menu-new">NEW</i></a
-                >
-              </li>
-              <li>
-                <a href="https://www.zmki.cn/dark-room"
-                  ><i class="b2font b2-skull-2-line"></i>
-                  <p>
-                    小黑屋<span class="top-user-link-des">关进小黑屋的人</span>
-                  </p>
-                  <i class="menu-new">NEW</i></a
-                >
-              </li>
-              <li>
-                <a href="https://www.zmki.cn/users/dCACBojqs/orders"
-                  ><i class="b2font b2-file-list-2-line"></i>
-                  <p>
-                    我的订单<span class="top-user-link-des">查看我的订单</span>
-                  </p></a
-                >
-              </li>
-              <li>
-                <a href="https://www.zmki.cn/users/dCACBojqs/settings"
-                  ><i class="b2font b2-user-settings-line"></i>
-                  <p>
-                    我的设置<span class="top-user-link-des">编辑个人资料</span>
-                  </p></a
-                >
-              </li>
-              <li></li>
-            </ul>
-           -->
+            <p><span>文章</span> <b>0</b></p>
+            <p><span>评论</span> <b>0</b></p>
+            <p><span>关注</span> <b>0</b></p>
+            <p><span>粉丝</span> <b>0</b></p>
+            <a href="https://www.zmki.cn/users/dCACBojqs" target="_blank" class="link-block"></a>
+          </div>
+          <div class="user-w-gold">
+            <div data-title="余额" class="user-money user-tips">
+              <a href="https://www.zmki.cn/gold" target="_blank"><i>￥</i>0.00</a>
+            </div>
+            <div data-title="积分" class="user-credit user-tips">
+              <a href="https://www.zmki.cn/gold" target="_blank"><i class="b2font b2-coin-line"></i>20</a>
+            </div>
+          </div>
+          <div class="user-w-rw b2-radius">
+            <div class="user-w-rw-bg" style="width: 0%"></div>
+            <a href="https://www.zmki.cn/task" target="_blank" class="link-block"><span>您已完成今天任务的<b>0%</b></span></a>
+          </div>
           <div slot="reference">
             <router-link to="/userinfo/index">
               <div v-if="!userJudje" class="avatartext">
@@ -670,13 +330,14 @@
 </template>
 
 <script>
-import { FindarticlesByNum } from '@/api/webarticle'
+// import { FindarticlesByNum } from '@/api/webarticle'
 import { FindresourceByNum } from '@/api/webresource'
+import { getGarbageList } from '@/apis/garbage'
 import { login } from '@/api/login'
 import { register } from '@/api/register'
 
-import { getAllResource, getAllResourceNumber } from '@/api/webresource'
-import { getAllArticle, getAllArticleNumber } from '@/api/webarticle'
+// import { getAllResource, getAllResourceNumber } from '@/api/webresource'
+// import { getAllArticle, getAllArticleNumber } from '@/api/webarticle'
 
 import { CheckVip } from '@/api/user'
 
@@ -733,49 +394,49 @@ export default ({
               type: 'success'
             })
             this.loading = false
-             // 关闭登录框
-             that.dialogFormVisible = false
-             this.dialogRegisterFormVisible = false
-              // 关闭登陆按钮
-              that.userJudje = true
+            // 关闭登录框
+            that.dialogFormVisible = false
+            this.dialogRegisterFormVisible = false
+            // 关闭登陆按钮
+            that.userJudje = true
             //登陆
             localStorage.setItem('access-admin', JSON.stringify(resp.data))
-               //立即获取用户数据
+            //立即获取用户数据
             that.getUserInfo()
           }
         }).catch((e) => { })
 
       }
     },
-    ChangeLogin(){
+    ChangeLogin() {
       this.dialogRegisterFormVisible = false
       this.dialogFormVisible = true
     },
-    ChangeRegister(){
+    ChangeRegister() {
       this.dialogRegisterFormVisible = true
       this.dialogFormVisible = false
     },
     fullnum() {
-      getAllResourceNumber().then(resp => {
-        this.ResourceNumber = resp.data
-      })
-      getAllArticleNumber().then(resp => {
-        this.articleCount = resp.data
-      })
+      // getAllResourceNumber().then(resp => {
+      //   this.ResourceNumber = resp.data
+      // })
+      // getAllArticleNumber().then(resp => {
+      //   this.articleCount = resp.data
+      // })
     },
     async loginout() {
       //退出登陆
       this.user = null
-            //关闭用户头像
-            this.userJudje = false
+      //关闭用户头像
+      this.userJudje = false
       //清除本地数据
       window.localStorage.removeItem('access-admin')
       console.log(this.userJudje)
       console.log(this.user)
       //跳转刷新
       // this.$router.push('/')
-      location. reload()
-this.$router.go(0)
+      location.reload()
+      this.$router.go(0)
       //显示退出成功
       this.$notify({
         title: '成功',
@@ -786,16 +447,16 @@ this.$router.go(0)
     },
     getUserInfo() {
       const user = JSON.parse(window.localStorage.getItem('access-admin'))
-      if(user != null){
-      this.user = user.data
-      this.userJudje = (user == null)
-      //获取会员有效性
-      CheckVip(user.data.userid).then(resp => {
-        if(resp.data){ 
-          this.vipTrue = true
-        }
-      })
-    }
+      if (user != null) {
+        this.user = user.data
+        this.userJudje = (user == null)
+        //获取会员有效性
+        CheckVip(user.data.userid).then(resp => {
+          if (resp.data) {
+            this.vipTrue = true
+          }
+        })
+      }
     },
     handleLogin() {
       var that = this
@@ -851,24 +512,27 @@ this.$router.go(0)
       this.searchshow = true
       this.search(this.seachcontent)
     },
-    Findresource(seachcontents, num) {
-      FindresourceByNum(seachcontents, num).then(resp => {
-        this.tempdata = resp.data
-      })
+    //TODO  搜索功能尚未完成
+    async Findresource(seachcontents, num) {
+      const res = await getGarbageList(1, num, seachcontents, '')
+      console.log('resgarbage', res);
+      this.tempdata = res.records
     },
     Findarticles(seachcontents, num) {
-      FindarticlesByNum(seachcontents, num).then(resp => {
-        this.tempdata = resp.data
-      })
+      // FindarticlesByNum(seachcontents, num).then(resp => {
+      //   this.tempdata = resp.data
+      // })
     },
-    //临时查询
+    // 临时查询
     search(seachcontents) {
       //限制查询五个数据
       if (!this.judgeNull(this.seachcontent)) {
-        if (this.fundByresource) { 
-          this.Findresource(seachcontents, 5) }
-        else { 
-          this.Findarticles(seachcontents, 5) }
+        if (this.fundByresource) {
+          this.Findresource(seachcontents, 5)
+        }
+        else {
+          this.Findarticles(seachcontents, 5)
+        }
 
       }
     },
@@ -890,13 +554,15 @@ this.$router.go(0)
         });
       } else {
         //   直接调用$router.push 实现携带参数的跳转
-        if(this.fundByresource){
+        if (this.fundByresource) {
           this.$router.push({
-          path: `/list/${this.seachcontent}/all`,
-        })
-        }else{this.$router.push({
-          path: `/post/${this.seachcontent}/all`,
-        })}
+            path: `/list/${this.seachcontent}/all`,
+          })
+        } else {
+          this.$router.push({
+            path: `/post/${this.seachcontent}/all`,
+          })
+        }
       }
     },
     articleshows() {
@@ -994,6 +660,10 @@ this.$router.go(0)
 <style scoped>
 @import "../../static/mycss/margin_top.css";
 
+.test {
+  color: #999;
+}
+
 .navbar .navbar-button,
 .off-canvas .canvas-close {
   background: linear-gradient(125deg, #18cef2 0%, #448aff 100%);
@@ -1001,13 +671,16 @@ this.$router.go(0)
   box-shadow: 4px 3px 10px #2f6bd024;
   color: #fff;
 }
+
 .actions .login-btn {
   position: relative;
 }
+
 .navbar .login-btn {
   border-radius: 25px;
   width: 90px;
 }
+
 .login-button {
   height: 30px;
   width: 100px;
@@ -1024,6 +697,7 @@ this.$router.go(0)
   justify-content: center;
   border-radius: 50px 50px 50px 50px;
 }
+
 .logintext {
   font-size: 15px;
   text-align: center;
@@ -1031,6 +705,7 @@ this.$router.go(0)
   /* transform:translateY(-50%);
   transform:translateX(30px);  */
 }
+
 .login-title {
   image-rendering: -webkit-optimize-contrast;
   --bs-blue: #0d6efd;
@@ -1059,11 +734,9 @@ this.$router.go(0)
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas,
     "Liberation Mono", "Courier New", monospace;
-  --bs-gradient: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.15),
-    rgba(255, 255, 255, 0)
-  );
+  --bs-gradient: linear-gradient(180deg,
+      rgba(255, 255, 255, 0.15),
+      rgba(255, 255, 255, 0));
   --web-color: #0a36fa;
   --web-light-color: rgba(10, 54, 250, 0.2);
   --border-radius: 4px;
@@ -1087,73 +760,49 @@ this.$router.go(0)
   --wp--preset--color--pale-cyan-blue: #8ed1fc;
   --wp--preset--color--vivid-cyan-blue: #0693e3;
   --wp--preset--color--vivid-purple: #9b51e0;
-  --wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(
-    135deg,
-    rgba(6, 147, 227, 1) 0%,
-    rgb(155, 81, 224) 100%
-  );
-  --wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(
-    135deg,
-    rgb(122, 220, 180) 0%,
-    rgb(0, 208, 130) 100%
-  );
-  --wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(
-    135deg,
-    rgba(252, 185, 0, 1) 0%,
-    rgba(255, 105, 0, 1) 100%
-  );
-  --wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(
-    135deg,
-    rgba(255, 105, 0, 1) 0%,
-    rgb(207, 46, 46) 100%
-  );
-  --wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(
-    135deg,
-    rgb(238, 238, 238) 0%,
-    rgb(169, 184, 195) 100%
-  );
-  --wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(
-    135deg,
-    rgb(74, 234, 220) 0%,
-    rgb(151, 120, 209) 20%,
-    rgb(207, 42, 186) 40%,
-    rgb(238, 44, 130) 60%,
-    rgb(251, 105, 98) 80%,
-    rgb(254, 248, 76) 100%
-  );
-  --wp--preset--gradient--blush-light-purple: linear-gradient(
-    135deg,
-    rgb(255, 206, 236) 0%,
-    rgb(152, 150, 240) 100%
-  );
-  --wp--preset--gradient--blush-bordeaux: linear-gradient(
-    135deg,
-    rgb(254, 205, 165) 0%,
-    rgb(254, 45, 45) 50%,
-    rgb(107, 0, 62) 100%
-  );
-  --wp--preset--gradient--luminous-dusk: linear-gradient(
-    135deg,
-    rgb(255, 203, 112) 0%,
-    rgb(199, 81, 192) 50%,
-    rgb(65, 88, 208) 100%
-  );
-  --wp--preset--gradient--pale-ocean: linear-gradient(
-    135deg,
-    rgb(255, 245, 203) 0%,
-    rgb(182, 227, 212) 50%,
-    rgb(51, 167, 181) 100%
-  );
-  --wp--preset--gradient--electric-grass: linear-gradient(
-    135deg,
-    rgb(202, 248, 128) 0%,
-    rgb(113, 206, 126) 100%
-  );
-  --wp--preset--gradient--midnight: linear-gradient(
-    135deg,
-    rgb(2, 3, 129) 0%,
-    rgb(40, 116, 252) 100%
-  );
+  --wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,
+      rgba(6, 147, 227, 1) 0%,
+      rgb(155, 81, 224) 100%);
+  --wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,
+      rgb(122, 220, 180) 0%,
+      rgb(0, 208, 130) 100%);
+  --wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,
+      rgba(252, 185, 0, 1) 0%,
+      rgba(255, 105, 0, 1) 100%);
+  --wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,
+      rgba(255, 105, 0, 1) 0%,
+      rgb(207, 46, 46) 100%);
+  --wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,
+      rgb(238, 238, 238) 0%,
+      rgb(169, 184, 195) 100%);
+  --wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,
+      rgb(74, 234, 220) 0%,
+      rgb(151, 120, 209) 20%,
+      rgb(207, 42, 186) 40%,
+      rgb(238, 44, 130) 60%,
+      rgb(251, 105, 98) 80%,
+      rgb(254, 248, 76) 100%);
+  --wp--preset--gradient--blush-light-purple: linear-gradient(135deg,
+      rgb(255, 206, 236) 0%,
+      rgb(152, 150, 240) 100%);
+  --wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,
+      rgb(254, 205, 165) 0%,
+      rgb(254, 45, 45) 50%,
+      rgb(107, 0, 62) 100%);
+  --wp--preset--gradient--luminous-dusk: linear-gradient(135deg,
+      rgb(255, 203, 112) 0%,
+      rgb(199, 81, 192) 50%,
+      rgb(65, 88, 208) 100%);
+  --wp--preset--gradient--pale-ocean: linear-gradient(135deg,
+      rgb(255, 245, 203) 0%,
+      rgb(182, 227, 212) 50%,
+      rgb(51, 167, 181) 100%);
+  --wp--preset--gradient--electric-grass: linear-gradient(135deg,
+      rgb(202, 248, 128) 0%,
+      rgb(113, 206, 126) 100%);
+  --wp--preset--gradient--midnight: linear-gradient(135deg,
+      rgb(2, 3, 129) 0%,
+      rgb(40, 116, 252) 100%);
   --wp--preset--duotone--dark-grayscale: url("#wp-duotone-dark-grayscale");
   --wp--preset--duotone--grayscale: url("#wp-duotone-grayscale");
   --wp--preset--duotone--purple-yellow: url("#wp-duotone-purple-yellow");
@@ -1184,6 +833,7 @@ this.$router.go(0)
   margin-bottom: 20px;
   text-align: center;
 }
+
 .login-logo {
   image-rendering: -webkit-optimize-contrast;
   --bs-blue: #0d6efd;
@@ -1212,11 +862,9 @@ this.$router.go(0)
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas,
     "Liberation Mono", "Courier New", monospace;
-  --bs-gradient: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.15),
-    rgba(255, 255, 255, 0)
-  );
+  --bs-gradient: linear-gradient(180deg,
+      rgba(255, 255, 255, 0.15),
+      rgba(255, 255, 255, 0));
   --web-color: #0a36fa;
   --web-light-color: rgba(10, 54, 250, 0.2);
   --border-radius: 4px;
@@ -1241,73 +889,49 @@ this.$router.go(0)
   --wp--preset--color--pale-cyan-blue: #8ed1fc;
   --wp--preset--color--vivid-cyan-blue: #0693e3;
   --wp--preset--color--vivid-purple: #9b51e0;
-  --wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(
-    135deg,
-    rgba(6, 147, 227, 1) 0%,
-    rgb(155, 81, 224) 100%
-  );
-  --wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(
-    135deg,
-    rgb(122, 220, 180) 0%,
-    rgb(0, 208, 130) 100%
-  );
-  --wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(
-    135deg,
-    rgba(252, 185, 0, 1) 0%,
-    rgba(255, 105, 0, 1) 100%
-  );
-  --wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(
-    135deg,
-    rgba(255, 105, 0, 1) 0%,
-    rgb(207, 46, 46) 100%
-  );
-  --wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(
-    135deg,
-    rgb(238, 238, 238) 0%,
-    rgb(169, 184, 195) 100%
-  );
-  --wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(
-    135deg,
-    rgb(74, 234, 220) 0%,
-    rgb(151, 120, 209) 20%,
-    rgb(207, 42, 186) 40%,
-    rgb(238, 44, 130) 60%,
-    rgb(251, 105, 98) 80%,
-    rgb(254, 248, 76) 100%
-  );
-  --wp--preset--gradient--blush-light-purple: linear-gradient(
-    135deg,
-    rgb(255, 206, 236) 0%,
-    rgb(152, 150, 240) 100%
-  );
-  --wp--preset--gradient--blush-bordeaux: linear-gradient(
-    135deg,
-    rgb(254, 205, 165) 0%,
-    rgb(254, 45, 45) 50%,
-    rgb(107, 0, 62) 100%
-  );
-  --wp--preset--gradient--luminous-dusk: linear-gradient(
-    135deg,
-    rgb(255, 203, 112) 0%,
-    rgb(199, 81, 192) 50%,
-    rgb(65, 88, 208) 100%
-  );
-  --wp--preset--gradient--pale-ocean: linear-gradient(
-    135deg,
-    rgb(255, 245, 203) 0%,
-    rgb(182, 227, 212) 50%,
-    rgb(51, 167, 181) 100%
-  );
-  --wp--preset--gradient--electric-grass: linear-gradient(
-    135deg,
-    rgb(202, 248, 128) 0%,
-    rgb(113, 206, 126) 100%
-  );
-  --wp--preset--gradient--midnight: linear-gradient(
-    135deg,
-    rgb(2, 3, 129) 0%,
-    rgb(40, 116, 252) 100%
-  );
+  --wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,
+      rgba(6, 147, 227, 1) 0%,
+      rgb(155, 81, 224) 100%);
+  --wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,
+      rgb(122, 220, 180) 0%,
+      rgb(0, 208, 130) 100%);
+  --wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,
+      rgba(252, 185, 0, 1) 0%,
+      rgba(255, 105, 0, 1) 100%);
+  --wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,
+      rgba(255, 105, 0, 1) 0%,
+      rgb(207, 46, 46) 100%);
+  --wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,
+      rgb(238, 238, 238) 0%,
+      rgb(169, 184, 195) 100%);
+  --wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,
+      rgb(74, 234, 220) 0%,
+      rgb(151, 120, 209) 20%,
+      rgb(207, 42, 186) 40%,
+      rgb(238, 44, 130) 60%,
+      rgb(251, 105, 98) 80%,
+      rgb(254, 248, 76) 100%);
+  --wp--preset--gradient--blush-light-purple: linear-gradient(135deg,
+      rgb(255, 206, 236) 0%,
+      rgb(152, 150, 240) 100%);
+  --wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,
+      rgb(254, 205, 165) 0%,
+      rgb(254, 45, 45) 50%,
+      rgb(107, 0, 62) 100%);
+  --wp--preset--gradient--luminous-dusk: linear-gradient(135deg,
+      rgb(255, 203, 112) 0%,
+      rgb(199, 81, 192) 50%,
+      rgb(65, 88, 208) 100%);
+  --wp--preset--gradient--pale-ocean: linear-gradient(135deg,
+      rgb(255, 245, 203) 0%,
+      rgb(182, 227, 212) 50%,
+      rgb(51, 167, 181) 100%);
+  --wp--preset--gradient--electric-grass: linear-gradient(135deg,
+      rgb(202, 248, 128) 0%,
+      rgb(113, 206, 126) 100%);
+  --wp--preset--gradient--midnight: linear-gradient(135deg,
+      rgb(2, 3, 129) 0%,
+      rgb(40, 116, 252) 100%);
   --wp--preset--duotone--dark-grayscale: url("#wp-duotone-dark-grayscale");
   --wp--preset--duotone--grayscale: url("#wp-duotone-grayscale");
   --wp--preset--duotone--purple-yellow: url("#wp-duotone-purple-yellow");
@@ -1338,6 +962,7 @@ this.$router.go(0)
   justify-content: center;
   font-size: 27px;
 }
+
 .box {
   /* image-rendering: -webkit-optimize-contrast;
   --bs-blue: #0d6efd;
@@ -1493,6 +1118,7 @@ this.$router.go(0)
   background-repeat: no-repeat;
   background: none; */
 }
+
 .footer {
   display: flex;
   justify-content: center;
@@ -1529,6 +1155,7 @@ this.$router.go(0)
   flex-direction: column;
   flex-wrap: wrap;
 }
+
 .line {
   font-family: -apple-system, BlinkMacSystemFont, PingFang SC, Hiragino Sans GB,
     Microsoft YaHei, "\5FAE\8F6F\96C5\9ED1", helvetica neue, helvetica, ubuntu,
@@ -1565,6 +1192,7 @@ this.$router.go(0)
   margin-top: 20px;
   margin-bottom: 20px;
 }
+
 .ss-login_statement {
   font-family: -apple-system, BlinkMacSystemFont, PingFang SC, Hiragino Sans GB,
     Microsoft YaHei, "\5FAE\8F6F\96C5\9ED1", helvetica neue, helvetica, ubuntu,
@@ -1597,6 +1225,7 @@ this.$router.go(0)
   padding: 0 20px;
   color: var(--B80);
 }
+
 .ss-login_statement a {
   padding: 0 0.5em;
   font-weight: 600;
@@ -1609,9 +1238,11 @@ this.$router.go(0)
     border-radius: 18px;
   }
 }
+
 .avatartext {
   display: flex;
 }
+
 .spans {
   display: flex;
   align-content: center;
@@ -1619,15 +1250,17 @@ this.$router.go(0)
   margin-left: 5px;
   font-weight: bold;
 }
+
 .qqloginsvg {
   display: flex;
   width: 31px;
 }
 </style>
-<style >
+<style>
 .el-dialog--center {
   border-radius: 10px;
 }
+
 .other-login {
   display: flex;
   flex-wrap: nowrap;
@@ -1635,6 +1268,7 @@ this.$router.go(0)
   justify-content: center;
   align-items: center;
 }
+
 @media screen and (max-width:991px) {
   .display-top {
     display: none;

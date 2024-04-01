@@ -10,15 +10,8 @@
               <div class="outsection">
                 <!-- 视频区 -->
                 <div class="video_overlay"></div>
-                <video
-                  id="video"
-                  poster="../static/images/background-img.jpg"
-                  src="../static/video/sorting.mp4"
-                  autoplay="autoplay"
-                  loop
-                  muted
-                  style="width: 70%"
-                ></video>
+                <video id="video" poster="../static/images/background-img.jpg" src="../static/video/sorting.mp4"
+                  autoplay="autoplay" loop muted style="width: 70%"></video>
               </div>
               <div class="sectionText">
                 <div class="vedio_header">
@@ -27,41 +20,24 @@
                 <div class="vedio_text">
                   在这里，我们将分享给你详细的垃圾分类教程，与最新咨询。每一个垃圾都有它自己的归宿，让我们为环保做一份贡献
                 </div>
-                <el-button
-                  ref="playVideo"
-                  type="primary"
-                  style="margin-top: 40px"
-                  @click="watchVideo"
-                  >观看学习视频</el-button
-                >
+                <el-button ref="playVideo" type="primary" style="margin-top: 40px"
+                  @click="watchVideo">观看学习视频</el-button>
               </div>
               <!-- class="container"  垃圾四大类型 -->
               <div class="container">
                 <div data-v-0a1f67c4="" class="index-special row mb-6">
                   <div data-v-0a1f67c4="" class="col-3">
-                    <router-link
-                      :to="{ path: '/content', query: { id: 're-garbage' } }"
-                      data-v-0a1f67c4=""
-                      class=""
-                    >
-                      <div
-                        data-v-0a1f67c4=""
-                        class="macwk-card bg-gradient-green hover-shadow-6 py-3 text-center"
+                    <router-link :to="{ path: '/content', query: { id: 1,garbarge: '' } }" data-v-0a1f67c4="" class="">
+                      <div data-v-0a1f67c4="" class="macwk-card bg-gradient-green hover-shadow-6 py-3 text-center"
                         style="
                           will-change: transform;
                           transform: perspective(1000px) rotateX(0deg)
                             rotateY(0deg) scale3d(1, 1, 1);
-                        "
-                      >
-                        <div
-                          class="macwk-card__collapsible-content vs-con-loading__container"
-                        >
+                        ">
+                        <div class="macwk-card__collapsible-content vs-con-loading__container">
                           <div class="macwk-card__body">
                             <h6 data-v-0a1f67c4="" class="mb-0 text-white">
-                              <i
-                                data-v-0a1f67c4=""
-                                class="icon-office fs-22 mr-3 v-m-3"
-                              ></i>
+                              <i data-v-0a1f67c4="" class="icon-office fs-22 mr-3 v-m-3"></i>
                               <span data-v-0a1f67c4="">可回收垃圾</span>
                             </h6>
                           </div>
@@ -70,24 +46,12 @@
                     </router-link>
                   </div>
                   <div data-v-0a1f67c4="" class="col-3">
-                    <router-link
-                      :to="{ path: '/content', query: { id: 'harm-garbage' } }"
-                      data-v-0a1f67c4=""
-                      class=""
-                    >
-                      <div
-                        data-v-0a1f67c4=""
-                        class="macwk-card bg-gradient-danger hover-shadow-6 py-3 text-center"
-                      >
-                        <div
-                          class="macwk-card__collapsible-content vs-con-loading__container"
-                        >
+                    <router-link :to="{ path: '/content', query: { id: 2,garbarge: '' } }" data-v-0a1f67c4="" class="">
+                      <div data-v-0a1f67c4="" class="macwk-card bg-gradient-danger hover-shadow-6 py-3 text-center">
+                        <div class="macwk-card__collapsible-content vs-con-loading__container">
                           <div class="macwk-card__body">
                             <h6 data-v-0a1f67c4="" class="mb-0 text-white">
-                              <i
-                                data-v-0a1f67c4=""
-                                class="icon-cp fs-22 mr-3 v-m-3"
-                              ></i>
+                              <i data-v-0a1f67c4="" class="icon-cp fs-22 mr-3 v-m-3"></i>
                               <span data-v-0a1f67c4="">有害垃圾</span>
                             </h6>
                           </div>
@@ -96,24 +60,12 @@
                     </router-link>
                   </div>
                   <div data-v-0a1f67c4="" class="col-3">
-                    <router-link
-                      :to="{ path: '/content', query: { id: 'wet-garbage' } }"
-                      data-v-0a1f67c4=""
-                      class=""
-                    >
-                      <div
-                        data-v-0a1f67c4=""
-                        class="macwk-card bg-gradient-warning hover-shadow-6 py-3 text-center"
-                      >
-                        <div
-                          class="macwk-card__collapsible-content vs-con-loading__container"
-                        >
+                    <router-link :to="{ path: '/content', query: { id: 4, garbarge: '' } }" data-v-0a1f67c4="" class="">
+                      <div data-v-0a1f67c4="" class="macwk-card bg-gradient-warning hover-shadow-6 py-3 text-center">
+                        <div class="macwk-card__collapsible-content vs-con-loading__container">
                           <div class="macwk-card__body">
                             <h6 data-v-0a1f67c4="" class="mb-0 text-white">
-                              <i
-                                data-v-0a1f67c4=""
-                                class="icon-cp fs-22 mr-3 v-m-3"
-                              ></i>
+                              <i data-v-0a1f67c4="" class="icon-cp fs-22 mr-3 v-m-3"></i>
                               <span data-v-0a1f67c4="">湿垃圾</span>
                             </h6>
                           </div>
@@ -122,24 +74,12 @@
                     </router-link>
                   </div>
                   <div data-v-0a1f67c4="" class="col-3">
-                    <router-link
-                      :to="{ path: '/content', query: { id: 'dry-garbage' } }"
-                      data-v-0a1f67c4=""
-                      class=""
-                    >
-                      <div
-                        data-v-0a1f67c4=""
-                        class="macwk-card bg-gradient-info hover-shadow-6 py-3 text-center"
-                      >
-                        <div
-                          class="macwk-card__collapsible-content vs-con-loading__container"
-                        >
+                    <router-link :to="{ path: '/content', query: { id: 8, garbarge: '' } }" data-v-0a1f67c4="" class="">
+                      <div data-v-0a1f67c4="" class="macwk-card bg-gradient-info hover-shadow-6 py-3 text-center">
+                        <div class="macwk-card__collapsible-content vs-con-loading__container">
                           <div class="macwk-card__body">
                             <h6 data-v-0a1f67c4="" class="mb-0 text-white">
-                              <i
-                                data-v-0a1f67c4=""
-                                class="icon-code fs-22 mr-3 v-m-3"
-                              ></i>
+                              <i data-v-0a1f67c4="" class="icon-code fs-22 mr-3 v-m-3"></i>
                               <span data-v-0a1f67c4="">干垃圾</span>
                             </h6>
                           </div>
@@ -154,9 +94,7 @@
                 <div class="d-flex app-content-header mb-6">
                   <div class="main-title">
                     <h4 class="i-con-h-a mb-0">
-                      <i class="mr-1 text-muted i-con i-con-calendar v-m-4"
-                        ><i></i
-                      ></i>
+                      <i class="mr-1 text-muted i-con i-con-calendar v-m-4"><i></i></i>
                       <a id="garbageClassify"><span>垃圾分类：1-2-3</span></a>
                     </h4>
                   </div>
@@ -165,54 +103,33 @@
                 <div>
                   <el-row class="garbage-tips" :gutter="20">
                     <el-col :span="8">
-                      <div
-                        class="tips"
-                        :class="{ tips_active: tips.isTipsOne }"
-                        @click="changeTips(1)"
-                      >
+                      <div class="tips" :class="{ tips_active: tips.isTipsOne }" @click="changeTips(1)">
                         <div class="tips_num">1</div>
                         <div class="tips_dis">
                           <h3 class="tips_title">知道什么是可以回收的</h3>
-                          <div
-                            class="tips_content"
-                            :class="{ title_active: tips.isTipsOne }"
-                          >
+                          <div class="tips_content" :class="{ title_active: tips.isTipsOne }">
                             纸板、纸张、金属罐、塑料瓶、罐子
                           </div>
                         </div>
                       </div>
                     </el-col>
                     <el-col :span="8">
-                      <div
-                        class="tips"
-                        :class="{ tips_active: tips.isTipsTwo }"
-                        @click="changeTips(2)"
-                      >
+                      <div class="tips" :class="{ tips_active: tips.isTipsTwo }" @click="changeTips(2)">
                         <div class="tips_num">2</div>
                         <div class="tips_dis">
                           <h3 class="tips_title">保持回收物品的干净与干燥</h3>
-                          <div
-                            class="tips_content"
-                            :class="{ title_active: tips.isTipsTwo }"
-                          >
+                          <div class="tips_content" :class="{ title_active: tips.isTipsTwo }">
                             确保所有回收物品中不含食物和液体
                           </div>
                         </div>
                       </div>
                     </el-col>
                     <el-col :span="8">
-                      <div
-                        class="tips"
-                        :class="{ tips_active: tips.isTipsThree }"
-                        @click="changeTips(3)"
-                      >
+                      <div class="tips" :class="{ tips_active: tips.isTipsThree }" @click="changeTips(3)">
                         <div class="tips_num">3</div>
                         <div class="tips_dis">
                           <h3 class="tips_title">请勿装袋处理</h3>
-                          <div
-                            class="tips_content"
-                            :class="{ title_active: tips.isTipsThree }"
-                          >
+                          <div class="tips_content" :class="{ title_active: tips.isTipsThree }">
                             请勿将回收物品放入容器或袋子中
                           </div>
                         </div>
@@ -221,11 +138,7 @@
                   </el-row>
                   <div class="garbage-tips-dis" v-show="tips.isTipsOne">
                     <div class="dis_img img_margin">
-                      <img
-                        src="../static/image/home/rules-loose-recyclables.webp"
-                        alt="纸板回收的图片"
-                        srcset=""
-                      />
+                      <img src="../static/image/home/rules-loose-recyclables.webp" alt="纸板回收的图片" srcset="" />
                     </div>
                     <div class="dis_content">
                       <div class="content_header tips_title">纸和纸板子</div>
@@ -238,11 +151,7 @@
                   </div>
                   <div class="garbage-tips-dis" v-show="tips.isTipsTwo">
                     <div class="dis_img">
-                      <img
-                        src="../static/image/home/rules-clean-items.webp"
-                        alt="东西清理干净的图片"
-                        srcset=""
-                      />
+                      <img src="../static/image/home/rules-clean-items.webp" alt="东西清理干净的图片" srcset="" />
                     </div>
                     <div class="dis_content">
                       <div class="content_header tips_title">
@@ -255,11 +164,7 @@
                   </div>
                   <div class="garbage-tips-dis" v-show="tips.isTipsThree">
                     <div class="dis_img">
-                      <img
-                        src="../static/image/home/rules-bagged-recyclables.webp"
-                        alt="物品装袋处理的图片"
-                        srcset=""
-                      />
+                      <img src="../static/image/home/rules-bagged-recyclables.webp" alt="物品装袋处理的图片" srcset="" />
                     </div>
                     <div class="dis_content">
                       <div class="content_header tips_title">不要装袋处理</div>
@@ -282,9 +187,7 @@
                   <div class="d-flex app-content-header mb-6">
                     <div class="main-title">
                       <h4 class="i-con-h-a mb-0">
-                        <i class="mr-1 text-muted i-con i-con-layer v-m-4"
-                          ><i></i
-                        ></i>
+                        <i class="mr-1 text-muted i-con i-con-layer v-m-4"><i></i></i>
                         <a id="regulations"><span>条例处罚问题</span></a>
                       </h4>
                     </div>
@@ -363,9 +266,7 @@
                   <div class="d-flex app-content-header mb-6">
                     <div class="main-title">
                       <h4 class="i-con-h-a mb-0">
-                        <i class="mr-1 text-muted i-con i-con-layer v-m-4"
-                          ><i></i
-                        ></i>
+                        <i class="mr-1 text-muted i-con i-con-layer v-m-4"><i></i></i>
                         <a id="units"><span>垃圾分类示范单位</span></a>
                       </h4>
                     </div>
@@ -386,9 +287,7 @@
               </div>
             </section>
             <div class="mobile-model">
-              <div
-                class="d-flex layout-min-full-height justify-content-center align-items-center"
-              >
+              <div class="d-flex layout-min-full-height justify-content-center align-items-center">
                 <div class="text-center" style="width: 80%; margin: 0px auto">
                   <h1 class="mb-4">哇，窗口太小啦</h1>
                   <p class="mb-6">请调整浏览器窗口大小或者请使用手机查看！</p>
@@ -399,21 +298,14 @@
           <foot />
           <div infos="0">
             <div
-              class="adBanner pub_300x250 pub_300x250m pub_728x90 text-ad textAd text_ad text_ads text-ads text-ad-links"
-            ></div>
+              class="adBanner pub_300x250 pub_300x250m pub_728x90 text-ad textAd text_ad text_ads text-ads text-ad-links">
+            </div>
           </div>
         </div>
       </div>
     </div>
     <el-dialog :visible.sync="dialogPlay" width="40%" @close="closeDialog">
-      <video
-        :src="videoUrl"
-        controls
-        autoplay
-        class="video"
-        ref="dialogVideo"
-        width="100%"
-      ></video>
+      <video :src="videoUrl" controls autoplay class="video" ref="dialogVideo" width="100%"></video>
     </el-dialog>
   </div>
 </template>
@@ -447,8 +339,8 @@ export default {
   },
   created() {
   },
-  mounted() {},
-  updated() {},
+  mounted() { },
+  updated() { },
   props: {
     dataHeight: {
       type: String,
@@ -668,6 +560,7 @@ export default {
 .dis_content {
   padding: 0 15px;
 }
+
 /* 垃圾问题 */
 .garbage-problem {
   padding: 20px;
@@ -679,6 +572,7 @@ export default {
   font-size: 16px;
   margin-bottom: 10px;
 }
+
 /* 电脑屏幕与显示大屏条例布局 */
 @media only screen and (min-width: 992px) {
   .garbage-problem {
@@ -690,6 +584,7 @@ export default {
   .el-col-lg-8 {
     width: 33%;
   }
+
   .garbage-problem {
     height: 24vh;
   }
@@ -796,9 +691,7 @@ export default {
   top: 0;
   content: "";
   height: 100%;
-  background: rgba(0, 0, 0, 0)
-    linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.65) 100%)
-    repeat scroll 0 0;
+  background: rgba(0, 0, 0, 0) linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.65) 100%) repeat scroll 0 0;
   width: 100%;
   z-index: -1;
 }
@@ -1063,7 +956,7 @@ export default {
   padding: 13px 9px 5px;
 }
 </style>
-<style  scoped>
+<style scoped>
 .gaosiImg {
   filter: blur(20px) opacity(70%) brightness(110%);
   transition: 0.3s;
