@@ -79,6 +79,13 @@ service.interceptors.response.use(
       Message(response.data.msg);
       router.push('/login');
     }
+    console.log('response', response);
+    if (response.data.code == "1002" || response.data.code == "500") {
+      Message({
+        message: response.data.msg,
+        type: 'warning'
+      })
+    }
     return response;
   },
   (error) => {

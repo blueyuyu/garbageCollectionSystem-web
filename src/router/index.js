@@ -5,6 +5,16 @@ import Layout from "@/layout";
 
 Vue.use(Router);
 
+// 全局路由配置， 重复路由不报错
+const VueRouterPush = Router.prototype.push
+Router.prototype.push = function push(to){
+    return VueRouterPush.call(this,to).catch(err => err)
+}
+const VueRouterReplace = Router.prototype.replace
+Router.prototype.replace = function replace(to){
+    return VueRouterReplace.call(this,to).catch(err => err)
+}
+
 const createRouter = () => {
   return new Router({
     mode: "history",
@@ -58,9 +68,7 @@ export const setRoutes = () => {
   console.log('itemMenu', adminRouter);
   localStorage.setItem('__ADMINROUTER', JSON.stringify(adminRouter))
 }
-
 setRoutes();
-
 
 // Detail see: https://github.com/vuejs/vue-router/issues/1234#issuecomment-357941465
 // 这是一个remove-router 的帖子,重置路由

@@ -32,14 +32,19 @@ export async function get(url, params, responseType = 'json') {
 
 /**
  * 封装 post 方法
- * @param {*} url 
+ * @param {string} url 
  * @param {*} data 
+ * @param {boolean} errorHandler
  * @returns {Promise}
  */
-export async function post(url, data = {}) {
+export async function post(url, data = {}, errorHandler) {
     try {
         const response = await service.post(url, data)
-        return response.data.data
+        if(errorHandler){
+            return response.data
+        }else{
+            return response.data.data
+        }
     } catch (error) {
         return Promise.reject(error)
     }

@@ -1,6 +1,6 @@
 <template>
   <header class="app-header" data-v-7cf0e7dc="">
-    <!-- 登陆 -->
+    <!-- 注册功能 -->
     <el-dialog class="dialogdeep" width="30%" top="30px" center title="" :visible.sync="dialogRegisterFormVisible">
       <div class="box">
         <div class="login-logo">
@@ -40,13 +40,13 @@
           </el-form-item>
           <el-button :loading="loading" type="primary" style="width: 100%; margin-bottom: 30px"
             @click.native.prevent="userRegister">立即注册</el-button>
-          <div data-v-11bb2e85="" class="ss-login_statement">
+          <!-- <div data-v-11bb2e85="" class="ss-login_statement">
             <span data-v-11bb2e85="">登陆注册即代表同意</span>
             <router-link to="/Protocol">
               <a data-v-11bb2e85="" target="_blank">用户协议</a></router-link><span data-v-11bb2e85="">及</span>
             <router-link to="/Privacy">
               <a data-v-11bb2e85="" target="_blank">隐私条款</a></router-link>
-          </div>
+          </div> -->
           <div data-v-11bb2e85="" class="line"></div>
           <div data-v-11bb2e85="" class="footer">
             <p data-v-11bb2e85="" class="text-align-center">
@@ -73,6 +73,7 @@
       </div>
       <el-form :model="form"> </el-form>
     </el-dialog>
+    <!-- 登录功能 -->
     <el-dialog class="dialogdeep" width="30%" top="30px" center title="" :visible.sync="dialogFormVisible">
       <div class="box">
         <div class="login-logo">
@@ -94,22 +95,10 @@
           <el-form-item prop="password">
             <el-input :key="passwordType" ref="password" v-model="loginForm.password" :type="passwordType"
               placeholder="密码" name="password" tabindex="2" auto-complete="on" @keyup.enter.native="handleLogin" />
-            <!-- <span class="show-pwd" @click="showPwd">
-          <svg-icon
-            :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'"
-          />
-        </span> -->
           </el-form-item>
 
           <el-button :loading="loading" type="primary" style="width: 100%; margin-bottom: 30px"
             @click.native.prevent="handleLogin">登陆</el-button>
-          <div data-v-11bb2e85="" class="ss-login_statement">
-            <span data-v-11bb2e85="">登陆注册即代表同意</span>
-            <router-link to="/Protocol">
-              <a data-v-11bb2e85="" target="_blank">用户协议</a></router-link><span data-v-11bb2e85="">及</span>
-            <router-link to="/Privacy">
-              <a data-v-11bb2e85="" target="_blank">隐私条款</a></router-link>
-          </div>
           <div data-v-11bb2e85="" class="line"></div>
           <div data-v-11bb2e85="" class="footer">
             <p data-v-11bb2e85="" class="text-align-center">
@@ -136,6 +125,7 @@
       </div>
       <el-form :model="form"> </el-form>
     </el-dialog>
+
     <div class="app-header-navbar white shadow-4 border-bottom pc-model" data-v-122eae44="" data-v-7cf0e7dc="">
       <div class="app-header-main" data-v-122eae44="">
         <router-link target="_self" data-v-122eae44="" aria-current="page" to="/">
@@ -177,10 +167,11 @@
                       <span data-v-6d6103b4="" class="fs-12">({{ articleCount }})</span></a>
                   </div>
                 </div>
+                <!-- 搜索栏 -->
                 <ul role="listbox">
                   <div v-for="(item, id) in this.tempdata" :key="id">
                     <div>
-                      <router-link :to="{ path: '/content', query: { id: item.category ,garbarge: item.name } }">
+                      <router-link :to="{ path: '/content', query: { id: item.category, garbarge: item.name } }">
                         <li role="option" data-suggestion-index="0" data-section-name="default"
                           id="autosuggest__results-item--0" class="autosuggest__results-item">
                           <a data-v-6d6103b4="" class="macwk-app white border-top">
@@ -278,7 +269,7 @@
                           style="color: #ff8223">会员</b></span>
                     </p>
                     <p>
-                      <span class="user-lvs"><b>荣誉用户</b><i>lv5</i></span>
+                      <span class="user-lvs"><b>荣誉用户</b><i>lv0</i></span>
                     </p>
                   </div>
                 </div>
@@ -311,8 +302,8 @@
           <div slot="reference">
             <router-link to="/userinfo/index">
               <div v-if="!userJudje" class="avatartext">
-                <el-avatar :src="user.profile"></el-avatar>
-                <span class="spans">{{ user.name }}</span>
+                <el-avatar :src="user.avatarUrl"></el-avatar>
+                <span class="spans">{{ user.nickname }}</span>
               </div>
             </router-link>
           </div>
@@ -331,10 +322,10 @@
 
 <script>
 // import { FindarticlesByNum } from '@/api/webarticle'
-import { FindresourceByNum } from '@/api/webresource'
+// import { FindresourceByNum } from '@/api/webresource'
 import { getGarbageList } from '@/apis/garbage'
-import { login } from '@/api/login'
-import { register } from '@/api/register'
+import { userlogin, userRegister } from '@/apis/buser'
+// import { register } from '@/api/register'
 
 // import { getAllResource, getAllResourceNumber } from '@/api/webresource'
 // import { getAllArticle, getAllArticleNumber } from '@/api/webarticle'
@@ -358,8 +349,9 @@ export default ({
     this.fullnum()
   },
 
-  methods: {//用户注册
-    userRegister() {
+  methods: {
+    //用户注册
+    async userRegister() {
       if (this.RegisterForm.username === "") {
         this.$message.error("用户名不能为空！")
         return false
@@ -376,36 +368,29 @@ export default ({
         user.username = this.RegisterForm.username
         user.password = this.RegisterForm.password
         //  user.auditor = this.regUser.selectValue
-
         var that = this
-
         this.loading = true
-        register(user).then(resp => {
-          if (resp.data.code == 402 || resp.data.code == 400) {
-            that.$message({
-              message: '用户名已经存在',
-              type: 'warning'
-            })
-            this.loading = false
-          } else if (resp.data.code == 200) {
-            that.$router.push({ path: '/' }) // 跳到主页
-            that.$message({
-              message: '注册成功',
-              type: 'success'
-            })
-            this.loading = false
-            // 关闭登录框
-            that.dialogFormVisible = false
-            this.dialogRegisterFormVisible = false
-            // 关闭登陆按钮
-            that.userJudje = true
-            //登陆
-            localStorage.setItem('access-admin', JSON.stringify(resp.data))
-            //立即获取用户数据
-            that.getUserInfo()
-          }
-        }).catch((e) => { })
-
+        const res = await userRegister(user.username, user.password)
+        console.log('res', res);
+        if (res.code == "1002") {
+          this.loading = false
+          return
+        }
+        // 设置用户信息
+        // this.user = res.data;
+        // 设置token
+        // localStorage.setItem('access-user', JSON.stringify(res.data.token))
+        that.$message({
+          message: '注册成功',
+          type: 'success'
+        })
+        this.loading = false
+        // 关闭登录框
+        that.dialogFormVisible = false
+        this.dialogRegisterFormVisible = false
+        // 关闭登陆按钮
+        that.userJudje = true
+        this.$router.push({ path: '/' })
       }
     },
     ChangeLogin() {
@@ -430,9 +415,9 @@ export default ({
       //关闭用户头像
       this.userJudje = false
       //清除本地数据
-      window.localStorage.removeItem('access-admin')
-      console.log(this.userJudje)
-      console.log(this.user)
+      window.localStorage.removeItem('access-user')
+      // console.log(this.userJudje)
+      // console.log(this.user)
       //跳转刷新
       // this.$router.push('/')
       location.reload()
@@ -446,49 +431,37 @@ export default ({
       });
     },
     getUserInfo() {
-      const user = JSON.parse(window.localStorage.getItem('access-admin'))
-      if (user != null) {
-        this.user = user.data
-        this.userJudje = (user == null)
-        //获取会员有效性
-        CheckVip(user.data.userid).then(resp => {
-          if (resp.data) {
-            this.vipTrue = true
-          }
-        })
-      }
+      // const user = JSON.parse(window.localStorage.getItem('access-user'))
+      // if (user != null) {
+      //   this.user = user.data
+      //   this.userJudje = (user == null)
+      //   //获取会员有效性
+      //   // CheckVip(user.data.userid).then(resp => {
+      //   //   if (resp.data) {
+      //   //     this.vipTrue = true
+      //   //   }
+      //   // })
+      // }
     },
     handleLogin() {
       var that = this
-      this.$refs.loginForm.validate(valid => {
+      this.$refs.loginForm.validate(async valid => {
         if (valid) {
           this.loading = true
-          login(that.loginForm).then(resp => {
-            console.log(resp)
-            if (resp.data.code == 402 || resp.data.code == 400) {
-              that.$message({
-                message: '登陆失败',
-                type: 'warning'
-              })
-            } else if (resp.data.code == 200) {
-              console.log(resp.data)
-              localStorage.setItem('access-admin', JSON.stringify(resp.data))
-              // 关闭登录框
-              that.dialogFormVisible = false
-              // 关闭登陆按钮
-              that.userJudje = false
-              //立即获取用户数据
-              that.getUserInfo()
-              console.log(that.dialogFormVisible)
-              this.$notify({
-                title: '成功',
-                message: '您已成功登陆',
-                type: 'success',
-                offset: 50
-              });
-            }
-          }).catch((e) => { })
-          this.loading = false
+          const res = await userlogin(that.loginForm.username, that.loginForm.password)
+          console.log('res', res);
+          localStorage.setItem('access-user', JSON.stringify(res.token))
+          // 关闭登录框
+          that.dialogFormVisible = false
+          // 关闭登陆按钮
+          that.userJudje = false;
+          this.user = res;
+          this.$notify({
+            title: '成功',
+            message: '您已成功登陆',
+            type: 'success',
+            offset: 50
+          });
         } else {
           console.log('error submit!!')
           return false
@@ -574,7 +547,6 @@ export default ({
       this.fundByresource = false
       this.Findarticles(this.seachcontent, 5)
       this.howto = '/post/'
-
     },
     codeshows() {
       // setTimeout(() => { this.focus() }, 219)
@@ -659,6 +631,10 @@ export default ({
 
 <style scoped>
 @import "../../static/mycss/margin_top.css";
+
+::v-deep .el-dialog__header {
+  background-color: transparent;
+}
 
 .test {
   color: #999;
