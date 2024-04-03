@@ -1,10 +1,6 @@
 <template>
   <div class="navbar">
-    <hamburger
-      :is-active="sidebar.opened"
-      class="hamburger-container"
-      @toggleClick="toggleSideBar"
-    />
+    <hamburger :is-active="sidebar.opened" class="hamburger-container" @toggleClick="toggleSideBar" />
 
     <breadcrumb class="breadcrumb-container" />
 
@@ -21,19 +17,13 @@
         </div>
         <el-dropdown-menu slot="dropdown" class="user-dropdown">
           <router-link to="/">
-            <el-dropdown-item> 主页 </el-dropdown-item>
+            <el-dropdown-item> 用户主页 </el-dropdown-item>
           </router-link>
-          <a
-            target="_blank"
-            href="https://github.com/PanJiaChen/vue-admin-template/"
-          >
-            <el-dropdown-item>Github</el-dropdown-item>
+          <a target="_blank" href="https://github.com/blueyuyu/garbageCollectionSystem-web">
+            <el-dropdown-item>Github地址</el-dropdown-item>
           </a>
-          <a
-            target="_blank"
-            href="https://panjiachen.github.io/vue-element-admin-site/#/"
-          >
-            <el-dropdown-item>文档</el-dropdown-item>
+          <a target="_blank" href="https://panjiachen.github.io/vue-element-admin-site/#/">
+            <el-dropdown-item>参考文档</el-dropdown-item>
           </a>
           <el-dropdown-item divided @click.native="logout">
             <span style="display: block">退出</span>
