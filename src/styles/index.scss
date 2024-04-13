@@ -102,8 +102,9 @@ div:focus {
     color: #fff;
   }
 
+  // 这个代表，& 代表上面的 .sub-navbar，这段代码代表选中的是同时有sub-navbar 与 draft 类的元素
   &.draft {
-    background: #d0d0d0;
+    background: #ecf2f7;
   }
 
   &.deleted {

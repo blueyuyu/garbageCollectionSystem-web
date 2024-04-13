@@ -55,14 +55,14 @@
               {{ "\xa0" }}
               <a data-v-11bb2e85="" @click="ChangeLogin" class="text-align-center">立即登陆</a>
             </p>
-            <div data-v-11bb2e85="" class="other-login">
+            <!-- <div data-v-11bb2e85="" class="other-login">
               <button data-v-11bb2e85="" class="btn-login circle weixin">
                 <img class="qqloginsvg" src="../../static/image/qq.svg" />
               </button>
               <button data-v-11bb2e85="" class="btn-login circle weibo">
                 <img class="qqloginsvg" src="../../static/image/weixin.svg" />
               </button>
-            </div>
+            </div> -->
           </div>
 
           <div class="tips">
@@ -107,14 +107,14 @@
               {{ "\xa0" }}
               <a data-v-11bb2e85="" @click="ChangeRegister" class="text-align-center">立即注册</a>
             </p>
-            <div data-v-11bb2e85="" class="other-login">
+            <!-- <div data-v-11bb2e85="" class="other-login">
               <button data-v-11bb2e85="" class="btn-login circle weixin">
                 <img class="qqloginsvg" src="../../static/image/qq.svg" />
               </button>
               <button data-v-11bb2e85="" class="btn-login circle weibo">
                 <img class="qqloginsvg" src="../../static/image/weixin.svg" />
               </button>
-            </div>
+            </div> -->
           </div>
 
           <div class="tips">

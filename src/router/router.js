@@ -106,6 +106,7 @@ export const constantRoutes = [
                 path: "NewArticle",
                 component: () => import("@/admin/NewArticle"),
                 name: "NewArticle",
+                
                 meta: {
                     title: "创建文章",
                     icon: "el-icon-edit",

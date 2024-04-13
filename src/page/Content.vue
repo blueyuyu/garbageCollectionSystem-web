@@ -48,7 +48,7 @@
                   </pre>
               </div>
             </div>
-            <div v-show="type == 4">
+            <div v-show="type == 8">
               <div class="garbage-banner" style="display: flex">
                 <img src="../static/images/dryRefuse.webp" alt="" style="width: 10vw; height: 100%" />
                 <div class="banner-right" style="padding-left: 30px">
@@ -67,7 +67,7 @@
                   </pre>
               </div>
             </div>
-            <div v-show="type == 8">
+            <div v-show="type == 4">
               <div class="garbage-banner" style="display: flex">
                 <img src="../static/images/wetGarbage.webp" alt="" style="width: 10vw; height: 100%" />
                 <div class="banner-right" style="padding-left: 30px">
