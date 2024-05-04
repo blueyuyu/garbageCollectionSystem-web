@@ -15,8 +15,18 @@ export const updateArticleInfo = (Article) => {
 /**
  * 获取全部文章
  */
-export const getArticleList = () => {
+export const getAllArticleList = () => {
     return get('/article')
+}
+
+/**
+ * 分页获取文章
+ */
+export const getArticleList = (pageNum, pageSize) => {
+    return post('/page',{
+        pageNum,
+        pageSize
+    })
 }
 
 
@@ -38,5 +48,5 @@ export const deleteArticleByIds = (ids) => {
  * 上传文件
  */
 export const uploadFile = (formdate) => {
-    return post(`/file/upload`,formdate)
+    return post(`/file/upload`, formdate)
 }

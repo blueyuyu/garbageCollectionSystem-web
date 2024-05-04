@@ -297,23 +297,25 @@ export default {
       let that = this;
       this.$refs.postForm.validate(async (valid) => {
         if (valid) {
-          this.loading = true
+          this.loading = true;
           this.postForm.author =
             JSON.parse(localStorage.getItem("__USER"))?.id ?? "佚名";
-            this.postForm.status = val;
+          this.postForm.status = val;
           console.log("postForm", this.postForm);
           const res = await updateArticleInfo(this.postForm);
           this.$notify({
             title: "成功",
-            message: val === 1 ? "发布文章成功": "保存草稿成功",
+            message: val === 1 ? "发布文章成功" : "保存草稿成功",
             type: "success",
             duration: 2000,
           });
+          this.$refs.editor.setContent("");
+          this.postForm = Object.assign({}, defaultForm);
           this.loading = false;
-        }else{
-          this.loading = false
-          console.log('error submit!!')
-          return false
+        } else {
+          this.loading = false;
+          console.log("error submit!!");
+          return false;
         }
       });
     },
