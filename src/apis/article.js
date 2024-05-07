@@ -1,3 +1,4 @@
+import { title } from '@/settings'
 import { post, get, del } from '@/utils/requestFn'
 
 /**
@@ -31,6 +32,7 @@ export const getArticleList = (pageNum, pageSize, title, type, status) => {
         status
     })
 }
+
 
 /**
 * 删除文章
