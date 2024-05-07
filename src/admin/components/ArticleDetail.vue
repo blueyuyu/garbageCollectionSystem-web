@@ -70,17 +70,17 @@
         <!-- <h4>生成图片文字(根据所填写标题)</h4>
         <el-switch v-model="isCreate" active-color="#13ce66" inactive-color="#ff4949">
         </el-switch> -->
-        <!-- <h4>上传封面</h4>
+        <h4>上传封面</h4>
         <el-form-item prop="image_uri" style="margin-bottom: 30px">
           <Upload
-            :foriscreate="this.postForm.created"
+            :foriscreate="false"
             :fortitle="this.postForm.title"
             v-model="postForm.cover"
           />
         </el-form-item>
         <div slot="tip" class="el-upload__tip">
           只能上传jpg/png文件，且不超过2mb
-        </div> -->
+        </div>
       </div>
     </el-form>
   </div>
@@ -91,25 +91,21 @@ import { validURL } from "@/utils/validate";
 import { Todate } from "@/utils/date.js";
 
 import ElDragSelect from "@/components/DragSelect"; // base on element-ui
-// import Upload from "@/components/Upload/SingleImage";
+import Upload from "@/components/Upload/SingleImage";
 import Sticky from "@/components/Sticky"; // 粘性header组件
 import Warning from "./Warning";
 import { CommentDropdown } from "./Dropdown";
-
-import { getArticleById } from "@/api/article";
 import { getAllUserName } from "@/api/user";
 import { createArticle } from "@/api/article";
 import { getAllClassName } from "@/api/article";
-import { getClassNameById } from "@/api/article";
 
 import { getAllTag } from "@/api/alltag";
 
 import Tinymce from "@/components/Tinymce";
 import MDinput from "@/components/MDinput";
 
-import { updateArticleInfo } from "@/apis/article";
+import { updateArticleInfo, getArticleById } from "@/apis/article";
 
-// TODO 文章数据位置
 const defaultForm = {
   id: undefined,
   title: "", // 文章题目
@@ -141,6 +137,7 @@ export default {
     Sticky,
     Warning,
     CommentDropdown,
+    Upload
   },
   props: {
     isEdit: {
@@ -226,35 +223,14 @@ export default {
     contentShortLength() {
       return this.postForm.intro.length;
     },
-    // displayTime: {
-    //   // set and get is useful when the data
-    //   // returned by the back end api is different from the front end
-    //   // back end return => "2013-06-25 06:59:25"
-    //   // front end need timestamp => 1372114765000
-    //   get() {
-    //     return +new Date(this.postForm.createTime);
-    //   },
-    //   set(val) {
-    //     this.postForm.createTime = new Date(val);
-    //     this.postForm.createTime = Todate(this.postForm.createTime);
-    //   },
-    // },
   },
   created() {
+    // 在created 的时候获取不到跳转的参数
     const id = this.$route.params && this.$route.params.id;
-
-    //获取作者列表，和分类列表
-    // this.getRemoteUserList();
-
-    //获取标签列表
-    // this.getRemoteTagList(id);
-
+    if (!id) return;
     //数据回填
-    // if (this.isEdit) {
-    //   this.articleid = this.$route.params.id;
-    //   this.fetchData(id);
-    //   this.fetchData(this.articleid);
-    // }
+    this.postForm.id = id;
+    this.fetchData(id);
 
     // // Why need to make a copy of this.$route here?
     // // Because if you enter this page and quickly switch tag, may be in the execution of the setTagsViewTitle function, this.$route is no longer pointing to the current page
@@ -263,23 +239,25 @@ export default {
   },
   methods: {
     async fetchData(id) {
-      getArticleById(id)
-        .then((response) => {
-          console.log(response);
-
-          this.postForm = response.data;
-          //根据classId查询对应的名称
-          getClassNameById(response.data.sortClass).then((response) => {
-            this.postForm.sortClass = response.data;
-          });
-          this.postForm.articleStatus = response.data.articleStatus;
-          this.setTagsViewTitle();
-          // set page title
-          this.setPageTitle();
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      const res = await getArticleById(id);
+      console.log("res", res);
+      this.postForm = res;
+      // getArticleById(id)
+      //   .then((response) => {
+      //     console.log(response);
+      //     this.postForm = response.data;
+      //     //根据classId查询对应的名称
+      //     getClassNameById(response.data.sortClass).then((response) => {
+      //       this.postForm.sortClass = response.data;
+      //     });
+      //     this.postForm.articleStatus = response.data.articleStatus;
+      //     this.setTagsViewTitle();
+      //     // set page title
+      //     this.setPageTitle();
+      //   })
+      //   .catch((err) => {
+      //     console.log(err);
+      //   });
     },
     setTagsViewTitle() {
       const title = "编辑文章";
@@ -293,7 +271,6 @@ export default {
       document.title = `${title} - ${this.postForm.id}`;
     },
     submitForm(val) {
-      //TODO 提交文章
       let that = this;
       this.$refs.postForm.validate(async (valid) => {
         if (valid) {

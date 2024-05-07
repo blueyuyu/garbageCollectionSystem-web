@@ -12,21 +12,34 @@
         "
       >
         <el-input
-          placeholder="请输入垃圾名称"
+          placeholder="请输入文章标题"
           suffix-icon="el-icon-search"
-          v-model="input.name"
+          v-model="input.title"
           class="input-margin"
           clearable
           style="flex: 1"
         >
         </el-input>
         <el-select
-          v-model="input.category"
-          placeholder="请选择垃圾类型"
+          v-model="input.type"
+          placeholder="请选择文章类型"
           style="flex: 1; margin-right: 10px"
         >
           <el-option
-            v-for="item in options"
+            v-for="item in typeOptions"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
+          >
+          </el-option>
+        </el-select>
+        <el-select
+          v-model="input.status"
+          placeholder="请选择文章状态"
+          style="flex: 1; margin-right: 10px"
+        >
+          <el-option
+            v-for="item in statusOption"
             :key="item.value"
             :label="item.label"
             :value="item.value"
@@ -39,8 +52,6 @@
       <div class="topListLeft" style="padding: 0 0 20px 20px">
         <button class="topBtn searchBtn" @click="handleAdd">新增</button>
         <button class="topBtn delBtn" @click="handleDelete">批量删除</button>
-        <button class="topBtn searchBtn" @click="handleImport">导入</button>
-        <button class="topBtn searchBtn" @click="handleExport">导出</button>
       </div>
     </div>
     <!-- 下方数据表 -->
@@ -51,7 +62,8 @@
       :cell-style="columnStyle"
       @selection-change="handleSelectionChange"
     >
-      <el-table-column type="selection" width="55"> </el-table-column>
+      <!-- 在宽度设置的时候，最好设置 min-width: 这样不会出现元素挤压位移的情况 -->
+      <el-table-column type="selection" min-width="10%"> </el-table-column>
       <el-table-column
         align="center"
         prop="id"
@@ -62,40 +74,84 @@
       </el-table-column>
 
       <el-table-column
-        min-width="40%"
+        min-width="10%"
         align="center"
-        prop="name"
-        label="垃圾名称"
+        prop="title"
+        label="文章标题"
       >
       </el-table-column>
 
       <el-table-column
-        min-width="30%"
+        min-width="20%"
         align="center"
-        prop="category"
-        label="垃圾类型"
+        prop="content"
+        label="文章内容"
+      >
+        <template slot-scope="{ row }">
+          <div class="ellipsis">{{ row.content }}</div>
+        </template>
+      </el-table-column>
+
+      <!-- <el-table-column
+        min-width="10%"
+        align="center"
+        prop="cover"
+        label="文章封面"
+      >
+      </el-table-column> -->
+
+      <el-table-column
+        min-width="10%"
+        align="center"
+        prop="type"
+        label="文章类型"
       >
         <template slot-scope="scope">
           <div slot="reference" class="name-wrapper">
-            <el-tag size="medium" type="success" v-if="scope.row.category === 1"
-              >可回收垃圾</el-tag
+            <el-tag size="medium" type="success" v-if="scope.row.type === 1"
+              >知识</el-tag
             >
-            <el-tag size="medium" type="danger" v-if="scope.row.category === 2"
-              >有害垃圾</el-tag
-            >
-            <el-tag size="medium" type="info" v-if="scope.row.category === 4"
-              >湿垃圾</el-tag
-            >
-            <el-tag size="medium" type="info" v-if="scope.row.category === 8"
-              >干垃圾</el-tag
-            >
-            <el-tag
-              size="medium"
-              type="warning"
-              v-if="scope.row.category === 16"
-              >大件垃圾</el-tag
+            <el-tag size="medium" type="warning" v-if="scope.row.type === 2"
+              >政策</el-tag
             >
           </div>
+        </template>
+      </el-table-column>
+
+      <el-table-column
+        min-width="10%"
+        align="center"
+        prop="status"
+        label="文章状态"
+      >
+        <template slot-scope="scope">
+          <div slot="reference" class="name-wrapper">
+            <el-tag size="medium" type="success" v-if="scope.row.status === 1"
+              >发布</el-tag
+            >
+            <el-tag size="medium" type="warning" v-if="scope.row.status === 2"
+              >草稿</el-tag
+            >
+          </div>
+        </template>
+      </el-table-column>
+
+      <el-table-column
+        min-width="10%"
+        align="center"
+        prop="author"
+        label="作者"
+      >
+      </el-table-column>
+
+      <el-table-column
+        min-width="10%"
+        align="center"
+        prop="updated"
+        label="修改时间"
+      >
+        <template slot-scope="{ row }">
+          <div>{{ formatDate(row.updated) }}</div>
         </template>
       </el-table-column>
 
@@ -103,7 +159,7 @@
         <template slot-scope="scope">
           <button
             class="button updateBtn"
-            @click="updateArticleInfo(scope.row, 'addOrUpdateForm')"
+            @click="updateArticleInfo(scope.row.id)"
           >
             修改
           </button>
@@ -116,88 +172,6 @@
         </template>
       </el-table-column>
     </el-table>
-
-    <!-- add and update dialog Form -->
-    <el-dialog
-      :title="isUpdate ? '修改' : '新增'"
-      :visible.sync="dialogFormVisible"
-      width="34%"
-      :before-close="resetDialog"
-    >
-      <el-form
-        :model="addOrUpdateForm"
-        ref="addOrUpdateForm"
-        :rules="rules"
-        hide-required-asterisk
-      >
-        <el-form-item label="垃圾名" :label-width="formLabelWidth" prop="name">
-          <el-input
-            v-model="addOrUpdateForm.name"
-            autocomplete="off"
-          ></el-input>
-        </el-form-item>
-        <el-form-item
-          label="垃圾类型"
-          :label-width="formLabelWidth"
-          prop="category"
-        >
-          <el-select
-            v-model="addOrUpdateForm.category"
-            placeholder="请选择垃圾类型"
-            style="flex: 1; margin-right: 10px"
-          >
-            <el-option
-              v-for="item in options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
-            >
-            </el-option>
-          </el-select>
-        </el-form-item>
-      </el-form>
-      <div slot="footer" class="dialog-footer">
-        <el-button @click="resetDialog">取 消</el-button>
-        <el-button type="success" @click="confirmDialog('addOrUpdateForm')"
-          >确 定</el-button
-        >
-      </div>
-    </el-dialog>
-
-    <el-dialog
-      title="导入垃圾资料"
-      :visible.sync="dialogVisibleExport"
-      width="34%"
-      :before-close="handleClose"
-    >
-      <el-upload
-        class="upload-demo"
-        drag
-        action="http://localhost:9091/garbage/import"
-        accept=".xls"
-        :multiple="false"
-        :disabled="uploadDisabled"
-        :on-success="handleExcelSuccess"
-      >
-        <!-- TODO 导入功能，导入数据不成功，到时候再修复-->
-        <i class="el-icon-upload"></i>
-        <div>
-          <el-button type="text" @click="downloadTemplate">
-            下载导入模板
-          </el-button>
-        </div>
-        <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
-        <div class="el-upload__tip" slot="tip">
-          请按照模板excel上传，只能上传.xls文件，且不超过5M
-        </div>
-      </el-upload>
-      <span slot="footer" class="dialog-footer">
-        <el-button @click="dialogVisibleExport = false">取 消</el-button>
-        <el-button type="success" @click="dialogVisibleExport = false"
-          >确 定</el-button
-        >
-      </span>
-    </el-dialog>
 
     <pagination
       v-show="total > 0"
@@ -213,20 +187,12 @@
 import Pagination from "@/components/Pagination";
 import { formatDate } from "@/utils/date.js";
 import {
-  getGarbageList,
-  updateGarbageInfo,
-  deleteGarbageById,
-  exportGarbageExcel,
-  exportGarbageExcelTemplate,
-  delGarbagesByIds,
-} from "@/apis/garbage";
-import {
   updateArticleInfo,
   getArticleList,
   deleteArticleById,
   deleteArticleByIds,
-  uploadFile
-} from '@/apis/article'
+  uploadFile,
+} from "@/apis/article";
 
 import { setValue, clearObj, exportExcel } from "@/utils/datafn";
 
@@ -254,44 +220,44 @@ export default {
       },
       multipleSelection: [],
       input: {
-        name: "",
-        category: "",
+        title: "",
+        type: "",
+        status: "",
       },
       // 为解决bug而引入的中间参数
       searchParam: {
-        name: "",
-        category: "",
+        title: "",
+        type: "",
+        status: "",
       },
       isSearch: false,
       isUpdate: true,
-      // options
-      options: [
-        { value: 1, label: "可回收垃圾" },
-        { value: 2, label: "有害垃圾" },
-        { value: 4, label: "湿垃圾" },
-        { value: 8, label: "干垃圾" },
-        { value: "16", label: "大件垃圾" },
+      //TODO options
+      typeOptions: [
+        { value: 1, label: "知识" },
+        { value: 2, label: "政策" },
       ],
-      // just the userForm
-      dialogFormVisible: false,
+      statusOption: [
+        { value: 1, label: "发布状态" },
+        { value: 2, label: "草稿状态" },
+      ],
+      // 文章表单的编辑不通过弹窗
       dialogVisibleExport: false,
       addOrUpdateForm: {
-        id: "",
-        name: "",
-        category: "",
+        id: undefined,
+        title: "", // 文章题目
+        content: "", // 文章内容
+        cover: "", // 缩略图
+        type: 1, // 1. 知识 2.政策
+        status: 2, // 1.发布 2.草稿状态 draft
+        allowContent: 2, // 1. 允许评论 2.禁止评论
+        views: 0,
+        created: undefined, // 创建时间
+        updated: undefined, // 更新时间
+        author: "佚名",
+        authortype: "admin", // admin normarl
       },
       formLabelWidth: "70px",
-      rules: {
-        name: [
-          { required: true, message: "请输入垃圾名", trigger: "blur" },
-          {
-            pattern: /[\u4e00-\u9fa5a-zA-Z]{0,20}/,
-            message: "长度在 0 到 20 个字符",
-            trigger: "blur",
-          },
-        ],
-        category: [{ required: true, message: "请选择垃圾类型" }],
-      },
       uploadDisabled: false, // 是否允许上传文件
     };
   },
@@ -336,18 +302,18 @@ export default {
       return "background-image: linear-gradient( 135deg, #FFD3A5 10%, #FD6585 100%);";
     },
     formatDate(time) {
-      let data = new Date(time);
-      return formatDate(data, "yyyy-MM-dd hh:mm ");
+      return formatDate(time);
     },
     async getList() {
       this.listLoading = true;
-      let res;  
+      let res;
       if (this.isSearch) {
         res = await getArticleList(
           this.listQuery.page,
           this.listQuery.limit,
-          this.searchParam.name,
-          this.searchParam.category
+          this.searchParam.title,
+          this.searchParam.type,
+          this.searchParam.status
         );
       } else {
         res = await getArticleList(this.listQuery.page, this.listQuery.limit);
@@ -369,9 +335,9 @@ export default {
       this.getList();
     },
     handleAdd() {
-      this.dialogFormVisible = true;
       this.addOrUpdateForm.id = ""; // id 不置空会应发问题；
       this.isUpdate = false;
+      this.$router.push("/newArticle/NewArticle");
     },
     async handleDelete() {
       try {
@@ -381,7 +347,7 @@ export default {
           confirmButtonText: "删除",
           cancelButtonText: "放弃删除",
         });
-        await delArticlesByIds(this.multipleSelection);
+        await deleteArticleByIds(this.multipleSelection);
         this.$notify({
           title: "成功",
           message: "批量删除成功",
@@ -395,9 +361,6 @@ export default {
           message: "取消删除",
         });
       }
-    },
-    async handleImport() {
-      this.dialogVisibleExport = true;
     },
     handleClose() {},
     handleExcelSuccess() {
@@ -416,55 +379,18 @@ export default {
       exportExcel(res, "垃圾信息模板表");
       this.uploadDisabled = false;
     },
-    async handleExport() {
-      const res = await exportArticleExcel();
-      // 销毁超连接
-      exportExcel(res, "垃圾信息表");
-      this.$notify({
-        title: "成功",
-        message: "您已成功导出垃圾表",
-        type: "success",
-      });
-    },
-
-    confirmDialog(formname) {
-      this.$refs[formname].validate(async (valid) => {
-        if (valid) {
-          var that = this;
-          const message = this.isUpdate
-            ? "修改垃圾信息成功"
-            : "新增垃圾信息成功";
-          await updateArticleInfo(that.addOrUpdateForm);
-          this.$notify({
-            title: "成功",
-            message,
-            type: "success",
-            duration: 2000,
-          });
-          this.listQuery.page = 1;
-          await this.getList();
-          this.resetDialog();
-        } else {
-          console.log("error submit!!");
-          return false;
-        }
-      });
-    },
     resetDialog() {
       this.$refs["addOrUpdateForm"].resetFields();
-      this.addOrUpdateForm.password = "";
-      this.dialogFormVisible = false;
     },
-    updateArticleInfo(data) {
-      // 留意一下这里的执行顺序,Mounted()创建之后，就会执行resetField()记录初始值
-      this.dialogFormVisible = true;
+    updateArticleInfo(id) {
       this.isUpdate = true;
-      this.$nextTick(() => {
-        setValue(this.addOrUpdateForm, data);
+      console.log("id", id);
+      this.$router.push({
+        name: "NewArticle",
+        params: { id },
       });
     },
     async delectArticleInfo(id) {
-      console.log("id", id);
       try {
         await this.$confirm(
           "此操作将永久删除垃圾，是否确认删除？",
@@ -504,6 +430,11 @@ export default {
 </script>
 
 <style scoped>
+.ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 .input-margin {
   margin-right: 8px;
 }

@@ -1,28 +1,60 @@
 /* eslint-disable quotes */
 /* eslint-disable no-array-constructor */
 /* eslint-disable spaced-comment */
-export function formatDate(date, fmt) {
+
+// formatFunction(new Date(), "yyyy-MM-dd hh:mm:ss") 使用方法
+export function formatFunction(date, fmt) {
   if (/(y+)/.test(fmt)) {
-    fmt = fmt.replace(RegExp.$1, (date.getFullYear() + '').substr(4 - RegExp.$1.length))
+      const t = /(y+)/.exec(fmt)[1];
+      fmt = fmt.replace(
+          t,
+          (date.getFullYear() + "").substring(4 - t.length)
+      );
   }
+
   const o = {
-    'M+': date.getMonth() + 1,
-    'd+': date.getDate(),
-    'h+': date.getHours(),
-    'm+': date.getMinutes(),
-    's+': date.getSeconds()
+      "M+": date.getMonth() + 1, // 月份
+      "d+": date.getDate(), // 日
+      "h+": date.getHours(), // 小时
+      "m+": date.getMinutes(), // 分
+      "s+": date.getSeconds(), // 秒
+      "q+": Math.floor((date.getMonth() + 3) / 3), // 季度
+      S: date.getMilliseconds(), // 毫秒
+  };
+  for (let k in o) {
+      const regx = new RegExp("(" + k + ")");
+      if (regx.test(fmt)) {
+          const t = regx.exec(fmt)[1];
+          fmt = fmt.replace(
+              t,
+              t.length == 1 ? o[k] : ("00" + o[k]).substring(("" + o[k]).length)
+          );
+      }
   }
-  for (const k in o) {
-    if (new RegExp(`(${k})`).test(fmt)) {
-      const str = o[k] + ''
-      fmt = fmt.replace(RegExp.$1, RegExp.$1.length === 1 ? str : padLeftZero(str))
-    }
-  }
-  return fmt
+  return fmt;
+};
+
+/**
+ * 
+ * @param {Array} data [2024,5,1,10,50,90] 传入的一个年月日时分秒数组，要求返回‘’
+ * @returns yyyy-MM-dd hh:mm:ss
+ */
+export function formatDate(data) {
+  const year = data[0];
+  const month = data[1];
+  const day = data[2];
+  const hour = data[3];
+  const minute = data[4];
+  const second = data[5];
+
+  const formattedDate = `${year}-${padZero(month)}-${padZero(day)}`;
+  const formattedTime = `${padZero(hour)}:${padZero(minute)}:${padZero(second)}`;
+
+  return `${formattedDate} ${formattedTime}`;
 }
 
-function padLeftZero(str) {
-  return ('00' + str).substr(str.length)
+function padZero(num) {
+  return num.toString().padStart(2, '0');
 }
 
 export function Todate(num) { //Fri Oct 31 18:00:00 UTC+0800 2008

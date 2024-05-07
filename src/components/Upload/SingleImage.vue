@@ -1,7 +1,17 @@
 <template>
   <div class="upload-container">
-    <el-upload :limit="1" :data="dataObj" :multiple="false" :show-file-list="false" :on-change="handleImageSuccess"
-      class="image-uploader" drag action="#" :before-upload="beforeUpload" :http-request="Execute_File">
+    <el-upload
+      :limit="1"
+      :data="dataObj"
+      :multiple="false"
+      :show-file-list="false"
+      :on-change="handleImageSuccess"
+      class="image-uploader"
+      drag
+      action="#"
+      :before-upload="beforeUpload"
+      :http-request="Execute_File"
+    >
       <i class="el-icon-upload" />
       <div class="el-upload__text">将主图拖到此处，或<em>点击上传</em></div>
     </el-upload>
@@ -13,36 +23,38 @@
         </div>
       </div>
     </div>
-    <el-progress v-show="theprogress" :percentage="percentage > 100 ? 100 : percentage"
-      :color="customColorMethod"></el-progress>
+    <el-progress
+      v-show="theprogress"
+      :percentage="percentage > 100 ? 100 : percentage"
+      :color="customColorMethod"
+    ></el-progress>
   </div>
 </template>
 
 <script>
-import { addwatermarkimageUpload, updateImage } from '@/api/updateImage'
+import { uploadFile } from "@/apis/article";
 
 export default {
-
-  name: 'SingleImageUpload',
+  name: "SingleImageUpload",
   props: {
     foriscreate: {
       type: Boolean,
       required: true,
-      default: ''
+      default: "",
     },
     fortitle: {
       type: String,
       required: true,
-      default: ''
+      default: "",
     },
     forcontent: {
       type: String,
-      default: ''
+      default: "",
     },
     value: {
       type: String,
-      default: ''
-    }
+      default: "",
+    },
   },
   data() {
     return {
@@ -51,23 +63,23 @@ export default {
       title: "",
       content: "",
       upFile: "",
-      tempUrl: '',
-      dataObj: { token: '', key: '' }
-    }
+      tempUrl: "",
+      dataObj: { token: "", key: "" },
+    };
   },
   computed: {
     imageUrl() {
-      return this.value
-    }
+      return this.value;
+    },
   },
   methods: {
     customColorMethod(percentage) {
       if (percentage < 30) {
-        return '#909399';
+        return "#909399";
       } else if (percentage < 70) {
-        return '#e6a23c';
+        return "#e6a23c";
       } else {
-        return '#67c23a';
+        return "#67c23a";
       }
     },
     increase() {
@@ -82,116 +94,135 @@ export default {
         this.percentage = 0;
       }
     },
-    Execute_File(file) {
+    async Execute_File(file) {
       //判断文件大小
       if (file.size > 1024 * 1024 * 2) {
         this.$message({
-          message: '上传文件大小不能超过 2MB!',
+          message: "上传文件大小不能超过 2MB!",
           showClose: true,
-          duration: 1000
-        })
+          duration: 1000,
+        });
         return false;
       }
-      this.theprogress = true
+      this.theprogress = true;
       this.$message({
-        message: '上传中,请稍后',
+        message: "上传中,请稍后",
         showClose: true,
-        duration: 1000
-      })
-      this.percentage = 20
-      var form = new FormData();
-      form.append('editormd-image-file', file.file, file.file.name)
-      this.title = this.fortitle
-      this.content = this.forcontent
+        duration: 1000,
+      });
+      this.percentage = 20;
+      const form = new FormData();
+      form.append("file", file.file);
+      // this.title = this.fortitle;
+      // this.content = this.forcontent;
       window.setInterval(() => {
         setTimeout(() => {
-          this.percentage += 3
-          this.percentage % 90
-        }, 0)
-      }, 20)
-      if (this.foriscreate) {
-        if (this.title.length < 1) {
-          this.$message({
-            message: '标题不能为空',
-            showClose: true,
-            duration: 1000
-          })
-          this.percentage = 0
-          this.theprogress = false
-          return
-        }
-        if (this.content.length < 1) {
-          this.$message({
-            message: '简介不能为空',
-            showClose: true,
-            duration: 1000
-          })
-          this.percentage = 0
-          this.theprogress = false
-          return
-        }
-        addwatermarkimageUpload(form, this.title, this.content).then(resp => {
-          this.$message({
-            message: '上传成功',
-            type: 'success',
-            showClose: true,
-            duration: 1000
-          })
-          this.percentage = 100
-          this.theprogress = false
-          var imgUrl = resp.data.url;//根据返回值得不同这里要自己定义
-          this.tempUrl = imgUrl
-          this.handleImageSuccess()
-        }).catch((e) => {
-          this.$message.error('抱歉,上传失败,请检查网络环境或图片大小');
-          this.theprogress = false
-          console.log("上传失败")
-        })
-        const fileData = new FormData()
-        fileData.append('file', file.file)
-      }
-      else {
-        updateImage(form).then(resp => {
-          this.$message({
-            message: '上传成功',
-            type: 'success',
-            showClose: true,
-            duration: 1000
-          })
-          this.percentage = 100
-          this.theprogress = false
-          var imgUrl = resp.data.url;//根据返回值得不同这里要自己定义
-          this.tempUrl = imgUrl
-          this.handleImageSuccess()
-        }).catch((e) => {
-          this.$message.error('抱歉,上传失败,请检查网络环境或图片大小');
-          this.theprogress = false
-          console.log("上传失败")
-        })
-        const fileData = new FormData()
-        fileData.append('file', file.file)
+          this.percentage += 3;
+          this.percentage % 90;
+        }, 0);
+      }, 20);
+      if (false) {
+        // if (this.foriscreate) {
+        // if (this.title.length < 1) {
+        //   this.$message({
+        //     message: "标题不能为空",
+        //     showClose: true,
+        //     duration: 1000,
+        //   });
+        //   this.percentage = 0;
+        //   this.theprogress = false;
+        //   return;
+        // }
+        // if (this.content.length < 1) {
+        //   this.$message({
+        //     message: "简介不能为空",
+        //     showClose: true,
+        //     duration: 1000,
+        //   });
+        //   this.percentage = 0;
+        //   this.theprogress = false;
+        //   return;
+        // }
+        // //TODO 封面上传
+        // addwatermarkimageUpload(form, this.title, this.content)
+        //   .then((resp) => {
+        //     this.$message({
+        //       message: "上传成功",
+        //       type: "success",
+        //       showClose: true,
+        //       duration: 1000,
+        //     });
+        //     this.percentage = 100;
+        //     this.theprogress = false;
+        //     var imgUrl = resp.data.url; //根据返回值得不同这里要自己定义
+        //     this.tempUrl = imgUrl;
+        //     this.handleImageSuccess();
+        //   })
+        //   .catch((e) => {
+        //     this.$message.error("抱歉,上传失败,请检查网络环境或图片大小");
+        //     this.theprogress = false;
+        //     console.log("上传失败");
+        //   });
+        // const fileData = new FormData();
+        // fileData.append("file", file.file);
+      } else {
+        // 封面上传触发
+        const url = await uploadFile(form);
+        this.$message({
+          message: "上传成功",
+          type: "success",
+          showClose: true,
+          duration: 1000,
+        });
+        this.percentage = 100;
+        this.theprogress = false;
+        var imgUrl = url;
+        this.tempUrl = imgUrl;
+        this.handleImageSuccess();
+
+        // updateImage(form)
+        //   .then((resp) => {
+        //     this.$message({
+        //       message: "上传成功",
+        //       type: "success",
+        //       showClose: true,
+        //       duration: 1000,
+        //     });
+        //     this.percentage = 100;
+        //     this.theprogress = false;
+        //     var imgUrl = resp.data.url; //根据返回值得不同这里要自己定义
+        //     this.tempUrl = imgUrl;
+        //     this.handleImageSuccess();
+        //   })
+        //   .catch((e) => {
+        //     this.$message.error("抱歉,上传失败,请检查网络环境或图片大小");
+        //     this.theprogress = false;
+        //     console.log("上传失败");
+        //   });
+        const fileData = new FormData();
+        fileData.append("file", file.file);
       }
     },
     rmImage() {
-      this.emitInput('')
+      this.emitInput("");
     },
     emitInput(val) {
-      this.$emit('input', val)
+      this.$emit("input", val);
     },
     handleImageSuccess() {
-      this.emitInput(this.tempUrl)
+      this.emitInput(this.tempUrl);
     },
     beforeUpload(file) {
       if (file) {
         let upfile = new FormData();
-        upfile.append('file', file) //append /12XiE buS#
+        upfile.append("file", file); //append /12XiE buS#
         this.upload = upfile;
       } else {
-        return false
+        return false;
       }
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>

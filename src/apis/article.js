@@ -22,13 +22,15 @@ export const getAllArticleList = () => {
 /**
  * 分页获取文章
  */
-export const getArticleList = (pageNum, pageSize) => {
-    return post('/page',{
+export const getArticleList = (pageNum, pageSize, title, type, status) => {
+    return get('/article/page', {
         pageNum,
-        pageSize
+        pageSize,
+        title,
+        type,
+        status
     })
 }
-
 
 /**
 * 删除文章
@@ -42,6 +44,13 @@ export const deleteArticleById = (id) => {
 */
 export const deleteArticleByIds = (ids) => {
     return post(`/article/del/batch`, ids)
+}
+
+/**
+ * 通过id获取文章
+ */
+export const getArticleById = (id) => {
+    return get(`/article/${id}`)
 }
 
 /**

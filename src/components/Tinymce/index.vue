@@ -191,7 +191,7 @@ export default {
         paste_merge_formats: true, //合并相同的文本格式元素
         nonbreaking_force_tab: false, //按下键盘tab键时强制TinyMCE插入三个实体
 
-        // 这里是图片
+        // TODO 这里是图片上传的模板
         images_upload_handler: async (blobInfo, progress) => {
           var form = new FormData();
           form.append("file", blobInfo.blob());
