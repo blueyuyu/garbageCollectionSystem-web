@@ -141,11 +141,11 @@
             to="/">首页</router-link>
           <router-link target="_self" class="nav-link" :class="message2" data-v-1f33282a="" to="/list">资源</router-link>
           <router-link target="_self" class="nav-link" :class="message3" data-v-122eae44=""
-            to="/post/all">文章</router-link>
-          <router-link target="_self" class="nav-link display-top" :class="message5" data-v-1f33282a=""
-            to="/planet">圈子</router-link>
+            to="/post/1/all">文章</router-link>
           <router-link target="_self" class="nav-link " :class="message4" data-v-1f33282a=""
             to="/class">分类</router-link>
+          <router-link target="_self" class="nav-link display-top" :class="message5" data-v-1f33282a=""
+          to="/planet">个人中心</router-link>
         </div>
         <div class="app-header-search grid-list lazy-transition" data-v-122eae44="">
           <div id="autosuggest" data-v-122eae44="">

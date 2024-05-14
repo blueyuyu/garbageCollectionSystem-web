@@ -76,7 +76,9 @@
                             <div class="card-content">
                               <div class="card-meta mar-top">
                                 <div class="meta-item post-author">
-                                  <span class="categorys">分类</span
+                                  <span class="categorys">{{
+                                    type == 1 ? "知识" : "政策"
+                                  }}</span
                                   ><a href="#" class="author-name">
                                     作者：{{ author }}
                                   </a>
@@ -120,10 +122,10 @@
                             </div>
                           </div>
                           <!-- Tags -->
-                          <div class="tags">
+                          <!-- <div class="tags">
                             <h3 class="heading-tertiary">文章标签</h3>
-                            <div class="categories-tags"></div>
-                          </div>
+                            <div class="categories-tags">知识</div>
+                          </div> -->
                           <!-- Post navigation -->
                           <div class="post-navigation">
                             <router-link :to="'/post/' + preArticle.id">
@@ -167,7 +169,7 @@
                               </div>
                             </router-link>
                           </div>
-                          <!-- Comments -->
+                          <!-- Comments 文章评论功能，暂时不做 -->
                           <!-- <div class="post-comments">
                             <h3 class="heading-secondary">Comments(3)</h3>
                             <div class="comment-card">
@@ -270,33 +272,28 @@
                               <div>
                                 <img
                                   class="card-thumb bg-cover"
-                                  :src="item.thumb"
+                                  :src="item.cover"
                                 />
                               </div>
                               <div class="card-content">
                                 <div class="post-meta">
-                                  <span class="meta-item"> item.author </span>
-
+                                  <span class="meta-item"> {{item.author}} </span>
                                   <span
-                                    v-if="item.createTime != null"
                                     class="meta-item"
                                   >
-                                    formatDate(item.createTime)
+                                    {{ formatDate(item.updated)}}
                                   </span>
-                                  <span v-else class="meta-item">
-                                    formatDate(item.addTime)
-                                  </span>
-                                  <span class="meta-item"
+                                  <!-- <span class="meta-item"
                                     ><i class="el-icon-chat-line-square"></i>
                                     item.hits
-                                  </span>
+                                  </span> -->
                                 </div>
-                                <h3 class="heading-secondary">item.title</h3>
+                                <h3 class="heading-secondary">{{item.title}}</h3>
                               </div>
                             </a>
                           </div>
-                          <!-- Widget category -->
-                          <div class="widget-categories">
+                          <!-- Widget category 标签 -->
+                          <!-- <div class="widget-categories">
                             <h3 class="heading-tertiary">标签云</h3>
                             <div class="categories-tags">
                               <a
@@ -307,20 +304,24 @@
                                 item.tagName
                               </a>
                             </div>
-                          </div>
+                          </div> -->
                           <!-- Widget ad banner -->
                           <div class="widget-ad-banner bg-cover" style="">
                             <div class="content">
-                              <span class="discount">20% off</span>
-                              <h2 class="heading-secondary">会员折扣</h2>
-                              <p class="body-text">开通会员享受更多优惠</p>
+                              <span class="discount">支持 ❤ 我们</span>
+                              <h2 class="heading-secondary">
+                                这是一个公益性的网站
+                              </h2>
+                              <p class="body-text" style="text-indent: 0">
+                                但是您的打赏❤，将会激励作者为您提供更好的服务
+                              </p>
                               <a href="#" class="button icon-button active"
-                                ><span><i class="el-icon-caret-right"></i></span
+                                ><span>❤</span
                               ></a>
                             </div>
                           </div>
-                          <!-- Widget social profile -->
-                          <div class="widget-social-profile">
+                          <!-- Widget social profile 三个图标 -->
+                          <!-- <div class="widget-social-profile">
                             <h3 class="heading-tertiary mb-20">关注我们</h3>
                             <p class="body-text">找到更多</p>
                             <div class="social-items">
@@ -337,12 +338,11 @@
                                   ><i class="el-icon-lollipop"></i></span
                               ></a>
                             </div>
-                          </div>
+                          </div> -->
                           <!-- Widget popular post -->
-                          <!-- Widget popular post -->
-                          <div class="widget-popular-post mt-30">
+                          <!-- Widget popular post  热门文章 -->
+                          <!-- <div class="widget-popular-post mt-30">
                             <h3 class="heading-tertiary mb-20">热门文章</h3>
-                            <!-- Cat item -->
                             <div
                               v-for="item in newArticle"
                               :key="item.id"
@@ -376,7 +376,7 @@
                                   </div>
                                 </div>
                               </router-link>
-                            </div>
+                            </div> -->
                             <!-- Cat item -->
                             <!-- Cat item -->
                           </div>
@@ -394,7 +394,7 @@
                         ></i>
                       </template>
                     </side-catalog>
-                    <div class="catalogleft">
+                    <!-- <div class="catalogleft">
                       <aside
                         class="crayons-layout__sidebar-left"
                         aria-label="Article actions"
@@ -579,7 +579,7 @@
                           </div>
                         </div>
                       </aside>
-                    </div>
+                    </div> -->
                   </div>
                 </div>
               </div>
@@ -588,6 +588,7 @@
             <!---->
             <!-- v-on:click="show = !show"
                 v-if="!show" -->
+            <!-- 表情模块 -->
             <div class="myVEmojiPicker">
               <VEmojiPicker
                 v-show="showDialog"
@@ -597,8 +598,9 @@
                 @select="onSelectEmoji"
               />
             </div>
+            <!-- 评论区与问答模块 -->
             <!-- 后台控制是否显示评论 -->
-            <div v-if="!this.glabledata.glableCommentShow">
+            <!-- <div v-if="!this.glabledata.glableCommentShow">
               <div v-show="!judjeComment">
                 <section
                   v-if="mycomment"
@@ -643,8 +645,8 @@
               ref="child"
               @closethecpmmentName="updateDate()"
               @openthecpmmentName="showemoge()"
-            />
-          </div>
+            /> 
+          </div> -->
         </div>
         <foot />
 
@@ -683,7 +685,7 @@ import top from "./components/Top.vue";
 import foot from "./components/Foots.vue";
 import comment from "./components/Comment.vue";
 
-import { getArticleById, getPreArticle, getNextArticle } from "@/apis/article";
+import { getArticleById, getPreArticle, getNextArticle, getArticleList } from "@/apis/article";
 
 import { formatDate } from "@/utils/date.js";
 import { mapState, mapMutations } from "vuex";
@@ -817,6 +819,7 @@ export default {
       this.author = res.author;
       this.addTime = formatDate(res.updated);
       this.cover = res.cover;
+      this.type = res.type;
 
       setTimeout(() => {
         this.content = res.content;
@@ -841,11 +844,15 @@ export default {
       this.nextArticle.title = nextArticle.title;
       this.nextArticle.id = nextArticle.id;
       this.nextArticle.addTime = formatDate(nextArticle.updated);
-      // getNewArticle(2).then((resp) => {
-      //   this.newArticle = resp.data;
-      // });
 
+      // 推荐文章，获取三篇
+      const newArticle = await getArticleList(1,3,'垃圾',1) 
+      this.newArticle = newArticle.records;
     },
+    formatDate(time){
+      // 导入的方法不能直接模板html中用，必须以这种方式才能使用大括号 {{ }}
+      return formatDate(time);
+    }
   },
   data() {
     return {
@@ -889,6 +896,7 @@ export default {
       author: "",
       content: "",
       title: "",
+      type: "",
       cover: "", // 封面
       show: false,
     };
