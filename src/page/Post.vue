@@ -758,7 +758,7 @@ export default {
           type: "warning",
         });
       } else {
-        console.log(this.fundByresource);
+        // console.log(this.fundByresource);
         //   直接调用$router.push 实现携带参数的跳转
         this.$router.push({
           path: `/post/${this.seachcontent}/all`,

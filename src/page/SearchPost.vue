@@ -95,10 +95,10 @@
                               class="post-item white delay-0 list-animation-leftIn"
                             >
                               <img
-                                v-if="item.thumb != null"
+                                v-if="item.cover != null"
                                 class="post-item__preview delay-0"
                                 lazy="loading"
-                                :src="item.thumb"
+                                :src="item.cover"
                               />
                               <div
                                 v-else
@@ -114,31 +114,32 @@
                               <div class="post-item__content">
                                 <h3>{{ item.title }}</h3>
                                 <div class="post-meta">
-                                  <div class="category category--inspiring">
-                                    标签
+                                  <div class="category category--learn">
+                                    {{item.type == 1 ? "知识": "政策" }}
                                   </div>
-                                  <div class="post-meta__avatars">
+                                  <!-- <div class="post-meta__avatars">
                                     <img :src="item.profile" class="avatar" />
-                                  </div>
+                                  </div> -->
                                   <div class="post-meta__info fw-600">
-                                    <span> {{ item.author }} </span>
+                                    <span> 作者：{{ item.author }} </span>
                                     <span>•</span>
 
                                     <span
                                       v-if="item.createTime != null"
-                                      v-text="formatDate(item.createTime)"
+                                      v-text="formatDate(item.created)"
                                     >
                                     </span>
                                     <span
                                       v-else
-                                      v-text="formatDate(item.addTime)"
+                                      v-text="formatDate(item.updated)"
                                     >
                                     </span>
                                   </div>
                                 </div>
                               </div>
                               <div>
-                                <div class="CS CS--lg">
+                                <!-- 每一列的右边 -->
+                                <!-- <div class="CS CS--lg">
                                   <button class="comment">
                                     <i class="icon-bubble"></i>
                                   </button>
@@ -146,7 +147,7 @@
                                   <button class="share">
                                     <i class="icon-share"></i>
                                   </button>
-                                </div>
+                                </div> -->
                               </div>
                             </a>
                           </router-link>
@@ -177,10 +178,10 @@
                 </div>
               </div>
               <!-- 侧边导航栏（包括QQ, 微信，与回到最上方） -->
-              <div
+              <!-- <div
                 id="sidetools"
                 class="macwk-animation tinUpIn"
-                style="display: block;"
+                
               >
                 <div class="sidetools-item">
                   <div class="sidetools-wrapper">
@@ -211,7 +212,7 @@
                     class="el-popover el-popper"
                     style="width: 200px; display: none"
                   >
-                    <!---->
+                   
                     <div class="text-center">
                       <a href="feedback.html" class="mt-15 mb-0">在线留言</a>
                     </div>
@@ -226,14 +227,14 @@
                     class="el-popover el-popper"
                     style="width: 200px; display: none"
                   >
-                    <!---->
+                    
                     <div class="text-center">
                       <a href="feedback.html" class="mt-15 mb-0">在线留言</a>
                     </div>
                   </div>
                   <span class="el-popover__reference-wrapper"></span>
                 </span>
-              </div>
+              </div> -->
             </div>
           </div>
           <foot />
@@ -255,6 +256,7 @@ import { formatDate } from "@/utils/date.js";
 import top from "./components/Top.vue";
 import foot from "./components/Foots.vue";
 import { mocklist } from "./mockList";
+import { getArticleList } from '@/apis/article'
 
 export default {
   name: "ArticleList",
@@ -282,23 +284,23 @@ export default {
       listQuery: {
         content: "",
         page: 1,
-        limit: 8,
+        limit: 5,
       },
     };
   },
   watch: {
-    $route(to, from) {
-      //监听路由是否变化
-      if (this.$route.params.content) {
-        this.getList(this.$route.params.content);
-        // 判断条件1  判断传递值的变化
-        //获取文章数据
-      }
-    },
+    // $route(to, from) {
+    //   //监听路由是否变化
+    //   if (this.$route.params.content) {
+    //     this.getList(this.$route.params.content);
+    //     // 判断条件1  判断传递值的变化
+    //     //获取文章数据
+    //   }
+    // },
   },
   created() {
-    // this.getList(this.$route.params.content);
-    this.getList("222");
+    this.getList(this.$route.params.content);
+    // console.log('con',this.$route.params);
   },
 
   methods: {
@@ -347,28 +349,16 @@ export default {
       return "background-image: linear-gradient( 135deg, #FFD3A5 10%, #FD6585 100%);";
     },
     formatDate(time) {
-      let data = new Date(time);
-      console.log("time", time);
-      return formatDate(data, "yyyy-MM-dd hh:mm ");
+      return formatDate(time);
     },
-    getList(list) {
+    async getList(content) {
       this.listLoading = true;
-      this.listQuery.content = list;
-      //   FindAllArticle(this.listQuery).then(resp => {
-      //   this.list = resp.data.data
-      //   this.total = resp.data.total
-      //   this.articleCount = resp.data.total
-      //   this.listLoading = false
-      // })
-      this.list = mocklist;
-      this.total = 11;
-      this.articleCount = 100;
+      const { records , total, pages, publishedArticle } = await getArticleList(this.listQuery.page,this.listQuery.limit,content,1);
+      this.list = records;
+      this.total = pages;
+      this.articleCount = total;
       this.listLoading = false;
-      this.articleNum = 100;
-
-      // getAllArticleNumber().then(resp => {
-      //   this.articleNum = resp.data
-      // })
+      this.articleNum = publishedArticle; // 全部文章个数
     },
   },
 };
