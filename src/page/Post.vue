@@ -251,7 +251,7 @@
                       </div>
                       <div class="col-lg-3">
                         <div class="right-content">
-                          <!-- Widget search box -->
+                          <!-- Widget search box 方框右侧搜索 -->
                           <div class="widget-search-box">
                             <input
                               type="text"
@@ -268,7 +268,7 @@
                             :key="item.id"
                             class="recent-post-card"
                           >
-                            <a href="">
+                            <router-link :to="'/post/' + item.id">
                               <div>
                                 <img
                                   class="card-thumb bg-cover"
@@ -277,7 +277,7 @@
                               </div>
                               <div class="card-content">
                                 <div class="post-meta">
-                                  <span class="meta-item"> {{item.author}} </span>
+                                  <span class="meta-item">作者： {{item.author}} </span>
                                   <span
                                     class="meta-item"
                                   >
@@ -290,7 +290,7 @@
                                 </div>
                                 <h3 class="heading-secondary">{{item.title}}</h3>
                               </div>
-                            </a>
+                            </router-link>
                           </div>
                           <!-- Widget category 标签 -->
                           <!-- <div class="widget-categories">
