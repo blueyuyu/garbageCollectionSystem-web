@@ -135,6 +135,7 @@
       this.glabledata.glableSitTitle
     }}</span></a>
         </router-link>
+        <!-- 上方路由区 -->
         <div class="app-header-nav nav" data-v-122eae44="">
           <router-link target="_self" class="nav-link" :class="message1" data-v-122eae44="" aria-current="page"
             to="/">首页</router-link>
@@ -162,6 +163,7 @@
                     <a @click="codeshows()" data-v-6d6103b4="" :class="{ 'active search-active': codeshow }"
                       class="flex flex-grow-1 text-center py-3 fs-16"><span data-v-6d6103b4="" class="fw-400">资源</span>
                       <span data-v-6d6103b4="" class="fs-12">({{ ResourceNumber }})</span></a>
+                      <!-- 文章上方点击 -->
                     <a @click="articleshows()" data-v-6d6103b4="" :class="{ 'active search-active': articleshow }"
                       class="flex flex-grow-1 text-center py-3 fs-16"><span data-v-6d6103b4="" class="">文章</span>
                       <span data-v-6d6103b4="" class="fs-12">({{ articleCount }})</span></a>
@@ -169,7 +171,9 @@
                 </div>
                 <!-- 搜索栏 -->
                 <ul role="listbox">
-                  <div v-for="(item, id) in this.tempdata" :key="id">
+                  <!-- 展示垃圾 -->
+                  <template v-if="fundByresource">
+                    <div v-for="(item, id) in this.tempdata" :key="id">
                     <div>
                       <router-link :to="{ path: '/content', query: { id: item.category, garbarge: item.name } }">
                         <li role="option" data-suggestion-index="0" data-section-name="default"
@@ -222,6 +226,60 @@
                       </router-link>
                     </div>
                   </div>
+                  </template>
+                  <!-- 展示文章 -->
+                  <template v-else>
+                     <div v-for="(item, id) in this.tempdata" :key="id">
+                    <div>
+                      <router-link :to="{ path: `/post/${item.id}`}">
+                        <li role="option" data-suggestion-index="0" data-section-name="default"
+                          id="autosuggest__results-item--0" class="autosuggest__results-item">
+                          <a data-v-6d6103b4="" class="macwk-app white border-top">
+                            <span data-v-6d6103b4="" class="snow-dot"></span>
+                            <span data-v-6d6103b4="" class="snow-dot"></span>
+                            <span data-v-6d6103b4="" class="snow-dot"></span>
+                            <span data-v-6d6103b4="" class="snow-dot"></span>
+                            <span data-v-6d6103b4="" class="snow-dot"></span>
+                            <span data-v-6d6103b4="" class="snow-dot"></span>
+                            <span data-v-6d6103b4="" class="snow-dot"></span>
+                            <div data-v-6d6103b4="" class="macwk-app__hover--content"></div>
+                            <div data-v-6d6103b4="" class="macwk-app__header--icon">
+                              <div data-v-6d6103b4="" class="macwk-app__header--icon--content"></div>
+                              <img data-v-6d6103b4="" :src="item.thumb" lazy="loaded" />
+                            </div>
+                            <div data-v-6d6103b4="" class="macwk-app__body py-1">
+                              <h5 data-v-6d6103b4="" class="macwk-app__body--title fs-14" style="
+                                  display: -webkit-box;
+                                  -webkit-box-orient: vertical;
+                                  overflow: hidden;
+                                  word-break: break-all;
+                                  text-overflow: ellipsis;
+                                  -webkit-line-clamp: 1;
+                                ">
+                                <span data-v-6d6103b4="">{{ item.title }}</span>
+                              </h5>
+                              <p data-v-6d6103b4="" class="macwk-app__body--info" style="
+                                  display: -webkit-box;
+                                  -webkit-box-orient: vertical;
+                                  overflow: hidden;
+                                  word-break: break-all;
+                                  text-overflow: ellipsis;
+                                  -webkit-line-clamp: 1;
+                                ">
+                                <span data-v-6d6103b4="" v-if="item.type == 1">知识</span>
+                                <span data-v-6d6103b4="" v-if="item.type == 2">政策</span>
+                              </p>
+                            </div>
+                            <!---->
+                            <div data-v-6d6103b4="" class="macwk-box__more fs-24">
+                              <i data-v-6d6103b4="" class="light-icon-more icon-next-arrow"></i>
+                            </div>
+                          </a>
+                        </li>
+                      </router-link>
+                    </div>
+                  </div>
+                  </template>
                 </ul>
                 <div data-v-6d6103b4="">
                   <button data-v-6d6103b4="" class="
@@ -324,6 +382,7 @@
 // import { FindarticlesByNum } from '@/api/webarticle'
 // import { FindresourceByNum } from '@/api/webresource'
 import { getGarbageList } from '@/apis/garbage'
+import { getArticleList } from '@/apis/article'
 import { userlogin, userRegister } from '@/apis/buser'
 // import { register } from '@/api/register'
 
@@ -488,13 +547,11 @@ export default ({
     //TODO  搜索功能尚未完成
     async Findresource(seachcontents, num) {
       const res = await getGarbageList(1, num, seachcontents, '')
-      console.log('resgarbage', res);
       this.tempdata = res.records
     },
-    Findarticles(seachcontents, num) {
-      // FindarticlesByNum(seachcontents, num).then(resp => {
-      //   this.tempdata = resp.data
-      // })
+    async Findarticles(seachcontents, num) {
+      const res = await getArticleList(1, num, seachcontents, "", 1);
+      this.tempdata = res.records
     },
     // 临时查询
     search(seachcontents) {
@@ -538,6 +595,7 @@ export default ({
         }
       }
     },
+    // 文章展示
     articleshows() {
       // setTimeout(() => { this.focus() }, 219)
       // this.searchshow = true
@@ -548,6 +606,7 @@ export default ({
       this.Findarticles(this.seachcontent, 5)
       this.howto = '/post/'
     },
+    // 资源展示
     codeshows() {
       // setTimeout(() => { this.focus() }, 219)
       // this.searchshow = true

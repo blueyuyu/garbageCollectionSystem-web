@@ -96,14 +96,14 @@ export default {
     },
     async Execute_File(file) {
       //判断文件大小
-      if (file.size > 1024 * 1024 * 2) {
-        this.$message({
-          message: "上传文件大小不能超过 2MB!",
-          showClose: true,
-          duration: 1000,
-        });
-        return false;
-      }
+      // if (file.size > 1024 * 1024 * 2) {
+      //   this.$message({
+      //     message: "上传文件大小不能超过 2MB!",
+      //     showClose: true,
+      //     duration: 1000,
+      //   });
+      //   return false;
+      // }
       this.theprogress = true;
       this.$message({
         message: "上传中,请稍后",

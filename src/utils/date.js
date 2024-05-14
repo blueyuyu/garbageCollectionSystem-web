@@ -40,21 +40,25 @@ export function formatFunction(date, fmt) {
  * @returns yyyy-MM-dd hh:mm:ss
  */
 export function formatDate(data) {
-  const year = data[0];
-  const month = data[1];
-  const day = data[2];
-  const hour = data[3];
-  const minute = data[4];
-  const second = data[5];
-
-  const formattedDate = `${year}-${padZero(month)}-${padZero(day)}`;
-  const formattedTime = `${padZero(hour)}:${padZero(minute)}:${padZero(second)}`;
-
-  return `${formattedDate} ${formattedTime}`;
+  try{
+    const year = data[0];
+    const month = data[1];
+    const day = data[2];
+    const hour = data[3];
+    const minute = data[4];
+    const second = data[5] ?? 0;
+  
+    const formattedDate = `${year}-${padZero(month)}-${padZero(day)}`;
+    const formattedTime = `${padZero(hour)}:${padZero(minute)}:${padZero(second)}`;
+  
+    return `${formattedDate} ${formattedTime}`;
+  }catch(error){
+    console.error(error);
+  }
 }
 
 function padZero(num) {
-  return num.toString().padStart(2, '0');
+  return num?.toString().padStart(2, '0');
 }
 
 export function Todate(num) { //Fri Oct 31 18:00:00 UTC+0800 2008

@@ -14,13 +14,13 @@
                       <img alt="" />
                     </div> -->
                     <div class="section-head">
-                <!-- <h2 class="heading-secondary">Lifestyle</h2> -->
-                <ul class="c-bredcrumb">
-                    <li><a href="#">主页 </a></li>
-                    <li><a href="#">文章</a></li>
-                    <li><a href="#">当前文章</a></li>
-                </ul>
-            </div>
+                      <!-- <h2 class="heading-secondary">Lifestyle</h2> -->
+                      <ul class="c-bredcrumb">
+                        <li><a href="#">主页 </a></li>
+                        <li><a href="#">文章</a></li>
+                        <li><a href="#">当前文章</a></li>
+                      </ul>
+                    </div>
                   </div>
                   <div class="article-contents">
                     <!-- <h1 id="article-top" class="b-0 mt-0 pb-0 mb-15">
@@ -55,66 +55,120 @@
                       </div>
                     </div>
                     <div class="content-markdown"> -->
-                      <!-- 内容区域 -->
-                     <div class="row gy-5">
-                     <div class="col-lg-9">
-                          <div class="left-content">
-                        <!-- Post card -->
-                        <div class="post-card">
-                            <div >
-                            <img class="card-thumb bg-cover" src="../static/img/post1.png" />
+                    <!-- 内容区域 -->
+                    <div class="row gy-5">
+                      <div class="col-lg-9">
+                        <div class="left-content">
+                          <!-- Post card -->
+                          <div class="post-card">
+                            <div>
+                              <img
+                                v-if="cover === ''"
+                                class="card-thumb bg-cover"
+                                src="../static/img/post1.png"
+                              />
+                              <img
+                                v-else
+                                class="card-thumb bg-cover"
+                                :src="cover"
+                              />
                             </div>
                             <div class="card-content">
-                                <div class="card-meta mar-top">
-                                    <div class="meta-item post-author"><span class="categorys">分类</span><a href="#"
-                                            class="author-name"> this.author  </a></div><span class="meta-item"> this.addTime   </span><span class="meta-item"><i class="el-icon-chat-line-square"></i>13
-                                    </span><span class="meta-item"> this.hits  点击</span><span class="meta-item"><i class="el-icon-share"></i></span>
+                              <div class="card-meta mar-top">
+                                <div class="meta-item post-author">
+                                  <span class="categorys">分类</span
+                                  ><a href="#" class="author-name">
+                                    作者：{{ author }}
+                                  </a>
                                 </div>
-                                <div class="post-content">
-                                    <div>
-                                        <h5 class="heading-primary"> this.title  </h5>
-                                        <!-- Post quote -->
-                                          <div v-show="this.intro" class="post-quote">
-                                              <p class="body-text"> this.intro  </p>
-                                              <div class="quote-bottom"><a href="#" class="author"> this.author  </a><span
-                                                      class="gradient-bar small"></span></div><img class="quote-icon"
-                                                  src="../static/img/quote-icon.png" alt="">
-                                          </div>
-                                            <div class="article-content ">
-                                          <div class="post-txt" id="sidelist" v-html="this.content"></div>
-                                          </div>
+                                <span class="meta-item"> {{ addTime }} </span>
+                                <!-- <span class="meta-item"
+                                  ><i class="el-icon-chat-line-square"></i
+                                  >13 </span
+                                >
+                                <span class="meta-item"> this.hits 点击</span>
+                                <span class="meta-item"
+                                  ><i class="el-icon-share"></i
+                                ></span> -->
+                              </div>
+                              <div class="post-content">
+                                <div>
+                                  <h5 class="heading-primary">{{ title }}</h5>
+                                  <!-- Post quote -->
+                                  <div v-show="this.intro" class="post-quote">
+                                    <p class="body-text">this.intro</p>
+                                    <div class="quote-bottom">
+                                      <a href="#" class="author">
+                                        this.author </a
+                                      ><span class="gradient-bar small"></span>
                                     </div>
+                                    <img
+                                      class="quote-icon"
+                                      src="../static/img/quote-icon.png"
+                                      alt=""
+                                    />
+                                  </div>
+                                  <div class="article-content">
+                                    <div
+                                      class="post-txt"
+                                      id="sidelist"
+                                      v-html="this.content"
+                                    ></div>
+                                  </div>
                                 </div>
+                              </div>
                             </div>
-                        </div>
-                   <!-- Tags -->
-                        <div class="tags">
+                          </div>
+                          <!-- Tags -->
+                          <div class="tags">
                             <h3 class="heading-tertiary">文章标签</h3>
-                            <div class="categories-tags">
-                             </div>
-                        </div><!-- Post navigation -->
-                        <div class="post-navigation">
-                          <router-link :to="'/post/' + preArticle.id">
-                            <div class="nav-prev">
-                              <div  class="nav-button-left">
-                              <span><img src="../static/img/long-arrow-2.png" alt="arrow"></span>
-                                             <span>上一篇 </span> </div>
+                            <div class="categories-tags"></div>
+                          </div>
+                          <!-- Post navigation -->
+                          <div class="post-navigation">
+                            <router-link :to="'/post/' + preArticle.id">
+                              <div class="nav-prev">
+                                <div class="nav-button-left">
+                                  <span
+                                    ><img
+                                      src="../static/img/long-arrow-2.png"
+                                      alt="arrow"
+                                  /></span>
+                                  <span>上一篇 </span>
+                                </div>
                                 <div class="nav-post">
-                                        <h3 class="heading-tertiary"> 11preArticle.title  </h3>
-                                   <span class="date body-text"> formatDate(preArticle.addTime)  </span></div>
-                            </div>
-                          </router-link>
-                              <router-link :to="'/post/' + nextArticle.id">
-
-                            <div class="nav-next"><div class="nav-button-right">下一篇 <span><img
-                                            src="../static/img/long-arrow.png" alt="arrow"></span></div>
+                                  <h3 class="heading-tertiary">
+                                    {{ preArticle.title }}
+                                  </h3>
+                                  <span class="date body-text">
+                                    {{ preArticle.addTime }}
+                                  </span>
+                                </div>
+                              </div>
+                            </router-link>
+                            <router-link :to="'/post/' + nextArticle.id">
+                              <div class="nav-next">
+                                <div class="nav-button-right">
+                                  下一篇
+                                  <span
+                                    ><img
+                                      src="../static/img/long-arrow.png"
+                                      alt="arrow"
+                                  /></span>
+                                </div>
                                 <div class="nav-post">
-                                        <h3 class="heading-tertiary"> nextArticle.title  </h3>
-                                    <span class="date body-text"> formatDate(nextArticle.addTime)  </span></div>
-                            </div>
-                              </router-link>
-                        </div><!-- Comments -->
-                        <!-- <div class="post-comments">
+                                  <h3 class="heading-tertiary">
+                                    {{ nextArticle.title }}
+                                  </h3>
+                                  <span class="date body-text">
+                                    {{ nextArticle.addTime }}
+                                  </span>
+                                </div>
+                              </div>
+                            </router-link>
+                          </div>
+                          <!-- Comments -->
+                          <!-- <div class="post-comments">
                             <h3 class="heading-secondary">Comments(3)</h3>
                             <div class="comment-card">
                                 <div class="card-top">
@@ -176,8 +230,8 @@
                                 </div><button class="button button-primary">Post Comment</button>
                             </form>
                         </div> -->
-                        <!-- ============= AD CAMPAIGN-2 ============= -->
-                        <!-- <div class="ad-campaign-2 bg-cover mt-100"
+                          <!-- ============= AD CAMPAIGN-2 ============= -->
+                          <!-- <div class="ad-campaign-2 bg-cover mt-100"
                             style="background-image: url('../static/img/add-campign-3.png')">
                             <div class="row">
                                 <div class="col-lg-6"></div>
@@ -191,374 +245,372 @@
                                 </div>
                             </div>
                         </div> -->
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="right-content">
-                        <!-- Widget search box -->
-                        <div class="widget-search-box"><input type="text" v-model="seachcontent"  placeholder="输入内容">
-                      <button
-                      @click="queryssubmit()"
-                    class="search-btn"
-                  >
-                    <i class="el-icon-search"></i>
-                  </button>
-                          </div>
-                        <h3 class="heading-tertiary">推荐文章</h3>
-                        <div v-for="item in newArticle" :key="item.id" class="recent-post-card">
-                          <a href="">
-                            <div>
-                            <img class="card-thumb bg-cover" :src="item.thumb"  />
-                            </div>
-                            <div class="card-content">
-                                <div class="post-meta"><span class="meta-item"> item.author   </span>
-                                
-                                <span  v-if="item.createTime != null"  class="meta-item">  formatDate(item.createTime)   </span>
-                                  <span  v-else  class="meta-item">  formatDate(item.addTime)   </span>
-                                <span class="meta-item"><i class="el-icon-chat-line-square"></i> item.hits   </span>
-                                </div>
-                                    <h3 class="heading-secondary"> item.title  </h3>                      
-                            </div>
-                          </a>
                         </div>
-                       <!-- Widget category -->
-                        <div class="widget-categories">
+                      </div>
+                      <div class="col-lg-3">
+                        <div class="right-content">
+                          <!-- Widget search box -->
+                          <div class="widget-search-box">
+                            <input
+                              type="text"
+                              v-model="seachcontent"
+                              placeholder="输入内容"
+                            />
+                            <button @click="queryssubmit()" class="search-btn">
+                              <i class="el-icon-search"></i>
+                            </button>
+                          </div>
+                          <h3 class="heading-tertiary">推荐文章</h3>
+                          <div
+                            v-for="item in newArticle"
+                            :key="item.id"
+                            class="recent-post-card"
+                          >
+                            <a href="">
+                              <div>
+                                <img
+                                  class="card-thumb bg-cover"
+                                  :src="item.thumb"
+                                />
+                              </div>
+                              <div class="card-content">
+                                <div class="post-meta">
+                                  <span class="meta-item"> item.author </span>
+
+                                  <span
+                                    v-if="item.createTime != null"
+                                    class="meta-item"
+                                  >
+                                    formatDate(item.createTime)
+                                  </span>
+                                  <span v-else class="meta-item">
+                                    formatDate(item.addTime)
+                                  </span>
+                                  <span class="meta-item"
+                                    ><i class="el-icon-chat-line-square"></i>
+                                    item.hits
+                                  </span>
+                                </div>
+                                <h3 class="heading-secondary">item.title</h3>
+                              </div>
+                            </a>
+                          </div>
+                          <!-- Widget category -->
+                          <div class="widget-categories">
                             <h3 class="heading-tertiary">标签云</h3>
                             <div class="categories-tags">
-                              <a v-for="item in taglist" :key="item.id" 
-                              :href="'/post/' + item.tagName + '/all'" > item.tagName   </a>
-                            </div>
-                        </div><!-- Widget ad banner -->
-                        <div class="widget-ad-banner bg-cover"
-                            style="">
-                            <div class="content"><span class="discount">20% off</span>
-                                <h2 class="heading-secondary">会员折扣</h2>
-                                <p class="body-text">开通会员享受更多优惠</p><a href="#"
-                                    class="button icon-button active"><span><i
-                                            class="el-icon-caret-right"></i></span></a>
-                            </div>
-                        </div><!-- Widget social profile -->
-                        <div class="widget-social-profile">
-                             <h3 class="heading-tertiary mb-20">关注我们</h3>
-                            <p class="body-text">找到更多</p>
-                            <div class="social-items"><a href="#" class="social-link"><span class="icon"><i
-                                            class="el-icon-lollipop"></i>
-                                            </span></a><a href="#"
-                                    class="social-link"><span class="icon"><i
-                                            class="el-icon-ice-cream-square"></i></span></a><a href="#"
-                                    class="social-link"><span class="icon"><i class="el-icon-lollipop"></i></span></a>
-                            </div>
-                        </div><!-- Widget popular post -->
-                        <!-- Widget popular post -->
-                        <div class="widget-popular-post mt-30">
-                            <h3 class="heading-tertiary mb-20">热门文章</h3><!-- Cat item -->
-                            <div  v-for="item in newArticle" :key="item.id" class="widget-category">
-                              <router-link
-                              :to="'/post/' + item.id"
-                            >
-
-                                    <img class="cat-thumb bg-cover" :src="item.thumb" />
-                                  </router-link>
-                                  <router-link
-                              :to="'/post/' + item.id"
-                            >
-                                <div class="cat-content"><a href="#">
-                                        <h4 class="cat-title"> item.title  </h4>
-                                    </a>
-                                    <div class="cat-meta">
-                                             <span  v-if="item.createTime != null"  class="post-date meta-item">  formatDate(item.createTime)   </span>
-                                  <span  v-else  class="post-date meta-item">  formatDate(item.addTime)   </span>
-                                  <span
-                                            class="meta-item comment"><i class="el-icon-chat-line-square"></i> item.hits   </span></div>
-                                </div>
-                              </router-link>
-                            </div><!-- Cat item -->
-                           <!-- Cat item -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-                      <!-- <div id="sidelist" v-html="this.content"></div> -->
-                      <side-catalog class="catalog" v-bind="catalogProps">
-                        <template #default="{ isActive }">
-                          <i
-                            :class="[
-                              'line-style',
-                              isActive ? 'line-style--active' : '',
-                            ]"
-                          ></i>
-                        </template>
-                      </side-catalog>
-                      <div class="catalogleft">
-                        <aside
-                          class="crayons-layout__sidebar-left"
-                          aria-label="Article actions"
-                        >
-                          <div class="crayons-article-actions print-hidden">
-                            <div
-                              style="
-                                margin-bottom: 20px;
-                                display: flex;
-                                flex-direction: column;
-                                align-items: center;
-                              "
-                              class="crayons-article-actions__inner"
-                            >
-                              <button
-                                @click="loveClick()"
-                                id="reaction-butt-like"
-                                aria-label="Like"
-                                aria-pressed="false"
-                                class="
-                                  reaction-butt-
-                                  sogood
-                                  crayons-reaction crayons-reaction--like
-                                  activated
-                                "
-                                data-category="like"
-                                title="Heart"
+                              <a
+                                v-for="item in taglist"
+                                :key="item.id"
+                                :href="'/post/' + item.tagName + '/all'"
                               >
-                               <span
-                               v-if="!lovecheck"
-                                  class="
-                                    crayons-reaction__icon
-                                    crayons-reaction__icon--inactive
-                                  "
-                                >
-                                  <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="24"
-                                    height="24"
-                                    viewBox="0 0 24 24"
-                                    role="img"
-                                    
-                                    aria-hidden="true"
-                                    class="crayons-icon"
-                                  >
-                                    <path
-                                       
-                                      d="M21.179 12.794l.013.014L12 22l-9.192-9.192.013-.014A6.5 6.5 0 0112 3.64a6.5 6.5 0 019.179 9.154zM4.575 5.383a4.5 4.5 0 000 6.364L12 19.172l7.425-7.425a4.5 4.5 0 10-6.364-6.364L8.818 9.626 7.404 8.21l3.162-3.162a4.5 4.5 0 00-5.99.334l-.001.001z"
-                                    ></path>
-                                  </svg>
-                                </span>
-                                <span
-                                v-else
-                                  class="
-                                    crayons-reaction__icon
-                                    crayons-reaction__icon--inactive
-                                  "
-                                >
-                                  <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="24"
-                                    height="24"
-                                    viewBox="0 0 24 24"
-                                    role="img"
-                                    
-                                    aria-hidden="true"
-                                    class="crayons-icon"
-                                  >
-                                    <path
-                                       fill="red"
-                                      d="M21.179 12.794l.013.014L12 22l-9.192-9.192.013-.014A6.5 6.5 0 0112 3.64a6.5 6.5 0 019.179 9.154zM4.575 5.383a4.5 4.5 0 000 6.364L12 19.172l7.425-7.425a4.5 4.5 0 10-6.364-6.364L8.818 9.626 7.404 8.21l3.162-3.162a4.5 4.5 0 00-5.99.334l-.001.001z"
-                                    ></path>
-                                  </svg>
-                                </span>
-                                <span
-                                v-if="!lovecheck"
-                                  class="crayons-reaction__count"
-                                  id="reaction-number-like"
-                                  > loveNum  </span
-                                >
-                                <span
-                                v-else
-                                style="color:red"
-                                  class="crayons-reaction__count"
-                                  id="reaction-number-like"
-                                  > loveNum  </span
-                                >
-                              </button>
-
-                              <button
-                                style=""
-                                id="reaction-butt-unicorn"
-                                aria-label="React with unicorn"
-                                aria-pressed="false"
-                                class="
-                                   reaction-butt-
-                                  make
-                                  crayons-reaction crayons-reaction--unicorn
-                                "
-                                data-category="unicorn"
-                                title="Unicorn"
-                              >
-                                <span
-                                  class="
-                                    crayons-reaction__icon
-                                    crayons-reaction__icon--inactive
-                                  "
-                                >
-                                  <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="24"
-                                    height="24"
-                                    role="img"
-                                    aria-hidden="true"
-                                    class="crayons-icon"
-                                  >
-                                    <path
-                                      d="M5.645 8.013c.013-.265-.261-.323-.4-.183-1.16 1.17-1.822 3.865-.344 7.32.294.961 1.938 3.19.84 6.131l-.003.006c-.094.255.206.404.366.263 1.395-1.226 1.933-3.593 1.1-6.375-.488-1.657-1.955-4.226-1.559-7.162zm-3.22 2.738c.05-.137-.124-.417-.326-.225-.939.893-1.316 2.863-.976 4.605.547 2.878 2.374 3.526 2.066 6.629-.028.102.176.38.348.154 1.546-2.033.409-4.453-.241-6.006-1.005-2.386-1.087-4.118-.871-5.157z"
-                                      fill="#08090A"
-                                    ></path>
-                                    <path
-                                      fill-rule="evenodd"
-                                      clip-rule="evenodd"
-                                      d="M13.622 7.223l8.579-3.68c.598-.256 1.087.547.6.985l-6.618 5.941c.881 2.043 2.738 6.34 2.931 6.775 1.348 3.031-2.055 4.918-3.807 3.583a7.027 7.027 0 01-.623-.574c-.974-.965-2.419-2.398-5.207-1.877.284-2.115-.313-3.737-.883-5.288-.38-1.032-.747-2.032-.837-3.124-.346-3.329 3.763-8.23 4.696-7.953.386.115.326 1.229.266 2.319-.051.948-.102 1.88.143 2.12.145.142.428.43.76.773zM11.5 16.5l2.5.5 2.5 2 1-.5-2-4.5-1.5-4-1.5-1-1-1-1-1.5L10 8l-.5 1.5 1 2.5 1 4.5z"
-                                    ></path>
-                                  </svg>
-                                </span>
-                                <span
-                                  class="crayons-reaction__count"
-                                  id="reaction-number-unicorn"
-                                  >0</span
-                                >
-                              </button>
-
-                              <button
-                                id="reaction-butt-readinglist"
-                                aria-label="Add to reading list"
-                                aria-pressed="false"
-                                class="
-                                reaction-butt-
-                                  collect
-                                  crayons-reaction crayons-reaction--readinglist
-                                "
-                                data-category="readinglist"
-                                title="Save"
-                              >
-                                <span
-                                  class="
-                                    crayons-reaction__icon
-                                    crayons-reaction__icon--inactive
-                                  "
-                                >
-                                  <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="24"
-                                    height="24"
-                                    viewBox="0 0 24 24"
-                                    role="img"
-                                    aria-hidden="true"
-                                    class="crayons-icon"
-                                  >
-                                    <path
-                                      d="M5 2h14a1 1 0 011 1v19.143a.5.5 0 01-.766.424L12 18.03l-7.234 4.536A.5.5 0 014 22.143V3a1 1 0 011-1zm13 2H6v15.432l6-3.761 6 3.761V4z"
-                                    ></path>
-                                  </svg>
-                                </span>
-                                <span
-                                  class="crayons-reaction__count"
-                                  id="reaction-number-readinglist"
-                                  >0</span
-                                >
-                              </button>
-
-                              <div
-                                id="mod-actions-menu-btn-area"
-                                class="print-hidden hidden align-center"
-                              ></div>
-                              <div class="align-center m:relative">
-                                <button
-                                  id="article-show-more-button"
-                                  aria-controls="article-show-more-dropdown"
-                                  aria-expanded="false"
-                                  aria-haspopup="true"
-                                  class="
-                                  reaction-butt-
-                                    more
-                                    dropbtn
-                                    crayons-btn
-                                    crayons-btn--ghost-dimmed
-                                    crayons-btn--icon-rounded
-                                  "
-                                  aria-label="Share post options"
-                                  data-initialized="true"
-                                >
-                                  <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="24"
-                                    height="24"
-                                    role="img"
-                                    aria-labelledby="a6r3b1dohi4el9rjyuy41avu2a0sm5bz"
-                                    aria-hidden="true"
-                                    class="crayons-icon dropdown-icon"
-                                  >
-                                    <title
-                                      id="a6r3b1dohi4el9rjyuy41avu2a0sm5bz"
-                                    >
-                                      More...
-                                    </title>
-                                    <path
-                                      fill-rule="evenodd"
-                                      clip-rule="evenodd"
-                                      d="M7 12a2 2 0 11-4 0 2 2 0 014 0zm7 0a2 2 0 11-4 0 2 2 0 014 0zm5 2a2 2 0 100-4 2 2 0 000 4z"
-                                    ></path>
-                                  </svg>
-                                </button>
-                              </div>
+                                item.tagName
+                              </a>
                             </div>
                           </div>
-                        </aside>
+                          <!-- Widget ad banner -->
+                          <div class="widget-ad-banner bg-cover" style="">
+                            <div class="content">
+                              <span class="discount">20% off</span>
+                              <h2 class="heading-secondary">会员折扣</h2>
+                              <p class="body-text">开通会员享受更多优惠</p>
+                              <a href="#" class="button icon-button active"
+                                ><span><i class="el-icon-caret-right"></i></span
+                              ></a>
+                            </div>
+                          </div>
+                          <!-- Widget social profile -->
+                          <div class="widget-social-profile">
+                            <h3 class="heading-tertiary mb-20">关注我们</h3>
+                            <p class="body-text">找到更多</p>
+                            <div class="social-items">
+                              <a href="#" class="social-link"
+                                ><span class="icon"
+                                  ><i class="el-icon-lollipop"></i> </span></a
+                              ><a href="#" class="social-link"
+                                ><span class="icon"
+                                  ><i
+                                    class="el-icon-ice-cream-square"
+                                  ></i></span></a
+                              ><a href="#" class="social-link"
+                                ><span class="icon"
+                                  ><i class="el-icon-lollipop"></i></span
+                              ></a>
+                            </div>
+                          </div>
+                          <!-- Widget popular post -->
+                          <!-- Widget popular post -->
+                          <div class="widget-popular-post mt-30">
+                            <h3 class="heading-tertiary mb-20">热门文章</h3>
+                            <!-- Cat item -->
+                            <div
+                              v-for="item in newArticle"
+                              :key="item.id"
+                              class="widget-category"
+                            >
+                              <router-link :to="'/post/' + item.id">
+                                <img
+                                  class="cat-thumb bg-cover"
+                                  :src="item.thumb"
+                                />
+                              </router-link>
+                              <router-link :to="'/post/' + item.id">
+                                <div class="cat-content">
+                                  <a href="#">
+                                    <h4 class="cat-title">item.title</h4>
+                                  </a>
+                                  <div class="cat-meta">
+                                    <span
+                                      v-if="item.createTime != null"
+                                      class="post-date meta-item"
+                                    >
+                                      formatDate(item.createTime)
+                                    </span>
+                                    <span v-else class="post-date meta-item">
+                                      formatDate(item.addTime)
+                                    </span>
+                                    <span class="meta-item comment"
+                                      ><i class="el-icon-chat-line-square"></i>
+                                      item.hits
+                                    </span>
+                                  </div>
+                                </div>
+                              </router-link>
+                            </div>
+                            <!-- Cat item -->
+                            <!-- Cat item -->
+                          </div>
+                        </div>
                       </div>
+                    </div>
+                    <!-- <div id="sidelist" v-html="this.content"></div> -->
+                    <side-catalog class="catalog" v-bind="catalogProps">
+                      <template #default="{ isActive }">
+                        <i
+                          :class="[
+                            'line-style',
+                            isActive ? 'line-style--active' : '',
+                          ]"
+                        ></i>
+                      </template>
+                    </side-catalog>
+                    <div class="catalogleft">
+                      <aside
+                        class="crayons-layout__sidebar-left"
+                        aria-label="Article actions"
+                      >
+                        <div class="crayons-article-actions print-hidden">
+                          <div
+                            style="
+                              margin-bottom: 20px;
+                              display: flex;
+                              flex-direction: column;
+                              align-items: center;
+                            "
+                            class="crayons-article-actions__inner"
+                          >
+                            <button
+                              @click="loveClick()"
+                              id="reaction-butt-like"
+                              aria-label="Like"
+                              aria-pressed="false"
+                              class="reaction-butt- sogood crayons-reaction crayons-reaction--like activated"
+                              data-category="like"
+                              title="Heart"
+                            >
+                              <span
+                                v-if="!lovecheck"
+                                class="crayons-reaction__icon crayons-reaction__icon--inactive"
+                              >
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  width="24"
+                                  height="24"
+                                  viewBox="0 0 24 24"
+                                  role="img"
+                                  aria-hidden="true"
+                                  class="crayons-icon"
+                                >
+                                  <path
+                                    d="M21.179 12.794l.013.014L12 22l-9.192-9.192.013-.014A6.5 6.5 0 0112 3.64a6.5 6.5 0 019.179 9.154zM4.575 5.383a4.5 4.5 0 000 6.364L12 19.172l7.425-7.425a4.5 4.5 0 10-6.364-6.364L8.818 9.626 7.404 8.21l3.162-3.162a4.5 4.5 0 00-5.99.334l-.001.001z"
+                                  ></path>
+                                </svg>
+                              </span>
+                              <span
+                                v-else
+                                class="crayons-reaction__icon crayons-reaction__icon--inactive"
+                              >
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  width="24"
+                                  height="24"
+                                  viewBox="0 0 24 24"
+                                  role="img"
+                                  aria-hidden="true"
+                                  class="crayons-icon"
+                                >
+                                  <path
+                                    fill="red"
+                                    d="M21.179 12.794l.013.014L12 22l-9.192-9.192.013-.014A6.5 6.5 0 0112 3.64a6.5 6.5 0 019.179 9.154zM4.575 5.383a4.5 4.5 0 000 6.364L12 19.172l7.425-7.425a4.5 4.5 0 10-6.364-6.364L8.818 9.626 7.404 8.21l3.162-3.162a4.5 4.5 0 00-5.99.334l-.001.001z"
+                                  ></path>
+                                </svg>
+                              </span>
+                              <span
+                                v-if="!lovecheck"
+                                class="crayons-reaction__count"
+                                id="reaction-number-like"
+                              >
+                                loveNum
+                              </span>
+                              <span
+                                v-else
+                                style="color: red"
+                                class="crayons-reaction__count"
+                                id="reaction-number-like"
+                              >
+                                loveNum
+                              </span>
+                            </button>
+
+                            <button
+                              style=""
+                              id="reaction-butt-unicorn"
+                              aria-label="React with unicorn"
+                              aria-pressed="false"
+                              class="reaction-butt- make crayons-reaction crayons-reaction--unicorn"
+                              data-category="unicorn"
+                              title="Unicorn"
+                            >
+                              <span
+                                class="crayons-reaction__icon crayons-reaction__icon--inactive"
+                              >
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  width="24"
+                                  height="24"
+                                  role="img"
+                                  aria-hidden="true"
+                                  class="crayons-icon"
+                                >
+                                  <path
+                                    d="M5.645 8.013c.013-.265-.261-.323-.4-.183-1.16 1.17-1.822 3.865-.344 7.32.294.961 1.938 3.19.84 6.131l-.003.006c-.094.255.206.404.366.263 1.395-1.226 1.933-3.593 1.1-6.375-.488-1.657-1.955-4.226-1.559-7.162zm-3.22 2.738c.05-.137-.124-.417-.326-.225-.939.893-1.316 2.863-.976 4.605.547 2.878 2.374 3.526 2.066 6.629-.028.102.176.38.348.154 1.546-2.033.409-4.453-.241-6.006-1.005-2.386-1.087-4.118-.871-5.157z"
+                                    fill="#08090A"
+                                  ></path>
+                                  <path
+                                    fill-rule="evenodd"
+                                    clip-rule="evenodd"
+                                    d="M13.622 7.223l8.579-3.68c.598-.256 1.087.547.6.985l-6.618 5.941c.881 2.043 2.738 6.34 2.931 6.775 1.348 3.031-2.055 4.918-3.807 3.583a7.027 7.027 0 01-.623-.574c-.974-.965-2.419-2.398-5.207-1.877.284-2.115-.313-3.737-.883-5.288-.38-1.032-.747-2.032-.837-3.124-.346-3.329 3.763-8.23 4.696-7.953.386.115.326 1.229.266 2.319-.051.948-.102 1.88.143 2.12.145.142.428.43.76.773zM11.5 16.5l2.5.5 2.5 2 1-.5-2-4.5-1.5-4-1.5-1-1-1-1-1.5L10 8l-.5 1.5 1 2.5 1 4.5z"
+                                  ></path>
+                                </svg>
+                              </span>
+                              <span
+                                class="crayons-reaction__count"
+                                id="reaction-number-unicorn"
+                                >0</span
+                              >
+                            </button>
+
+                            <button
+                              id="reaction-butt-readinglist"
+                              aria-label="Add to reading list"
+                              aria-pressed="false"
+                              class="reaction-butt- collect crayons-reaction crayons-reaction--readinglist"
+                              data-category="readinglist"
+                              title="Save"
+                            >
+                              <span
+                                class="crayons-reaction__icon crayons-reaction__icon--inactive"
+                              >
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  width="24"
+                                  height="24"
+                                  viewBox="0 0 24 24"
+                                  role="img"
+                                  aria-hidden="true"
+                                  class="crayons-icon"
+                                >
+                                  <path
+                                    d="M5 2h14a1 1 0 011 1v19.143a.5.5 0 01-.766.424L12 18.03l-7.234 4.536A.5.5 0 014 22.143V3a1 1 0 011-1zm13 2H6v15.432l6-3.761 6 3.761V4z"
+                                  ></path>
+                                </svg>
+                              </span>
+                              <span
+                                class="crayons-reaction__count"
+                                id="reaction-number-readinglist"
+                                >0</span
+                              >
+                            </button>
+
+                            <div
+                              id="mod-actions-menu-btn-area"
+                              class="print-hidden hidden align-center"
+                            ></div>
+                            <div class="align-center m:relative">
+                              <button
+                                id="article-show-more-button"
+                                aria-controls="article-show-more-dropdown"
+                                aria-expanded="false"
+                                aria-haspopup="true"
+                                class="reaction-butt- more dropbtn crayons-btn crayons-btn--ghost-dimmed crayons-btn--icon-rounded"
+                                aria-label="Share post options"
+                                data-initialized="true"
+                              >
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  width="24"
+                                  height="24"
+                                  role="img"
+                                  aria-labelledby="a6r3b1dohi4el9rjyuy41avu2a0sm5bz"
+                                  aria-hidden="true"
+                                  class="crayons-icon dropdown-icon"
+                                >
+                                  <title id="a6r3b1dohi4el9rjyuy41avu2a0sm5bz">
+                                    More...
+                                  </title>
+                                  <path
+                                    fill-rule="evenodd"
+                                    clip-rule="evenodd"
+                                    d="M7 12a2 2 0 11-4 0 2 2 0 014 0zm7 0a2 2 0 11-4 0 2 2 0 014 0zm5 2a2 2 0 100-4 2 2 0 000 4z"
+                                  ></path>
+                                </svg>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </aside>
                     </div>
                   </div>
                 </div>
               </div>
-              <!---->
-              <!---->
-              <!-- v-on:click="show = !show"
+            </div>
+            <!---->
+            <!---->
+            <!-- v-on:click="show = !show"
                 v-if="!show" -->
-              <div class="myVEmojiPicker">
-                <VEmojiPicker
-                  v-show="showDialog"
-                  :style="{ width: '340px', height: '200' }"
-                  labelSearch="Search"
-                  lang="pt-BR"
-                  @select="onSelectEmoji"
-                />
-              </div>
-              <!-- 后台控制是否显示评论 -->
-              <div v-if="!this.glabledata.glableCommentShow">
+            <div class="myVEmojiPicker">
+              <VEmojiPicker
+                v-show="showDialog"
+                :style="{ width: '340px', height: '200' }"
+                labelSearch="Search"
+                lang="pt-BR"
+                @select="onSelectEmoji"
+              />
+            </div>
+            <!-- 后台控制是否显示评论 -->
+            <div v-if="!this.glabledata.glableCommentShow">
               <div v-show="!judjeComment">
                 <section
                   v-if="mycomment"
                   @click="sendMsg"
-                  class="
-                    fiexd-comments-bar
-                    d-flex
-                    align-items-center
-                    is-scroll
-                    macwk-animation
-                    slow
-                    pc-model
-                    tinRightIn
-                  "
+                  class="fiexd-comments-bar d-flex align-items-center is-scroll macwk-animation slow pc-model tinRightIn"
                 >
                   <div
-                 
-                    class="
-                      d-flex
-                      align-items-center
-                      fs-20
-                      fw-700
-                      cursor-pointer
-                      w-full
-                      pl-3
-                    "
+                    class="d-flex align-items-center fs-20 fw-700 cursor-pointer w-full pl-3"
                   >
                     <div class="flex">
                       共
-                      <span class="fs-36 mx-1">  this.commentnum   </span>
+                      <span class="fs-36 mx-1"> this.commentnum </span>
                       条评论
                     </div>
                     <svg
@@ -569,7 +621,8 @@
                         width: 1.5em;
                         height: 1.5em;
                         font-size: 2rem;
-                        vertical-align: -6px;"
+                        vertical-align: -6px;
+                      "
                     >
                       <path
                         fill="#FFFFFF"
@@ -583,48 +636,41 @@
                   </div>
                 </section>
               </div>
-              </div>
-              <comment
-                :articleId="this.$route.params.id"
-                :theEmoge="this.MyEmoge"
-                ref="child"
-                @closethecpmmentName="updateDate()"
-                @openthecpmmentName="showemoge()"
-              />
             </div>
+            <comment
+              :articleId="this.$route.params.id"
+              :theEmoge="this.MyEmoge"
+              ref="child"
+              @closethecpmmentName="updateDate()"
+              @openthecpmmentName="showemoge()"
+            />
           </div>
-          <foot/>
+        </div>
+        <foot />
 
-          <div infos="0">
-            <div
-              class="
-                adBanner
-                pub_300x250 pub_300x250m pub_728x90
-                text-ad
-                textAd
-                text_ad text_ads text-ads text-ad-links
-              "
-            >
-            </div>
-          </div>
+        <div infos="0">
+          <div
+            class="adBanner pub_300x250 pub_300x250m pub_728x90 text-ad textAd text_ad text_ads text-ads text-ad-links"
+          ></div>
         </div>
       </div>
     </div>
+  </div>
 </template>
 
 <script>
 import { VEmojiPicker, emojisDefault, categoriesDefault } from "v-emoji-picker";
 
 import Prismjs from "prismjs"; //引入插件
-import {
-  getArticleById,
-  FindProfileByName,
-  viewarticle,
-  lovearticle,
-  getNewArticle,
-  getPrenewsArticle,
-  getLastnewsArticle,
-} from "@/api/webarticle";
+// import {
+//   getArticleById,
+//   FindProfileByName,
+//   viewarticle,
+//   lovearticle,
+//   getNewArticle,
+//   getPrenewsArticle,
+//   getLastnewsArticle,
+// } from "@/api/webarticle";
 import { getArticleCommentnum } from "@/api/webarticleComment";
 
 import "vue-side-catalog/lib/vue-side-catalog.css";
@@ -636,6 +682,8 @@ import { getAllTag, getTagByList } from "@/api/weballtag";
 import top from "./components/Top.vue";
 import foot from "./components/Foots.vue";
 import comment from "./components/Comment.vue";
+
+import { getArticleById, getPreArticle, getNextArticle } from "@/apis/article";
 
 import { formatDate } from "@/utils/date.js";
 import { mapState, mapMutations } from "vuex";
@@ -656,7 +704,7 @@ export default {
   },
   created() {
     //数据回填
-    // this.fetchData(this.$route.params.id);
+    this.fetchData(this.$route.params.id);
     // //获取文章评论数量
     // getArticleCommentnum(this.$route.params.id).then((resp) => {
     //   this.commentnum = resp.data;
@@ -692,8 +740,8 @@ export default {
   },
 
   methods: {
-        //判空
-        judgeNull(str) {
+    //判空
+    judgeNull(str) {
       if (str == "") return true;
       var regu = "^[ ]+$";
       var re = new RegExp(regu);
@@ -703,47 +751,42 @@ export default {
       //提交
       if (this.judgeNull(this.seachcontent)) {
         this.$notify({
-          title: '提示',
-          message: '输入的数据不能为空',
-          type: 'warning'
+          title: "提示",
+          message: "输入的数据不能为空",
+          type: "warning",
         });
       } else {
-        console.log(this.fundByresource)
+        console.log(this.fundByresource);
         //   直接调用$router.push 实现携带参数的跳转
         this.$router.push({
           path: `/post/${this.seachcontent}/all`,
-        })
-       
+        });
       }
-    },
-    formatDate(time) {
-      let data = new Date(time);
-      return formatDate(data, "yyyy-MM-dd  ");
     },
     loveClick() {
-      if (!this.lovecheck) {
-        if (this.firstLoveFlag) {
-          lovearticle(this.$route.params.id).then((resp) => {});
-          this.firstLoveFlag = false;
-        }
-        this.$notify({
-          title: "点赞成功👍",
-          message: "您的赞我们已经收到",
-          type: "success",
-          offset: 50,
-        });
-        this.loveNum += 1;
-        this.lovecheck = true;
-      } else {
-        this.$notify({
-          title: "取消点赞",
-          message: "已取消点赞",
-          type: "success",
-          offset: 50,
-        });
-        this.loveNum -= 1;
-        this.lovecheck = false;
-      }
+      // if (!this.lovecheck) {
+      //   if (this.firstLoveFlag) {
+      //     lovearticle(this.$route.params.id).then((resp) => {});
+      //     this.firstLoveFlag = false;
+      //   }
+      //   this.$notify({
+      //     title: "点赞成功👍",
+      //     message: "您的赞我们已经收到",
+      //     type: "success",
+      //     offset: 50,
+      //   });
+      //   this.loveNum += 1;
+      //   this.lovecheck = true;
+      // } else {
+      //   this.$notify({
+      //     title: "取消点赞",
+      //     message: "已取消点赞",
+      //     type: "success",
+      //     offset: 50,
+      //   });
+      //   this.loveNum -= 1;
+      //   this.lovecheck = false;
+      // }
     },
     onSelectEmoji(emoji) {
       this.MyEmoge = emoji.data;
@@ -766,63 +809,42 @@ export default {
       //改变了父组件的值
       // console.log('toCity:'+this.show1)
     },
-    fetchData(id) {
-      getArticleById(id).then((resp) => {
-        // console.log(resp.data.intro);
-        this.thumb = resp.data.thumb;
-        this.title = resp.data.title;
-        this.loveNum = resp.data.loveNum;
-        this.author = resp.data.author;
-        if (resp.data.commentDisabled == "true") {
-          this.judjeComment = true;
-        }
-        FindProfileByName(this.author).then((resp) => {
-          this.profile = resp.data;
-        });
-        //目录加载需要延时
-        setTimeout(() => {
-          this.content = resp.data.content;
-          //代码高亮
-          this.$nextTick(() => {
-            Prism.highlightAll();
-          });
-        }, 500);
-        //Prism.highlightAll()需要写在this.$nextTick()中，
+    //TODO 文章的展示
+    async fetchData(id) {
+      const res = await getArticleById(id);
+      console.log("res", res);
+      this.title = res.title;
+      this.author = res.author;
+      this.addTime = formatDate(res.updated);
+      this.cover = res.cover;
 
-        if (resp.data.createTime != null) {
-          this.addTime = resp.data.createTime;
-        } else {
-          this.addTime = resp.data.addTime;
-        }
-        this.intro = resp.data.intro;
-        this.hits = resp.data.hits;
-        JSON.parse(resp.data.keyword).forEach((item) => {
-          getTagByList(item).then((resp) => {
-            this.Mytag.push(resp.data.tagName);
+      setTimeout(() => {
+        this.content = res.content;
+        this.$nextTick(() => {
+          Prism.highlightAll();
         });
-        });
-      });
-      getNewArticle(2).then((resp) => {
-        this.newArticle = resp.data;
-      });
-      getPrenewsArticle(id).then((resp) => {
-        this.preArticle.title = resp.data.title;
-        this.preArticle.id = resp.data.id;
-        if(resp.data.createTime != null){
-          this.preArticle.addTime = resp.data.createTime;
-        } else {
-          this.preArticle.addTime = resp.data.addTime;
-        }
-      });
-      getLastnewsArticle(id).then((resp) => {
-        this.nextArticle.title = resp.data.title;
-        this.nextArticle.id = resp.data.id;
-        if(resp.data.createTime != null){
-          this.nextArticle.addTime = resp.data.createTime;
-        } else {
-          this.nextArticle.addTime = resp.data.addTime;
-        }
-      });
+      }, 500);
+
+      // 获取文章的上一篇与下一篇的
+
+      const preArticle = await getPreArticle(id);
+
+      const nextArticle = await getNextArticle(id);
+
+      console.log("preArticle", preArticle);
+      console.log("nextArticle", nextArticle);
+
+      this.preArticle.title = preArticle.title;
+      this.preArticle.id = preArticle.id;
+      this.preArticle.addTime = formatDate(preArticle.updated);
+
+      this.nextArticle.title = nextArticle.title;
+      this.nextArticle.id = nextArticle.id;
+      this.nextArticle.addTime = formatDate(nextArticle.updated);
+      // getNewArticle(2).then((resp) => {
+      //   this.newArticle = resp.data;
+      // });
+
     },
   },
   data() {
@@ -862,27 +884,28 @@ export default {
         watch: true,
       },
       intro: "",
-      addTime: "",
+      addTime: "", // 创建时间
       hits: "",
       author: "",
       content: "",
       title: "",
+      cover: "", // 封面
       show: false,
     };
   },
 };
 </script>
 <style scoped>
-  @import "../static/mycss/blog.css";
-  </style>
+@import "../static/mycss/blog.css";
+</style>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .post-txt {
-    font-size: 19px;
-    font-weight: 440;
-    color: #27222b;
-    margin-top: 0;
-    margin-bottom: 1rem;
+  font-size: 19px;
+  font-weight: 440;
+  color: #27222b;
+  margin-top: 0;
+  margin-bottom: 1rem;
 }
 .chat-container {
   z-index: 20 !important;
@@ -979,12 +1002,13 @@ export default {
 
 <style scoped>
 .reaction-butt- {
-    display: flex;
-    padding: 10px;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    justify-content: center;
-    align-items: center;}
+  display: flex;
+  padding: 10px;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+}
 #sidelist {
   width: 739px;
   overflow: auto;
@@ -1344,7 +1368,7 @@ p {
   --layout-sidebar-left-row-end: initial;
   --layout-content-width: 7fr;
   --layout: var(--layout-sidebar-left-width) var(--layout-content-width)
-  var(--layout-sidebar-right-width);
+    var(--layout-sidebar-right-width);
   box-sizing: border-box;
   display: var(--layout-sidebar-left-display);
   grid-row-end: var(--layout-sidebar-left-row-end);
@@ -1472,11 +1496,15 @@ p {
 .widget-ad-banner {
   background-image: url("../static/img/sidebar-add-banner.png");
 }
-.mar-top{
-margin-top:20px;
+.mar-top {
+  margin-top: 20px;
 }
-@media screen and (max-width:991px){
-  .col-lg-3{display:none; }
- .catalogleft{display:none; }
+@media screen and (max-width: 991px) {
+  .col-lg-3 {
+    display: none;
+  }
+  .catalogleft {
+    display: none;
+  }
 }
 </style>
