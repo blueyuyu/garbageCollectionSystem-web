@@ -107,6 +107,7 @@
               {{ "\xa0" }}
               <a data-v-11bb2e85="" @click="ChangeRegister" class="text-align-center">立即注册</a>
             </p>
+            <!-- qq登录 -->
             <!-- <div data-v-11bb2e85="" class="other-login">
               <button data-v-11bb2e85="" class="btn-login circle weixin">
                 <img class="qqloginsvg" src="../../static/image/qq.svg" />
@@ -308,54 +309,11 @@
             </div>
           </div>
         </div>
-        <el-popover placement="top-start" width="280" trigger="hover">
+        <el-popover placement="top-start"  trigger="hover">
           <div class="top-user-info-box-names">
-            <div class="topic-header-lefts">
-              <div class="topic-avatars">
-                <el-avatar :src="user.profile"></el-avatar>
-              </div>
-              <div class="topic-names">
-                <div>
-                  <div class="topic-name-datas">
-                    <a target="_blank"><b>{{ user.name }}</b></a>
-                    <!---->
-                    <!---->
-                  </div>
-                  <div class="topic-user-lvs">
-                    <p>
-                      <span class="user-vips"><i style="border-color: #ff8223"></i><b v-show="vipTrue"
-                          style="color: #ff8223">会员</b></span>
-                    </p>
-                    <p>
-                      <span class="user-lvs"><b>荣誉用户</b><i>lv0</i></span>
-                    </p>
-                  </div>
-                </div>
-              </div>
+            <div data-title="退出登录" @click="loginout()" class="login-out">
+              <a href="javascript:void(0)">退出登录<i class="el-icon-caret-left"></i></a>
             </div>
-
-            <div data-title="退出登录" @click="loginout()" class="login-outs user-tips">
-              <a href="javascript:void(0)"><i class="el-icon-caret-left"></i></a>
-            </div>
-          </div>
-          <div class="top-user-info-box-count">
-            <p><span>文章</span> <b>0</b></p>
-            <p><span>评论</span> <b>0</b></p>
-            <p><span>关注</span> <b>0</b></p>
-            <p><span>粉丝</span> <b>0</b></p>
-            <a href="https://www.zmki.cn/users/dCACBojqs" target="_blank" class="link-block"></a>
-          </div>
-          <div class="user-w-gold">
-            <div data-title="余额" class="user-money user-tips">
-              <a href="https://www.zmki.cn/gold" target="_blank"><i>￥</i>0.00</a>
-            </div>
-            <div data-title="积分" class="user-credit user-tips">
-              <a href="https://www.zmki.cn/gold" target="_blank"><i class="b2font b2-coin-line"></i>20</a>
-            </div>
-          </div>
-          <div class="user-w-rw b2-radius">
-            <div class="user-w-rw-bg" style="width: 0%"></div>
-            <a href="https://www.zmki.cn/task" target="_blank" class="link-block"><span>您已完成今天任务的<b>0%</b></span></a>
           </div>
           <div slot="reference">
             <router-link to="/userinfo/index">
@@ -462,6 +420,13 @@ export default ({
       //   this.articleCount = resp.data
       // })
     },
+    getUserInfo(){
+      const user =  localStorage.getItem('__BUSERS') ? JSON.parse(localStorage.getItem('__BUSERS')) : null
+      if(user){
+        this.user = user
+        this.userJudje = false
+      }
+    },
     async loginout() {
       //退出登陆
       this.user = null
@@ -469,6 +434,7 @@ export default ({
       this.userJudje = false
       //清除本地数据
       window.localStorage.removeItem('access-user')
+      window.localStorage.removeItem('__BUSERS')
       // console.log(this.userJudje)
       // console.log(this.user)
       //跳转刷新
@@ -482,19 +448,6 @@ export default ({
         type: 'success',
         offset: 50
       });
-    },
-    getUserInfo() {
-      // const user = JSON.parse(window.localStorage.getItem('access-user'))
-      // if (user != null) {
-      //   this.user = user.data
-      //   this.userJudje = (user == null)
-      //   //获取会员有效性
-      //   // CheckVip(user.data.userid).then(resp => {
-      //   //   if (resp.data) {
-      //   //     this.vipTrue = true
-      //   //   }
-      //   // })
-      // }
     },
     handleLogin() {
       var that = this

@@ -53,10 +53,11 @@
                       <div class="user-panel-info">
                         <div class="">
                           <h1>
-                            <span id="userDisplayName" class="usertopName">{{user.nickname}}</span
-                            >
+                            <span id="userDisplayName" class="usertopName">{{
+                              user.nickname
+                            }}</span>
                           </h1>
-                          <p>{{user.introduction}}</p>
+                          <p>{{ user.introduction}}</p>
                         </div>
                       </div>
                     </div>
@@ -70,10 +71,7 @@
                               <a class="link-block"></a>
                               <p>
                                 <i
-                                  class="
-                                    b2font
-                                    b2-user-heart-line b2-light b2-color
-                                  "
+                                  class="b2font b2-user-heart-line b2-light b2-color"
                                 ></i
                                 >概览
                               </p>
@@ -89,10 +87,7 @@
                               <a class="link-block"></a>
                               <p>
                                 <i
-                                  class="
-                                    b2font
-                                    b2-hearts-line b2-light b2-color
-                                  "
+                                  class="b2font b2-hearts-line b2-light b2-color"
                                 ></i
                                 >修改密码
                               </p>
@@ -102,7 +97,7 @@
                             </div>
                           </router-link>
                         </div>
-                        <div @click="ChanceShou()" class="user-sidebar">
+                        <!-- <div @click="ChanceShou()" class="user-sidebar">
                           <router-link to="/userinfo/star">
                             <div :class="acticveChanceShou">
                               <a class="link-block"></a>
@@ -117,7 +112,7 @@
                               </div>
                             </div>
                           </router-link>
-                        </div>
+                        </div> -->
                       </div>
                     </div>
                     <!--路由占位符-->
@@ -129,12 +124,7 @@
             </section>
             <div class="mobile-model">
               <div
-                class="
-                  d-flex
-                  layout-min-full-height
-                  justify-content-center
-                  align-items-center
-                "
+                class="d-flex layout-min-full-height justify-content-center align-items-center"
               >
                 <div class="text-center" style="width: 80%; margin: 0px auto">
                   <h1 class="mb-4">哇，窗口太小啦</h1>
@@ -146,13 +136,7 @@
           <foot />
           <div infos="0">
             <div
-              class="
-                adBanner
-                pub_300x250 pub_300x250m pub_728x90
-                text-ad
-                textAd
-                text_ad text_ads text-ads text-ad-links
-              "
+              class="adBanner pub_300x250 pub_300x250m pub_728x90 text-ad textAd text_ad text_ads text-ads text-ad-links"
             ></div>
           </div>
         </div>
@@ -162,13 +146,13 @@
 </template>
 
 <script>
-import { formatDate } from '@/utils/date.js'
-import top from './components/Top.vue'
-import foot from './components/Foots.vue'
-import { bg } from '@/static/baseImg/bg2'
+import { formatDate } from "@/utils/date.js";
+import top from "./components/Top.vue";
+import foot from "./components/Foots.vue";
+import { bg } from "@/static/baseImg/bg2";
 
-export default ({
-  name: 'Home',
+export default {
+  name: "Home",
   components: { top, foot },
   data() {
     return {
@@ -180,99 +164,104 @@ export default ({
       acticveChanceXiu: "user-sidebar-info",
       acticveChanceShou: "user-sidebar-info",
       image: "",
-      acticve: 'nav-link active',
+      acticve: "nav-link active",
       user: {
-        nickname: 'momo',
-        gender: '',
-        introduction: '此人非常神秘',
-        avatarUrl: ''
+        nickname: "momo",
+        gender: "",
+        introduction: "此人非常神秘",
+        avatarUrl: "",
       },
-    }
+    };
   },
   created() {
-    if(this.image == ""){
+    if (this.image == "") {
       this.image = bg;
     }
-    this.getUserInfo()
-    this.ChanceGai()
+    this.getUserInfo();
+    this.ChanceGai();
   },
-  props: {
-
-  },
+  props: {},
   methods: {
     ChanceGai() {
-      this.acticveChanceGai = "user-sidebar-info active"
-      this.acticveChanceFa = "user-sidebar-info"
-      this.acticveChanceDing = "user-sidebar-info"
-      this.acticveChanceHui = "user-sidebar-info"
-      this.acticveChanceChong = "user-sidebar-info"
-      this.acticveChanceXiu = "user-sidebar-info"
-      this.acticveChanceShou = "user-sidebar-info"
+      this.acticveChanceGai = "user-sidebar-info active";
+      this.acticveChanceFa = "user-sidebar-info";
+      this.acticveChanceDing = "user-sidebar-info";
+      this.acticveChanceHui = "user-sidebar-info";
+      this.acticveChanceChong = "user-sidebar-info";
+      this.acticveChanceXiu = "user-sidebar-info";
+      this.acticveChanceShou = "user-sidebar-info";
     },
     ChanceFa() {
-      this.acticveChanceGai = "user-sidebar-info "
-      this.acticveChanceFa = "user-sidebar-info active"
-      this.acticveChanceDing = "user-sidebar-info"
-      this.acticveChanceHui = "user-sidebar-info"
-      this.acticveChanceChong = "user-sidebar-info"
-      this.acticveChanceXiu = "user-sidebar-info"
-      this.acticveChanceShou = "user-sidebar-info"
+      this.acticveChanceGai = "user-sidebar-info ";
+      this.acticveChanceFa = "user-sidebar-info active";
+      this.acticveChanceDing = "user-sidebar-info";
+      this.acticveChanceHui = "user-sidebar-info";
+      this.acticveChanceChong = "user-sidebar-info";
+      this.acticveChanceXiu = "user-sidebar-info";
+      this.acticveChanceShou = "user-sidebar-info";
     },
     ChanceDing() {
-      this.acticveChanceGai = "user-sidebar-info "
-      this.acticveChanceFa = "user-sidebar-info"
-      this.acticveChanceDing = "user-sidebar-info active"
-      this.acticveChanceHui = "user-sidebar-info"
-      this.acticveChanceChong = "user-sidebar-info"
-      this.acticveChanceXiu = "user-sidebar-info"
-      this.acticveChanceShou = "user-sidebar-info"
+      this.acticveChanceGai = "user-sidebar-info ";
+      this.acticveChanceFa = "user-sidebar-info";
+      this.acticveChanceDing = "user-sidebar-info active";
+      this.acticveChanceHui = "user-sidebar-info";
+      this.acticveChanceChong = "user-sidebar-info";
+      this.acticveChanceXiu = "user-sidebar-info";
+      this.acticveChanceShou = "user-sidebar-info";
     },
     ChanceHui() {
-      this.acticveChanceGai = "user-sidebar-info "
-      this.acticveChanceFa = "user-sidebar-info"
-      this.acticveChanceDing = "user-sidebar-info"
-      this.acticveChanceHui = "user-sidebar-info active"
-      this.acticveChanceChong = "user-sidebar-info"
-      this.acticveChanceXiu = "user-sidebar-info"
-      this.acticveChanceShou = "user-sidebar-info"
+      this.acticveChanceGai = "user-sidebar-info ";
+      this.acticveChanceFa = "user-sidebar-info";
+      this.acticveChanceDing = "user-sidebar-info";
+      this.acticveChanceHui = "user-sidebar-info active";
+      this.acticveChanceChong = "user-sidebar-info";
+      this.acticveChanceXiu = "user-sidebar-info";
+      this.acticveChanceShou = "user-sidebar-info";
     },
     ChanceChong() {
-      this.acticveChanceGai = "user-sidebar-info "
-      this.acticveChanceFa = "user-sidebar-info"
-      this.acticveChanceDing = "user-sidebar-info"
-      this.acticveChanceHui = "user-sidebar-info"
-      this.acticveChanceChong = "user-sidebar-info active"
-      this.acticveChanceXiu = "user-sidebar-info"
-      this.acticveChanceShou = "user-sidebar-info"
+      this.acticveChanceGai = "user-sidebar-info ";
+      this.acticveChanceFa = "user-sidebar-info";
+      this.acticveChanceDing = "user-sidebar-info";
+      this.acticveChanceHui = "user-sidebar-info";
+      this.acticveChanceChong = "user-sidebar-info active";
+      this.acticveChanceXiu = "user-sidebar-info";
+      this.acticveChanceShou = "user-sidebar-info";
     },
     hanceXiu() {
-      this.acticveChanceGai = "user-sidebar-info "
-      this.acticveChanceFa = "user-sidebar-info"
-      this.acticveChanceDing = "user-sidebar-info"
-      this.acticveChanceHui = "user-sidebar-info"
-      this.acticveChanceChong = "user-sidebar-info"
-      this.acticveChanceXiu = "user-sidebar-info active"
-      this.acticveChanceShou = "user-sidebar-info"
+      this.acticveChanceGai = "user-sidebar-info ";
+      this.acticveChanceFa = "user-sidebar-info";
+      this.acticveChanceDing = "user-sidebar-info";
+      this.acticveChanceHui = "user-sidebar-info";
+      this.acticveChanceChong = "user-sidebar-info";
+      this.acticveChanceXiu = "user-sidebar-info active";
+      this.acticveChanceShou = "user-sidebar-info";
     },
     ChanceShou() {
-      this.acticveChanceGai = "user-sidebar-info "
-      this.acticveChanceFa = "user-sidebar-info"
-      this.acticveChanceDing = "user-sidebar-info"
-      this.acticveChanceHui = "user-sidebar-info"
-      this.acticveChanceChong = "user-sidebar-info"
-      this.acticveChanceXiu = "user-sidebar-info"
-      this.acticveChanceShou = "user-sidebar-info active"
+      this.acticveChanceGai = "user-sidebar-info ";
+      this.acticveChanceFa = "user-sidebar-info";
+      this.acticveChanceDing = "user-sidebar-info";
+      this.acticveChanceHui = "user-sidebar-info";
+      this.acticveChanceChong = "user-sidebar-info";
+      this.acticveChanceXiu = "user-sidebar-info";
+      this.acticveChanceShou = "user-sidebar-info active";
     },
     getUserInfo() {
-      const user = JSON.parse(window.localStorage.getItem('__BUSERS'))
-      this.user = user
+      const buser = window.localStorage.getItem("__BUSERS") ?? null;
+      if (buser) {
+        this.user = JSON.parse(buser);
+      } else {
+        this.$notify.error({
+          title: "失败",
+          message: "请先登录",
+        });
+      }
     },
     formatDate(time) {
-      let data = new Date(time)
-      return formatDate(data, 'yyyy-MM-dd hh:mm ')
+      let data = new Date(time);
+      return formatDate(data, "yyyy-MM-dd hh:mm ");
     },
-  }
-})
+  },
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

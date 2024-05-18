@@ -12,7 +12,7 @@ export const userlogin = (username, password) => {
  * @returns 
  */
 export const userRegister = (username, password) => {
-    return post('/businessuser/register', { username, password },true)
+    return post('/businessuser/register', { username, password }, true)
 }
 
 /**
@@ -27,4 +27,20 @@ export const userRegister = (username, password) => {
  */
 export const updateUserInfo = (user) => {
     return post('/businessuser', user)
+}
+
+/**
+ * 
+ * @param {*} id 
+ * @param {*} oldPassword 旧密码 新密码
+ * @param {*} newPassword 
+ * @returns 
+ */
+export const changePwd = (data) => {
+    return post('/businessuser/changePassword', data)
+}
+
+
+export const GetUserInfoByid = (id) => {
+    return get(`/businessuser/${id}`)
 }

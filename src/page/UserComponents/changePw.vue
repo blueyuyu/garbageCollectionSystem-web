@@ -11,7 +11,7 @@
                     <el-input
                       style="width: 220px"
                       placeholder="请输入密码"
-                      v-model="form.yuanPassWord"
+                      v-model="form.oldPassword"
                       show-password
                     ></el-input>
                   </el-form-item>
@@ -29,7 +29,7 @@
                     <el-input
                       style="width: 220px"
                       placeholder="请输入密码"
-                      v-model="form.NewPassWord"
+                      v-model="form.newPassword"
                       show-password
                     ></el-input>
                   </el-form-item>
@@ -47,7 +47,7 @@
                     <el-input
                       style="width: 220px"
                       placeholder="请输入密码"
-                      v-model="form.ShowPassWord"
+                      v-model="form.rePassword"
                       show-password
                     ></el-input>
                   </el-form-item>
@@ -65,65 +65,76 @@
   </div>
 </template>
 <script>
-import { GetUserInfoByid, ChangePassword } from '@/api/user'
+// import { GetUserInfoByid, ChangePassword } from '@/api/user'
+import { changePwd, GetUserInfoByid, updateUserInfo } from "@/apis/buser";
 
 export default {
   data() {
     return {
       form: {
-        yuanPassWord: '',
-        NewPassWord: '',
-        ShowPassWord: '',
-      }
-    }
+        oldPassword: "",
+        newPassword: "",
+        rePassword: "",
+      },
+    };
   },
   created() {
-    this.getList()
+    this.getList();
   },
   methods: {
-    onSubmit() {
-      if (this.form.NewPassWord != this.form.ShowPassWord) {
+    async onSubmit() {
+      if (this.form.newPassword != this.form.rePassword) {
         this.$notify({
-          title: '失败',
-          message: '两次输入密码不一致请重新输入',
-          type: 'warning',
-          offset: 50
+          title: "失败",
+          message: "两次输入密码不一致请重新输入",
+          type: "warning",
+          offset: 50,
         });
-        this.form.NewPassWord = ''
-        this.form.ShowPassWord = ''
+        this.form.newPassword = "";
+        this.form.rePassword = "";
+        return;
       }
-      const user = JSON.parse(window.localStorage.getItem('access-admin'))
-      ChangePassword(user.data.token, this.form.yuanPassWord, this.form.NewPassWord, user.data.userid ).then(resp => {
-        if(resp.data.code == 400){
-               this.$notify({
-            title: '失败',
-            message: '原密码不正确，请重新输入',
-            type: 'warning',
-            offset: 50
-          });
-        }
-        if (resp.data.code == 402 )  {
+      const user = JSON.parse(
+        window.localStorage.getItem("__BUSERS") ?? "null"
+      );
+      if (user) {
+        const form = {
+          id: +user.id,
+          newPassword: this.form.newPassword,
+          oldPassword: this.form.oldPassword,
+        };
+        // await changePwd(form)
+        const res = await GetUserInfoByid(form.id);
+        if (res.password !== form.oldPassword) {
           this.$notify({
-            title: '失败',
-            message: '修改失败',
-            type: 'warning',
-            offset: 50
+            title: "失败",
+            message: "原密码不正确，请重新输入",
+            type: "warning",
+            offset: 50,
           });
-        } else if (resp.data.code == 200) {
-          //显示成功
+          this.form.oldPassword = "";
+          this.form.newPassword = "";
+          this.form.rePassword = "";
+        } else {
+          await updateUserInfo({
+            id: +user.id,
+            password: this.form.newPassword,
+          });
           this.$notify({
-            title: '成功',
-            message: '修改成功',
-            type: 'success',
-            offset: 50
+            title: "成功",
+            message: "修改成功",
+            type: "success",
+            offset: 50,
           });
+          this.form.oldPassword = "";
+          this.form.newPassword = "";
+          this.form.rePassword = "";
         }
-      })
+      }
     },
-    getList() {
-    }
-  }
-}
+    getList() {},
+  },
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

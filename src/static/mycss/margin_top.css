@@ -479,3 +479,17 @@
   background-color: #333;
   color:#fff
 }
+.login-out a{
+  display: block;
+  height: 37px;
+  line-height: 37px;
+  text-align: center;
+  display: block;
+  background: rgb(0 0 0/3%);
+  border-radius: 4px;
+}
+
+.login-out a:hover{
+  background-color: #333;
+  color:#fff
+}

@@ -1,7 +1,6 @@
 import router from './router'
 import NProgress from 'nprogress' // progress bar
 import 'nprogress/nprogress.css' // progress bar style
-import { checkToken, CheckAdmin } from '@/api/checkToken'
 
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
 

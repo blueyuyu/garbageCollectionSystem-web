@@ -73,7 +73,8 @@ export default {
         type: "success",
         offset: 50,
       });
-      localStorage.setItem('__BUSERS',this.form)
+      localStorage.setItem('__BUSERS',JSON.stringify(this.form))
+      location.reload();
     },
     getList() {
       const user = JSON.parse(window.localStorage.getItem("__BUSERS"));
