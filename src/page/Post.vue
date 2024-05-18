@@ -811,7 +811,6 @@ export default {
       //改变了父组件的值
       // console.log('toCity:'+this.show1)
     },
-    //TODO 文章的展示
     async fetchData(id) {
       const res = await getArticleById(id);
       console.log("res", res);

@@ -139,13 +139,13 @@
         <div class="app-header-nav nav" data-v-122eae44="">
           <router-link target="_self" class="nav-link" :class="message1" data-v-122eae44="" aria-current="page"
             to="/">首页</router-link>
-          <router-link target="_self" class="nav-link" :class="message2" data-v-1f33282a="" to="/list">资源</router-link>
+          <router-link target="_self" class="nav-link" :class="message2" data-v-1f33282a="" to="/content">资源</router-link>
           <router-link target="_self" class="nav-link" :class="message3" data-v-122eae44=""
-            to="/post/1/all">文章</router-link>
+            to="/post/垃圾/all">文章</router-link>
           <router-link target="_self" class="nav-link " :class="message4" data-v-1f33282a=""
-            to="/class">分类</router-link>
+            to="/pay">分类</router-link>
           <router-link target="_self" class="nav-link display-top" :class="message5" data-v-1f33282a=""
-          to="/planet">个人中心</router-link>
+          to="/userinfo/index">个人中心</router-link>
         </div>
         <div class="app-header-search grid-list lazy-transition" data-v-122eae44="">
           <div id="autosuggest" data-v-122eae44="">
@@ -379,15 +379,9 @@
 </template>
 
 <script>
-// import { FindarticlesByNum } from '@/api/webarticle'
-// import { FindresourceByNum } from '@/api/webresource'
 import { getGarbageList } from '@/apis/garbage'
 import { getArticleList } from '@/apis/article'
 import { userlogin, userRegister } from '@/apis/buser'
-// import { register } from '@/api/register'
-
-// import { getAllResource, getAllResourceNumber } from '@/api/webresource'
-// import { getAllArticle, getAllArticleNumber } from '@/api/webarticle'
 
 import { CheckVip } from '@/api/user'
 
@@ -508,8 +502,10 @@ export default ({
         if (valid) {
           this.loading = true
           const res = await userlogin(that.loginForm.username, that.loginForm.password)
-          console.log('res', res);
-          localStorage.setItem('access-user', JSON.stringify(res.token))
+          console.log('res[login]', res)
+          localStorage.setItem('_BTOKEN', JSON.stringify(res.token))
+          localStorage.setItem('__BUSERS',JSON.stringify(res))
+
           // 关闭登录框
           that.dialogFormVisible = false
           // 关闭登陆按钮

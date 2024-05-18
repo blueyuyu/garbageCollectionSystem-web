@@ -14,3 +14,17 @@ export const userlogin = (username, password) => {
 export const userRegister = (username, password) => {
     return post('/businessuser/register', { username, password },true)
 }
+
+/**
+ * 更新用户信息,或者新增
+ * @param {*} username 
+ * @param {*} nickname
+ * @param {*} introduction
+ * @param {*} password
+ * @param {*} gender
+ * * @param {*} avartarUrl
+ * @returns 
+ */
+export const updateUserInfo = (user) => {
+    return post('/businessuser', user)
+}
