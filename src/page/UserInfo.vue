@@ -32,7 +32,7 @@
                     </div>
                     <div class="user-panel">
                       <div class="avatar">
-                        <!-- TODO 21 -->
+                        <!-- TODO 修改我的头像 -->
                         <el-avatar
                           shape="square"
                           :size="150"
@@ -81,7 +81,7 @@
                             </div>
                           </div>
                         </router-link>
-                        <div @click="hanceXiu()" class="user-sidebar">
+                        <div @click="ChanceXiu()" class="user-sidebar">
                           <router-link to="/userinfo/changePw">
                             <div :class="acticveChanceXiu">
                               <a class="link-block"></a>
@@ -157,27 +157,22 @@ export default {
       this.image = bg;
     }
     this.getUserInfo();
-    this.ChanceGai();
+    //TODO bug: 每一次路由的切换都会触发创建
+    // this.ChanceGai();
+    // console.log('创建触发');
   },
   props: {},
   methods: {
     ChanceGai() {
       this.acticveChanceGai = "user-sidebar-info active";
       this.acticveChanceXiu = "user-sidebar-info";
+      console.log('个人信息');
     },
-    hanceXiu() {
+    ChanceXiu() {
       this.acticveChanceGai = "user-sidebar-info ";
       this.acticveChanceXiu = "user-sidebar-info active";
+      console.log('密码高亮');
     },
-    // ChanceShou() {
-    //   this.acticveChanceGai = "user-sidebar-info ";
-    //   this.acticveChanceFa = "user-sidebar-info";
-    //   this.acticveChanceDing = "user-sidebar-info";
-    //   this.acticveChanceHui = "user-sidebar-info";
-    //   this.acticveChanceChong = "user-sidebar-info";
-    //   this.acticveChanceXiu = "user-sidebar-info";
-    //   this.acticveChanceShou = "user-sidebar-info active";
-    // },
     getUserInfo() {
       const buser = window.localStorage.getItem("__BUSERS") ?? null;
       if (buser) {
@@ -194,9 +189,6 @@ export default {
       return formatDate(data, "yyyy-MM-dd hh:mm ");
     },
   },
-  watch:{
-
-  }
 };
 </script>
 

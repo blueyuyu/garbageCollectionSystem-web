@@ -134,12 +134,22 @@ export default {
     };
   },
   mounted() {
-    this.type = this.$route.query.id;
-    if(this.$route.query.garbarge){
-      this.isShow = true
-      this.garbarge = this.$route.query.garbarge
+    this.setData();
+  },
+  watch:{
+    '$route': function(to, from){
+      this.setData();
     }
   },
+  methods: {
+    setData() {
+      this.type = this.$route.query.id;
+      if(this.$route.query.garbarge){
+        this.isShow = true
+        this.garbarge = this.$route.query.garbarge
+      }
+    }
+  }
 };
 </script>
 

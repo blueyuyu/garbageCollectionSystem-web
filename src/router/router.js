@@ -45,11 +45,11 @@ export const constantRoutes = [
         hidden: true,
         children: [
             {
-                path: "/userinfo/index",
+                path: "index",
                 component: () => import("@/page/UserComponents/Info"),
             },
             {
-                path: "/userinfo/changePw",
+                path: "changePw",
                 component: () => import("@/page/UserComponents/changePw"),
             },
         ],

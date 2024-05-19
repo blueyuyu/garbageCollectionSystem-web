@@ -23,38 +23,6 @@
                     </div>
                   </div>
                   <div class="article-contents">
-                    <!-- <h1 id="article-top" class="b-0 mt-0 pb-0 mb-15">
-                        this.title   
-                    </h1>
-                    <div class="d-flex mb-6 align-items-center">
-                      <img
-                        :src="profile"
-                        class="w-50 mw-50 h-50 b-0 circle m-0 mr-4"
-                      />
-                      <div class="flex">
-                        <h4 class="mb-0 mt-0">  this.author   </h4>
-                        <p class="mb-0 py-0 fs-14">
-                            this.addTime    阅读   this.hits   
-                        </p>
-                      </div>
-                    </div>
-                    <blockquote class="blockquote">
-                      <div class="text-muted">
-                          this.intro   
-                      </div>
-                    </blockquote>
-                    <div class=".image-header-side">
-                      <div class="imgBox">
-                        <img
-                          class="image-header"
-                          alt=""
-                          :data-src="thumb"
-                          :src="thumb"
-                          lazy="loaded"
-                        />
-                      </div>
-                    </div>
-                    <div class="content-markdown"> -->
                     <!-- 内容区域 -->
                     <div class="row gy-5">
                       <div class="col-lg-9">
@@ -719,10 +687,12 @@ export default {
     // viewarticle(this.$route.params.id).then((resp) => {});
   },
   watch: {
-    // $route(to, from) {
-    // //数据回填
-    // this.fetchData(this.$route.params.id);
-    // //获取文章评论数量
+    $route(to, from) {
+    //数据回填
+    // bug: 此处修复了相同路由条状不刷新的问题；
+    // 不再使用    <router-view :key="$route.fullPath" /> 因为这样变动太大
+    this.fetchData(this.$route.params.id);
+    //获取文章评论数量
     // getArticleCommentnum(this.$route.params.id).then((resp) => {
     //   this.commentnum = resp.data;
     // });
@@ -731,7 +701,8 @@ export default {
     //     this.taglist = resp.data;
     //   });
     // //文章浏览量+1，临时
-    // viewarticle(this.$route.params.id).then((resp) => {});    }
+    // viewarticle(this.$route.params.id).then((resp) => {});
+    }
   },
   mounted() {
     // setTimeout(() => {
