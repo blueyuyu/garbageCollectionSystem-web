@@ -119,32 +119,32 @@ export const constantRoutes = [
     },
 
     // garbage
-    {
-        path: "/newGarbage",
-        component: Layout,
-        redirect: "/resource/Allresource",
-        name: "newresource",
-        meta: {
-            title: "资源",
-            icon: "resource",
-            requireAuth: true,
-            // 需要登录才能进入的页面可以增加一个requireAuth属性
-        },
-        children: [
-            {
-                path: "NewResource",
-                component: () => import("@/admin/NewResource"),
-                name: "NewResource",
-                meta: {
-                    title: "创建资源",
-                    icon: "el-icon-edit-outline",
-                    requireAuth: true,
-                    noCache: false,
-                },
-                // 需要登录才能进入的页面可以增加一个requireAuth属性
-            },
-        ],
-    },
+    // {
+    //     path: "/newGarbage",
+    //     component: Layout,
+    //     redirect: "/resource/Allresource",
+    //     name: "newresource",
+    //     meta: {
+    //         title: "资源",
+    //         icon: "resource",
+    //         requireAuth: true,
+    //         // 需要登录才能进入的页面可以增加一个requireAuth属性
+    //     },
+    //     children: [
+    //         {
+    //             path: "NewResource",
+    //             component: () => import("@/admin/NewResource"),
+    //             name: "NewResource",
+    //             meta: {
+    //                 title: "创建资源",
+    //                 icon: "el-icon-edit-outline",
+    //                 requireAuth: true,
+    //                 noCache: false,
+    //             },
+    //             // 需要登录才能进入的页面可以增加一个requireAuth属性
+    //         },
+    //     ],
+    // },
 
     {
         path: "/article",
@@ -158,19 +158,19 @@ export const constantRoutes = [
             // 需要登录才能进入的页面可以增加一个requireAuth属性
         },
         children: [
-            {
-                path: "edit/:id(\\d+)",
-                component: () => import("@/admin/ArticleEdit"),
-                name: "EditArticle",
-                meta: {
-                    title: "编辑文章",
-                    noCache: true,
-                    activeMenu: "/article/list",
-                    requireAuth: true,
-                },
-                // 需要登录才能进入的页面可以增加一个requireAuth属性
-                hidden: true,
-            },
+            // {
+            //     path: "edit/:id(\\d+)",
+            //     component: () => import("@/admin/ArticleEdit"),
+            //     name: "EditArticle",
+            //     meta: {
+            //         title: "编辑文章",
+            //         noCache: true,
+            //         activeMenu: "/article/list",
+            //         requireAuth: true,
+            //     },
+            //     // 需要登录才能进入的页面可以增加一个requireAuth属性
+            //     hidden: true,
+            // },
             {
                 path: "AllArticle",
                 component: () => import("@/admin/ArticleList"),
@@ -178,19 +178,19 @@ export const constantRoutes = [
                 meta: { title: "文章列表", icon: "documentation", requireAuth: true },
                 // 需要登录才能进入的页面可以增加一个requireAuth属性
             },
+            // {
+            //     path: "ArticleComment",
+            //     component: () => import("@/admin/ArticleComment"),
+            //     name: "ArticleComment",
+            //     meta: { title: "评论管理", icon: "message", requireAuth: true },
+            //     // 需要登录才能进入的页面可以增加一个requireAuth属性
+            // },
             {
-                path: "ArticleComment",
-                component: () => import("@/admin/ArticleComment"),
-                name: "ArticleComment",
-                meta: { title: "评论管理", icon: "message", requireAuth: true },
-                // 需要登录才能进入的页面可以增加一个requireAuth属性
-            },
-            {
-                path: "ArticleClass",
-                component: () => import("@/admin/ArticleClass"),
-                name: "ArticleClass",
+                path: "ArticlePicture",
+                component: () => import("@/admin/Articlepicture"),
+                name: "ArticlePicture",
                 meta: {
-                    title: "分类管理",
+                    title: "图片管理",
                     icon: "el-icon-receiving",
                     requireAuth: true,
                 },
@@ -231,13 +231,13 @@ export const constantRoutes = [
                 meta: { title: "垃圾资源", icon: "documentation", requireAuth: true },
                 // 需要登录才能进入的页面可以增加一个requireAuth属性
             },
-            {
-                path: "ResourceComment",
-                component: () => import("@/admin/ResourceComment"),
-                name: "ResourceComment",
-                meta: { title: "评论管理", icon: "message", requireAuth: true },
-                // 需要登录才能进入的页面可以增加一个requireAuth属性
-            },
+            // {
+            //     path: "ResourceComment",
+            //     component: () => import("@/admin/ResourceComment"),
+            //     name: "ResourceComment",
+            //     meta: { title: "评论管理", icon: "message", requireAuth: true },
+            //     // 需要登录才能进入的页面可以增加一个requireAuth属性
+            // },
             {
                 path: "ResourceClass",
                 component: () => import("@/admin/ResourceClass"),

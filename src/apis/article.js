@@ -1,4 +1,3 @@
-import { title } from '@/settings'
 import { post, get, del } from '@/utils/requestFn'
 
 /**
