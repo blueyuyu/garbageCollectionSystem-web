@@ -4,7 +4,7 @@
       <!---->
       <div id="__layout">
         <div data-fetch-key="0" class="app light macwk-animation">
-          <top :message1="acticve" />
+          <top :message5="acticve" />
           <div>
             <section class="layout-index pc-model mt-5">
               <!-- class="banner-index mb-6" -->
@@ -97,22 +97,6 @@
                             </div>
                           </router-link>
                         </div>
-                        <!-- <div @click="ChanceShou()" class="user-sidebar">
-                          <router-link to="/userinfo/star">
-                            <div :class="acticveChanceShou">
-                              <a class="link-block"></a>
-                              <p>
-                                <i
-                                  class="b2font b2-star-line b2-light b2-color"
-                                ></i
-                                >收藏
-                              </p>
-                              <div class="author-sidebar-down">
-                                <i class="b2font b2-arrow-right-s-line"></i>
-                              </div>
-                            </div>
-                          </router-link>
-                        </div> -->
                       </div>
                     </div>
                     <!--路由占位符-->
@@ -157,12 +141,7 @@ export default {
   data() {
     return {
       acticveChanceGai: "user-sidebar-info active",
-      acticveChanceFa: "user-sidebar-info",
-      acticveChanceDing: "user-sidebar-info",
-      acticveChanceHui: "user-sidebar-info",
-      acticveChanceChong: "user-sidebar-info",
       acticveChanceXiu: "user-sidebar-info",
-      acticveChanceShou: "user-sidebar-info",
       image: "",
       acticve: "nav-link active",
       user: {
@@ -184,67 +163,21 @@ export default {
   methods: {
     ChanceGai() {
       this.acticveChanceGai = "user-sidebar-info active";
-      this.acticveChanceFa = "user-sidebar-info";
-      this.acticveChanceDing = "user-sidebar-info";
-      this.acticveChanceHui = "user-sidebar-info";
-      this.acticveChanceChong = "user-sidebar-info";
       this.acticveChanceXiu = "user-sidebar-info";
-      this.acticveChanceShou = "user-sidebar-info";
-    },
-    ChanceFa() {
-      this.acticveChanceGai = "user-sidebar-info ";
-      this.acticveChanceFa = "user-sidebar-info active";
-      this.acticveChanceDing = "user-sidebar-info";
-      this.acticveChanceHui = "user-sidebar-info";
-      this.acticveChanceChong = "user-sidebar-info";
-      this.acticveChanceXiu = "user-sidebar-info";
-      this.acticveChanceShou = "user-sidebar-info";
-    },
-    ChanceDing() {
-      this.acticveChanceGai = "user-sidebar-info ";
-      this.acticveChanceFa = "user-sidebar-info";
-      this.acticveChanceDing = "user-sidebar-info active";
-      this.acticveChanceHui = "user-sidebar-info";
-      this.acticveChanceChong = "user-sidebar-info";
-      this.acticveChanceXiu = "user-sidebar-info";
-      this.acticveChanceShou = "user-sidebar-info";
-    },
-    ChanceHui() {
-      this.acticveChanceGai = "user-sidebar-info ";
-      this.acticveChanceFa = "user-sidebar-info";
-      this.acticveChanceDing = "user-sidebar-info";
-      this.acticveChanceHui = "user-sidebar-info active";
-      this.acticveChanceChong = "user-sidebar-info";
-      this.acticveChanceXiu = "user-sidebar-info";
-      this.acticveChanceShou = "user-sidebar-info";
-    },
-    ChanceChong() {
-      this.acticveChanceGai = "user-sidebar-info ";
-      this.acticveChanceFa = "user-sidebar-info";
-      this.acticveChanceDing = "user-sidebar-info";
-      this.acticveChanceHui = "user-sidebar-info";
-      this.acticveChanceChong = "user-sidebar-info active";
-      this.acticveChanceXiu = "user-sidebar-info";
-      this.acticveChanceShou = "user-sidebar-info";
     },
     hanceXiu() {
       this.acticveChanceGai = "user-sidebar-info ";
-      this.acticveChanceFa = "user-sidebar-info";
-      this.acticveChanceDing = "user-sidebar-info";
-      this.acticveChanceHui = "user-sidebar-info";
-      this.acticveChanceChong = "user-sidebar-info";
       this.acticveChanceXiu = "user-sidebar-info active";
-      this.acticveChanceShou = "user-sidebar-info";
     },
-    ChanceShou() {
-      this.acticveChanceGai = "user-sidebar-info ";
-      this.acticveChanceFa = "user-sidebar-info";
-      this.acticveChanceDing = "user-sidebar-info";
-      this.acticveChanceHui = "user-sidebar-info";
-      this.acticveChanceChong = "user-sidebar-info";
-      this.acticveChanceXiu = "user-sidebar-info";
-      this.acticveChanceShou = "user-sidebar-info active";
-    },
+    // ChanceShou() {
+    //   this.acticveChanceGai = "user-sidebar-info ";
+    //   this.acticveChanceFa = "user-sidebar-info";
+    //   this.acticveChanceDing = "user-sidebar-info";
+    //   this.acticveChanceHui = "user-sidebar-info";
+    //   this.acticveChanceChong = "user-sidebar-info";
+    //   this.acticveChanceXiu = "user-sidebar-info";
+    //   this.acticveChanceShou = "user-sidebar-info active";
+    // },
     getUserInfo() {
       const buser = window.localStorage.getItem("__BUSERS") ?? null;
       if (buser) {
@@ -261,6 +194,9 @@ export default {
       return formatDate(data, "yyyy-MM-dd hh:mm ");
     },
   },
+  watch:{
+
+  }
 };
 </script>
 

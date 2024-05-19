@@ -140,13 +140,13 @@
         <div class="app-header-nav nav" data-v-122eae44="">
           <router-link target="_self" class="nav-link" :class="message1" data-v-122eae44="" aria-current="page"
             to="/">首页</router-link>
-          <router-link target="_self" class="nav-link" :class="message2" data-v-1f33282a="" to="/content">资源</router-link>
           <router-link target="_self" class="nav-link" :class="message3" data-v-122eae44=""
             to="/post/垃圾/all">文章</router-link>
           <router-link target="_self" class="nav-link " :class="message4" data-v-1f33282a=""
-            to="/pay">分类</router-link>
+            to="/classify">分类</router-link>
           <router-link target="_self" class="nav-link display-top" :class="message5" data-v-1f33282a=""
           to="/userinfo/index">个人中心</router-link>
+          <router-link target="_self" class="nav-link" :class="message2" data-v-1f33282a="" to="/login">后台</router-link>
         </div>
         <div class="app-header-search grid-list lazy-transition" data-v-122eae44="">
           <div id="autosuggest" data-v-122eae44="">
@@ -340,9 +340,6 @@
 import { getGarbageList } from '@/apis/garbage'
 import { getArticleList } from '@/apis/article'
 import { userlogin, userRegister } from '@/apis/buser'
-
-import { CheckVip } from '@/api/user'
-
 import { mapState, mapMutations } from 'vuex'
 
 export default ({

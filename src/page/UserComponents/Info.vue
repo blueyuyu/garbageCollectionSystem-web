@@ -74,6 +74,7 @@ export default {
         offset: 50,
       });
       localStorage.setItem('__BUSERS',JSON.stringify(this.form))
+      // TODO RELOAD 
       location.reload();
     },
     getList() {

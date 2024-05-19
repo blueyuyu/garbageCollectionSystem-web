@@ -30,8 +30,8 @@ export const constantRoutes = [
         hidden: true,
     },
     {
-        path: "/pay", // 暂时只需要页面的背景
-        component: () => import("@/page/Resource"),
+        path: "/classify", // 垃圾分类
+        component: () => import("@/page/Classify"),
         hidden: true,
     },
     {
