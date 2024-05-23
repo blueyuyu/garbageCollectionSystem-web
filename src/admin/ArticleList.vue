@@ -129,7 +129,7 @@
             <el-tag size="medium" type="success" v-if="scope.row.status === 1"
               >发布</el-tag
             >
-            <el-tag size="medium" type="warning" v-if="scope.row.status === 2"
+            <el-tag size="medium" type="warning" v-if="scope.row.status == 2"
               >草稿</el-tag
             >
           </div>

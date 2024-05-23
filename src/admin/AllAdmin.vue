@@ -106,6 +106,14 @@
             >
               资料管理员
             </el-tag>
+            <el-tag
+              size="medium"
+              type="success"
+              v-if="scope.row.role === 'ARTICLE_ADMIN'"
+            >
+              文章管理员
+            </el-tag>
+<!-- TODO 权限 -->
             <el-tag size="medium" type="info" v-if="!scope.row.role"
               >未分配权限</el-tag
             >
@@ -212,9 +220,11 @@
     >
       <div>
         <span style="margin-right: 10px">权限分配</span>
+        <!-- TODO 权限 -->
         <el-select v-model="addOrUpdateForm.role" placeholder="请选择权限">
           <el-option label="最高权限管理" value="TOP_ADMIN"></el-option>
           <el-option label="资料管理" value="DATA_ADMIN"></el-option>
+          <el-option label="文章管理" value="ARTICLE_ADMIN"></el-option>
         </el-select>
       </div>
       <span slot="footer" class="dialog-footer">
@@ -530,8 +540,8 @@ export default {
         type: "success",
       });
       await this.getList();
-      this.addOrUpdateForm.id = ""
-      this.addOrUpdateForm.role = ""
+      this.addOrUpdateForm.id = "";
+      this.addOrUpdateForm.role = "";
       this.permissionDialogVisible = false;
     },
   },

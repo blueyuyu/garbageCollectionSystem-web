@@ -10,7 +10,7 @@
           <div class="card-panel-text">收录垃圾总数</div>
           <count-to
             :start-val="0"
-            :end-val="136000"
+            :end-val="3987"
             :duration="3600"
             class="card-panel-num"
           />
@@ -27,7 +27,7 @@
           <div class="card-panel-text">注册用户总数</div>
           <count-to
             :start-val="0"
-            :end-val="102400"
+            :end-val="14"
             :duration="2600"
             class="card-panel-num"
           />
@@ -44,7 +44,7 @@
           <div class="card-panel-text">相关文章收录总数</div>
           <count-to
             :start-val="0"
-            :end-val="9280"
+            :end-val="24"
             :duration="3200"
             class="card-panel-num"
           />
@@ -61,7 +61,7 @@
           <div class="card-panel-text">评论数目</div>
           <count-to
             :start-val="0"
-            :end-val="81212"
+            :end-val="0"
             :duration="3000"
             class="card-panel-num"
           />

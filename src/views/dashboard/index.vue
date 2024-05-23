@@ -12,8 +12,7 @@
           <div class="title">垃圾分类收录数据</div>
           <el-row style="display: flex; ">
             <el-col :md="{ span: 12 }" :lg="{ span: 14 }" class="counts_chart">
-              <div class="pie" ref="pieCharts" style="width: 50%;height: 100%;"></div>
-              <div class="line" ref="lineCharts" style="width: 50%;height: 100%;"></div>
+              <div class="pie" ref="pieCharts" style="width: 100%;height: 100%;"></div>
             </el-col>
             <el-col :md="{ span: 12 }" :lg="{ span: 10 }" class="counts_data" style="
               background-color: #f7f9fb;
@@ -22,19 +21,19 @@
               height: 100%;
               ">
               <div class="counts_data_item">
-                320,11
+                1299
                 <div class="item_text">可回收垃圾</div>
               </div>
               <div class="counts_data_item">
-                222
+                1032
                 <div class="item_text">厨余垃圾</div>
               </div>
               <div class="counts_data_item">
-                333
+                1424
                 <div class="item_text">其他垃圾</div>
               </div>
               <div class="counts_data_item">
-                444
+                234
                 <div class="item_text">有害垃圾</div>
               </div>
             </el-col>
@@ -93,14 +92,14 @@ export default {
             name: "垃圾类别占比统计",
             type: "pie",
             // 如果radius是百分比则必须加引号
-            radius: ["10%", "70%"],
-            center: ["44%", "44%"],
+            radius: ["30%", "60%"],
+            center: ["50%", "50%"],
             roseType: "radius",
             data: [
-              { value: 20, name: "可回收垃圾" },
-              { value: 26, name: "厨余垃圾" },
-              { value: 24, name: "其他垃圾" },
-              { value: 25, name: "有害垃圾" },
+              { value: 1299, name: "可回收垃圾" },
+              { value: 1032, name: "厨余垃圾" },
+              { value: 1424, name: "其他垃圾" },
+              { value: 234, name: "有害垃圾" },
             ],
             label: {
               fontSize: 10
@@ -113,12 +112,14 @@ export default {
         ]
       };
       myChart.setOption(option);
-
+      // window.addEventListener('resize',()=>{
+      //   myChart.resize();
+      // })
     },
     initBarChart() {
       var mycharts = this.$echarts.init(this.$refs.barCharts)
       var data = [70, 34, 60];
-      var titlename = ["参与率", "搜索率", "知识掌握率"];
+      var titlename = ["参与率", "搜索率", "掌握率"];
       var valdata = [1,1,1]; // 纵轴
       var myColor = ["#1089E7", "#F57474", "#56D0E3", "#F8B448", "#8B78F6"];
       var options = {
@@ -529,7 +530,7 @@ export default {
 
 .counts_data_item {
   width: 100%;
-  padding: 20px 0;
+  padding: 4% 0;
   text-align: center;
   font-size: 32px;
   color: #666;

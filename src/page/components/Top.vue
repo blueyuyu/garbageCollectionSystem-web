@@ -163,11 +163,11 @@
                   <div data-v-6d6103b4="" class="d-flex align-items-center px-5">
                     <a @click="codeshows()" data-v-6d6103b4="" :class="{ 'active search-active': codeshow }"
                       class="flex flex-grow-1 text-center py-3 fs-16"><span data-v-6d6103b4="" class="fw-400">资源</span>
-                      <span data-v-6d6103b4="" class="fs-12">({{ ResourceNumber }})</span></a>
+                      <span data-v-6d6103b4="" class="fs-12"></span></a>
                       <!-- 文章上方点击 -->
                     <a @click="articleshows()" data-v-6d6103b4="" :class="{ 'active search-active': articleshow }"
                       class="flex flex-grow-1 text-center py-3 fs-16"><span data-v-6d6103b4="" class="">文章</span>
-                      <span data-v-6d6103b4="" class="fs-12">({{ articleCount }})</span></a>
+                      <span data-v-6d6103b4="" class="fs-12"></span></a>
                   </div>
                 </div>
                 <!-- 搜索栏 -->
@@ -467,6 +467,7 @@ export default ({
             type: 'success',
             offset: 50
           });
+          location.reload();
         } else {
           console.log('error submit!!')
           return false

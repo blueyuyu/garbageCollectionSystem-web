@@ -9,18 +9,18 @@
     </el-table-column>
     <el-table-column label="文章分类" min-width="105" align="center">
       <template slot-scope="scope">
-        {{ scope.row.className }}
+        {{ scope.row.type == 1 ? '知识': '政策' }}
       </template>
     </el-table-column>
-    <el-table-column label="访问量" min-width="80" align="center">
+    <!-- <el-table-column label="访问量" min-width="80" align="center">
       <template slot-scope="{row}">
           {{ row.hits }}
       </template>
-    </el-table-column>
+    </el-table-column> -->
     <el-table-column label="发布时间" min-width="90" align="center">
       <template slot-scope="{row}">
-          <span v-if="row.createTime != null"> {{ formatDate(row.createTime) }}</span>
-          <span v-else> {{ formatDate(row.addTime) }}</span>
+          <span v-if="row.createTime != null"> {{ formatDate(row.created) }}</span>
+          <span v-else> {{ formatDate(row.updated) }}</span>
       </template>
     </el-table-column>
   </el-table>
@@ -29,6 +29,7 @@
 
 <script>
 import { formatDate } from "@/utils/date.js";
+import { getArticleList } from '@/apis/article'
 
 export default {
   filters: {
@@ -49,13 +50,15 @@ export default {
     }
   },
   created() {
+    this.fetchData();
   },
   methods: {
     formatDate(time) {
-      let data = new Date(time);
-      return formatDate(data, "yyyy-MM-dd hh:mm ");
+      return formatDate(time);
     },
-    fetchData() {
+    async fetchData() {
+      const res = await getArticleList(8,1);
+      this.list = res.records;
     }
   }
 }
