@@ -29,26 +29,24 @@ node 版本要求 > 8.9
 
 下面是项目的部分图片展示：
 
-![](E:\lajiPro\garbageCollectionSystem-web\README_PIC\index.png)
+![](https://github.com/blueyuyu/garbageCollectionSystem-web/blob/main/README_PIC/index.png)
 
 
 
-![](E:\lajiPro\garbageCollectionSystem-web\README_PIC\index2.png)
+![](https://github.com/blueyuyu/garbageCollectionSystem-web/blob/main/README_PIC/index2.png)
 
 
 
-![](E:\lajiPro\garbageCollectionSystem-web\README_PIC\detail.png)
+![](https://github.com/blueyuyu/garbageCollectionSystem-web/blob/main/README_PIC/detail.png)
 
 
 
-![](E:\lajiPro\garbageCollectionSystem-web\README_PIC\article.png)
+![](https://github.com/blueyuyu/garbageCollectionSystem-web/blob/main/README_PIC/article.png)
 
 
 
-
-
-![](E:\lajiPro\garbageCollectionSystem-web\README_PIC\admin.png)
+![](https://github.com/blueyuyu/garbageCollectionSystem-web/blob/main/README_PIC/admin.png)
 
 
 
-![](E:\lajiPro\garbageCollectionSystem-web\README_PIC\admin-index.png)
+![](https://github.com/blueyuyu/garbageCollectionSystem-web/blob/main/README_PIC/admin-index.png)
